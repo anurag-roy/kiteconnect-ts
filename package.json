@@ -60,14 +60,10 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^5.0.3",
+    "@weiran.zsd/tsdx": "^0.15.2",
     "husky": "^7.0.1",
     "size-limit": "^5.0.3",
-    "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.3.5"
-  },
-  "resolutions": {
-    "**/@typescript-eslint/eslint-plugin": "^4.25.0",
-    "**/@typescript-eslint/parser": "^4.25.0"
   }
 }
