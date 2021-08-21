@@ -13,7 +13,6 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -33,6 +32,21 @@
   },
   "name": "kiteconnect-ts",
   "author": "Anurag Roy",
+  "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anurag2pirad/kiteconnect-ts.git"
+  },
+  "homepage": "https://github.com/anurag2pirad/kiteconnect-ts#readme",
+  "bugs": {
+    "url": "https://github.com/anurag2pirad/kiteconnect-ts/issues"
+  },
+  "keywords": [
+    "Zerodha",
+    "KiteConnect",
+    "KiteTicker",
+    "TypeScript"
+  ],
   "module": "dist/kiteconnect-ts.esm.js",
   "size-limit": [
     {
