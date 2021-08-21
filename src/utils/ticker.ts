@@ -84,7 +84,7 @@ export const parseBinary = (binpacks: ArrayBuffer) => {
       };
 
       // Compute the change price using close price and last price
-      if (tick.ohlc.close != 0) {
+      if (tick.ohlc.close !== 0) {
         tick.change =
           ((tick.lastPrice - tick.ohlc.close) * 100) / tick.ohlc.close;
       }
@@ -111,7 +111,7 @@ export const parseBinary = (binpacks: ArrayBuffer) => {
       };
 
       // Compute the change price using close price and last price
-      if (tick.ohlc.close != 0) {
+      if (tick.ohlc.close !== 0) {
         tick.change =
           ((tick.lastPrice - tick.ohlc.close) * 100) / tick.ohlc.close;
       }

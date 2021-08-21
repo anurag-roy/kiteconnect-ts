@@ -60,8 +60,8 @@ export class KiteTicker {
     // Skip if its already connected
     if (
       this._ws &&
-      (this._ws.readyState == this._ws.CONNECTING ||
-        this._ws.readyState == this._ws.OPEN)
+      (this._ws.readyState === this._ws.CONNECTING ||
+        this._ws.readyState === this._ws.OPEN)
     )
       return;
 
@@ -119,7 +119,7 @@ export class KiteTicker {
       this._trigger('error', [e]);
 
       // Force close to avoid ghost connections
-      if (this._ws && this._ws.readyState == this._ws.OPEN) this._ws.close();
+      if (this._ws && this._ws.readyState === this._ws.OPEN) this._ws.close();
     };
 
     this._ws.onclose = e => {
@@ -127,7 +127,7 @@ export class KiteTicker {
 
       // the ws id doesn't match the current global id,
       // meaning it's a ghost close event. just ignore.
-      if (this._currentWsUrl && url != this._currentWsUrl) return;
+      if (this._currentWsUrl && url !== this._currentWsUrl) return;
 
       this._triggerDisconnect(e);
     };
@@ -136,15 +136,15 @@ export class KiteTicker {
   public disconnect(): void {
     if (
       this._ws &&
-      this._ws.readyState != this._ws.CLOSING &&
-      this._ws.readyState != this._ws.CLOSED
+      this._ws.readyState !== this._ws.CLOSING &&
+      this._ws.readyState !== this._ws.CLOSED
     ) {
       this._ws.close();
     }
   }
 
   public connected(): boolean {
-    if (this._ws && this._ws.readyState == this._ws.OPEN) {
+    if (this._ws && this._ws.readyState === this._ws.OPEN) {
       return true;
     } else {
       return false;
@@ -205,7 +205,7 @@ export class KiteTicker {
   // send a message via the socket
   // automatically encodes json if possible
   private _send(message: TickRequest) {
-    if (!this._ws || this._ws.readyState != this._ws.OPEN) return;
+    if (!this._ws || this._ws.readyState !== this._ws.OPEN) return;
 
     try {
       if (typeof message == 'object') {
