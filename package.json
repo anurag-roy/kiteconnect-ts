@@ -1,69 +1,17 @@
 {
-  "version": "0.2.0",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=12"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "kiteconnect-ts",
-  "author": "Anurag Roy",
-  "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anurag2pirad/kiteconnect-ts.git"
+  "license": "MIT",
+  "version": "0.0.5",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "lint": "tsc"
   },
-  "homepage": "https://github.com/anurag2pirad/kiteconnect-ts#readme",
-  "bugs": {
-    "url": "https://github.com/anurag2pirad/kiteconnect-ts/issues"
-  },
-  "keywords": [
-    "Zerodha",
-    "KiteConnect",
-    "KiteTicker",
-    "TypeScript"
-  ],
-  "module": "dist/kiteconnect-ts.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/kiteconnect-ts.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/kiteconnect-ts.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^5.0.3",
-    "@weiran.zsd/tsdx": "^0.15.2",
-    "husky": "^7.0.1",
-    "size-limit": "^5.0.3",
-    "tslib": "^2.3.1",
-    "typescript": "^4.3.5"
+    "@changesets/cli": "^2.26.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.5"
   }
 }
