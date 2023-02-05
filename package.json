@@ -7,12 +7,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
-    "lint": "tsc"
+    "lint": "tsc",
+    "gen-docs": "typedoc lib/ticker.ts --name KiteConnectTS"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
     "@types/ws": "^8.5.4",
     "tsup": "^6.5.0",
+    "typedoc": "^0.23.24",
     "typescript": "^4.9.5"
   },
   "dependencies": {

@@ -12,103 +12,45 @@ type TickerEvent =
   | 'order_update'
   | 'message';
 
+export type KiteTickerParams = {
+  /**
+   * API key issued to you.
+   */
+  api_key: string;
+  /**
+   * Access token obtained after successful login flow.
+   */
+  access_token: string;
+  /**
+   * Enable/Disable auto reconnect. Enabled by default.
+   *
+   * @defaultValue `true`
+   */
+  reconnect?: boolean;
+  /**
+   * The maximum number of re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts.
+   *
+   * @defaultValue 50
+   */
+  max_retry?: number;
+  /**
+   * The maximum delay in seconds after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s.
+   *
+   * @defaultValue 60
+   */
+  max_delay?: number;
+  /**
+   * Kite websocket root.
+   *
+   * @defaultValue "wss://ws.kite.trade/"
+   */
+  root?: string;
+};
+
 /**
  * The WebSocket client for connecting to Kite connect streaming quotes service.
  *
- * Getting started:
- * ---------------
- *
- * 	const KiteTicker = require("kiteconnect").KiteTicker;
- * 	const ticker = new KiteTicker({
- * 		api_key: "api_key",
- * 		access_token: "access_token"
- *	});
- *
- * 	ticker.connect();
- * 	ticker.on("ticks", onTicks);
- * 	ticker.on("connect", subscribe);
- *
- * 	function onTicks(ticks) {
- * 		console.log("Ticks", ticks);
- * 	}
- *
- * 	function subscribe() {
- * 		const items = [738561];
- * 		ticker.subscribe(items);
- * 		ticker.setMode(ticker.modeFull, items);
- * 	}
- *
- * Tick structure (passed to the tick callback you assign):
- * ---------------------------
- * [{ tradable: true,
- *    mode: 'full',
- *    instrument_token: 208947,
- *    last_price: 3939,
- *    last_quantity: 1,
- *    average_price: 3944.77,
- *    volume: 28940,
- *    buy_quantity: 4492,
- *    sell_quantity: 4704,
- *    ohlc: { open: 3927, high: 3955, low: 3927, close: 3906 },
- *    change: 0.8448540706605223,
- *    last_trade_time: 1515491369,
- *    timestamp: 1515491373,
- *    oi: 24355,
- *    oi_day_high: 0,
- *    oi_day_low: 0,
- *    depth:
- *			buy: [{
- *				 quantity: 59,
- *				 price: 3223,
- *				 orders: 5
- *			  },
- *			  {
- *				 quantity: 164,
- *				 price: 3222,
- *				 orders: 15
- *			  },
- *			  {
- *				 quantity: 123,
- *				 price: 3221,
- *				 orders: 7
- *			  },
- *			  {
- *				 quantity: 48,
- *				 price: 3220,
- *				 orders: 7
- *			  },
- *			  {
- *				 quantity: 33,
- *				 price: 3219,
- *				 orders: 5
- *			  }],
- *		   sell: [{
- *				 quantity: 115,
- *				 price: 3224,
- *				 orders: 15
- *			  },
- *			  {
- *				 quantity: 50,
- *				 price: 3225,
- *				 orders: 5
- *			  },
- *			  {
- *				 quantity: 175,
- *				 price: 3226,
- *				 orders: 14
- *			  },
- *			  {
- *				 quantity: 49,
- *				 price: 3227,
- *				 orders: 10
- *			  },
- *			  {
- *				 quantity: 106,
- *				 price: 3228,
- *				 orders: 13
- *			  }]
- *		}
- *	}, ...]
+ * @remarks
  *
  * Auto reconnection
  * -----------------
@@ -118,62 +60,163 @@ type TickerEvent =
  * next retry interval will be increased exponentially. `max_delay` and `max_tries` params can be used to tweak
  * the alogrithm where `max_delay` is the maximum delay after which subsequent reconnection interval will become constant and
  * `max_tries` is maximum number of retries before it quits reconnection.
+ *
  * For example if `max_delay` is 60 seconds and `max_tries` is 50 then the first reconnection interval starts from
  * minimum interval which is 2 seconds and keep increasing up to 60 seconds after which it becomes constant and when reconnection attempt
  * is reached upto 50 then it stops reconnecting.
+ *
  * Callback `reconnect` will be called with current reconnect attempt and next reconnect interval and
  * `on_noreconnect` is called when reconnection attempts reaches max retries.
  *
+ * @example
+ * Getting started:
+ * ----
+ * ```ts
+ * import { KiteTicker } from "kiteconnect";
+ * const ticker = new KiteTicker({
+ * 	api_key: "api_key",
+ * 	access_token: "access_token"
+ * });
+ *
+ * ticker.connect();
+ * ticker.on("ticks", onTicks);
+ * ticker.on("connect", subscribe);
+ *
+ * function onTicks(ticks) {
+ * 	console.log("Ticks", ticks);
+ * }
+ *
+ * function subscribe() {
+ * 	const items = [738561];
+ * 	ticker.subscribe(items);
+ * 	ticker.setMode(ticker.modeFull, items);
+ * }
+ * ```
+ *
+ * @example
+ * Tick structure (passed to the tick callback you assign):
+ * ----
+ * ```
+ * [
+ *   {
+ *     tradable: true,
+ *     mode: 'full',
+ *     instrument_token: 208947,
+ *     last_price: 3939,
+ *     last_quantity: 1,
+ *     average_price: 3944.77,
+ *     volume: 28940,
+ *     buy_quantity: 4492,
+ *     sell_quantity: 4704,
+ *     ohlc: { open: 3927, high: 3955, low: 3927, close: 3906 },
+ *     change: 0.8448540706605223,
+ *     last_trade_time: 1515491369,
+ *     timestamp: 1515491373,
+ *     oi: 24355,
+ *     oi_day_high: 0,
+ *     oi_day_low: 0,
+ *     depth: {
+ *       buy: [
+ *         {
+ *           quantity: 59,
+ *           price: 3223,
+ *           orders: 5,
+ *         },
+ *         {
+ *           quantity: 164,
+ *           price: 3222,
+ *           orders: 15,
+ *         },
+ *         {
+ *           quantity: 123,
+ *           price: 3221,
+ *           orders: 7,
+ *         },
+ *         {
+ *           quantity: 48,
+ *           price: 3220,
+ *           orders: 7,
+ *         },
+ *         {
+ *           quantity: 33,
+ *           price: 3219,
+ *           orders: 5,
+ *         },
+ *       ],
+ *       sell: [
+ *         {
+ *           quantity: 115,
+ *           price: 3224,
+ *           orders: 15,
+ *         },
+ *         {
+ *           quantity: 50,
+ *           price: 3225,
+ *           orders: 5,
+ *         },
+ *         {
+ *           quantity: 175,
+ *           price: 3226,
+ *           orders: 14,
+ *         },
+ *         {
+ *           quantity: 49,
+ *           price: 3227,
+ *           orders: 10,
+ *         },
+ *         {
+ *           quantity: 106,
+ *           price: 3228,
+ *           orders: 13,
+ *         },
+ *       ],
+ *     },
+ *   },
+ * ];
+ * ```
+ *
+ * @example
  * Here is an example demonstrating auto reconnection.
+ * ```ts
+ * import { KiteTicker } from "kiteconnect-ts";
+ * const ticker = new KiteTicker({
+ * 	api_key: "api_key",
+ * 	access_token: "access_token"
+ * });
  *
- * 	const KiteTicker = require("kiteconnect").KiteTicker;
- * 	const ticker = new KiteTicker({
- * 		api_key: "api_key",
- * 		access_token: "access_token"
- *	});
+ * // set autoreconnect with 10 maximum reconnections and 5 second interval
+ * ticker.autoReconnect(true, 10, 5)
+ * ticker.connect();
+ * ticker.on("ticks", onTicks);
+ * ticker.on("connect", subscribe);
  *
- * 	// set autoreconnect with 10 maximum reconnections and 5 second interval
- * 	ticker.autoReconnect(true, 10, 5)
- * 	ticker.connect();
- * 	ticker.on("ticks", onTicks);
- * 	ticker.on("connect", subscribe);
+ * ticker.on("noreconnect", () => {
+ * 	console.log("noreconnect");
+ * });
  *
- * 	ticker.on("noreconnect", function() {
- * 		console.log("noreconnect");
- * 	});
+ * ticker.on("reconnect", (reconnect_count, reconnect_interval) => {
+ * 	console.log("Reconnecting: attempt - ", reconnect_count, " interval - ", reconnect_interval);
+ * });
  *
- * 	ticker.on("reconnect", function(reconnect_count, reconnect_interval) {
- * 		console.log("Reconnecting: attempt - ", reconnect_count, " interval - ", reconnect_interval);
- * 	});
+ * ticker.on("message", (binary_msg) => {
+ *	console.log("Binary message", binary_msg);
+ * });
  *
- *  ticker.on("message", function(binary_msg){
- *		console.log("Binary message", binary_msg);
- *  });
+ * function onTicks(ticks) {
+ * 	console.log("Ticks", ticks);
+ * }
  *
- * 	function onTicks(ticks) {
- * 		console.log("Ticks", ticks);
- * 	}
- *
- * 	function subscribe() {
- * 		const items = [738561];
- * 		ticker.subscribe(items);
- * 		ticker.setMode(ticker.modeFull, items);
- * 	}
- *
- *
- * @constructor
- * @name KiteTicker
- * @param {Object} params
- * @param {string} params.api_key API key issued you.
- * @param {string} params.access_token Access token obtained after successful login flow.
- * @param {bool}   [params.reconnect] Enable/Disable auto reconnect. Enabled by default.
- * @param {number} [params.max_retry=50] is maximum number re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts.
- * @param {number} [params.max_delay=60] in seconds is the maximum delay after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s.
- * #param {string} [params.root="wss://websocket.kite.trade/"] Kite websocket root.
+ * function subscribe() {
+ * 	const items = [738561];
+ * 	ticker.subscribe(items);
+ * 	ticker.setMode(ticker.modeFull, items);
+ * }
+ * ```
  */
 export class KiteTicker {
-  //   root = params.root || 'wss://ws.kite.trade/';
-  root = 'wss://ws.kite.trade/';
+  private root = 'wss://ws.kite.trade/';
+  private api_key: string | null = null;
+  private access_token: string | null = null;
 
   private read_timeout = 5; // seconds
   private reconnect_max_delay = 0;
@@ -188,6 +231,7 @@ export class KiteTicker {
   private readonly mLogout = 12;
   private readonly mReload = 13;
   private readonly mClearCache = 14;
+
   // public constants
   /**
    * Set mode full
@@ -202,8 +246,8 @@ export class KiteTicker {
    */
   public static readonly modeLTP = 'ltp';
 
-  ws: WebSocket | null = null;
-  triggers: Record<TickerEvent, Function[]> = {
+  private ws: WebSocket | null = null;
+  private triggers: Record<TickerEvent, Function[]> = {
     connect: [],
     ticks: [],
     disconnect: [],
@@ -214,17 +258,17 @@ export class KiteTicker {
     message: [],
     order_update: [],
   };
-  read_timer: NodeJS.Timer | null = null;
-  last_read: number = 0;
-  reconnect_timer: NodeJS.Timer | null = null;
-  auto_reconnect = false;
-  current_reconnection_count = 0;
-  last_reconnect_interval: number | null = 0;
-  current_ws_url: string | null = null;
-  defaultReconnectMaxDelay = 60;
-  defaultReconnectMaxRetries = 50;
-  maximumReconnectMaxRetries = 300;
-  minimumReconnectMaxDelay = 5;
+  private read_timer: NodeJS.Timer | null = null;
+  private last_read: number = 0;
+  private reconnect_timer: NodeJS.Timer | null = null;
+  private auto_reconnect = false;
+  private current_reconnection_count = 0;
+  private last_reconnect_interval: number | null = 0;
+  private current_ws_url: string | null = null;
+  private readonly defaultReconnectMaxDelay = 60;
+  private readonly defaultReconnectMaxRetries = 50;
+  private readonly maximumReconnectMaxRetries = 300;
+  private readonly minimumReconnectMaxDelay = 5;
 
   // segment constants
   private readonly NseCM = 1;
@@ -237,10 +281,17 @@ export class KiteTicker {
   private readonly McxSX = 8;
   private readonly Indices = 9;
 
-  params: any;
+  /**
+   * KiteTicker constructor
+   *
+   * @param params See {@link KiteTickerParams}
+   * @returns An instance of The KiteTicker class
+   */
+  constructor(params: KiteTickerParams) {
+    this.root = params.root || this.root;
+    this.api_key = params.api_key;
+    this.access_token = params.access_token;
 
-  constructor(params: any) {
-    this.params = params;
     // Enable auto reconnect by default
     if (!params.reconnect) params.reconnect = true;
     this.autoReconnect(params.reconnect, params.max_retry, params.max_delay);
@@ -248,11 +299,10 @@ export class KiteTicker {
 
   /**
    * Auto reconnect settings
-   * @param  {bool} Enable or disable auto disconnect, defaults to false
-   * @param  {number} [max_retry=50] is maximum number re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts.
-   * @param  {number} [max_delay=60] in seconds is the maximum delay after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s.
-   * @memberOf KiteTicker
-   * @method autoReconnect
+   *
+   * @param t Enable or disable auto disconnect, defaults to false
+   * @param max_retry is maximum number re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts.
+   * @param max_delay in seconds is the maximum delay after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s.
    */
   autoReconnect(t: boolean, max_retry?: number, max_delay?: number) {
     this.auto_reconnect = t === true;
@@ -274,9 +324,6 @@ export class KiteTicker {
 
   /**
    * Initiate a websocket connection
-   * @memberOf KiteTicker
-   * @method connect
-   * @instance
    */
   connect() {
     // Skip if its already connected
@@ -289,9 +336,9 @@ export class KiteTicker {
     const url =
       this.root +
       '?api_key=' +
-      this.params.api_key +
+      this.api_key +
       '&access_token=' +
-      this.params.access_token +
+      this.access_token +
       '&uid=' +
       new Date().getTime().toString();
 
@@ -366,9 +413,7 @@ export class KiteTicker {
   }
 
   /**
-   * @memberOf KiteTicker
-   * @method disconnect
-   * @instance
+   * Close the websocket connection
    */
   disconnect() {
     if (
@@ -382,6 +427,7 @@ export class KiteTicker {
 
   /**
    * Check if the ticker is connected
+   *
    * @returns `true` if the ticker is connected or `false` otherwise.
    */
   connected() {
@@ -394,29 +440,52 @@ export class KiteTicker {
 
   /**
    * Register websocket event callbacks
-   * Available events
-   * ~~~~
-   * connect -  when connection is successfully established.
-   * ticks - when ticks are available (Arrays of `ticks` object as the first argument).
-   * disconnect - when socket connection is disconnected. Error is received as a first param.
-   * error - when socket connection is closed with error. Error is received as a first param.
-   * close - when socket connection is closed cleanly.
-   * reconnect - When reconnecting (current re-connection count and reconnect interval as arguments respectively).
-   * noreconnect - When re-connection fails after n number times.
-   * order_update - When order update (postback) is received for the connected user (Data object is received as first argument).
-   * message - when binary message is received from the server.
-   * ~~~~
    *
-   * @memberOf KiteTicker
-   * @method on
-   * @instance
+   * @remarks
+   *
+   *  Available events:
+   * ----
+   * `connect` -  when connection is successfully established.
+   *
+   * `ticks` - when ticks are available (Arrays of `ticks` object as the first argument).
+   *
+   * `disconnect` - when socket connection is disconnected. Error is received as a first param.
+   *
+   * `error` - when socket connection is closed with error. Error is received as a first param.
+   *
+   * `close` - when socket connection is closed cleanly.
+   *
+   * `reconnect` - When reconnecting (current re-connection count and reconnect interval as arguments respectively).
+   *
+   * `noreconnect` - When re-connection fails after n number times.
+   *
+   * `order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
+   *
+   * `message` - when binary message is received from the server.
+   *
+   * ----
+   *
    *
    * @example
+   * ```ts
    * ticker.on("ticks", callback);
    * ticker.on("connect", callback);
    * ticker.on("disconnect", callback);
+   * ```
    */
-  on(e: TickerEvent, callback: Function) {
+  on(
+    e:
+      | 'connect'
+      | 'ticks'
+      | 'disconnect'
+      | 'error'
+      | 'close'
+      | 'reconnect'
+      | 'noreconnect'
+      | 'order_update'
+      | 'message',
+    callback: Function
+  ) {
     if (this.triggers.hasOwnProperty(e)) {
       this.triggers[e].push(callback);
     }
@@ -424,13 +493,13 @@ export class KiteTicker {
 
   /**
    * Subscribe to array of tokens
-   * @memberOf KiteTicker
-   * @method subscribe
-   * @instance
-   * @param {array} tokens Array of tokens to be subscribed
+   *
+   * @param tokens Array of tokens to be subscribed
    *
    * @example
+   * ```ts
    * ticker.subscribe([738561]);
+   * ```
    */
   subscribe(tokens: number[]) {
     if (tokens.length > 0) {
@@ -440,14 +509,14 @@ export class KiteTicker {
   }
 
   /**
-   * Unsubscribe to array of tokens
-   * @memberOf KiteTicker
-   * @method unsubscribe
-   * @instance
-   * @param {array} tokens Array of tokens to be subscribed
+   * Unsubscribe from array of tokens
+   *
+   * @param tokens Array of tokens to be unsubscribed
    *
    * @example
+   * ```ts
    * ticker.unsubscribe([738561]);
+   * ```
    */
   unsubscribe(tokens: number[]) {
     if (tokens.length > 0) {
@@ -457,15 +526,15 @@ export class KiteTicker {
   }
 
   /**
-   * Set modes to array of tokens
-   * @memberOf KiteTicker
-   * @method setMode
-   * @instance
-   * @param {string} mode - mode to set
-   * @param {array} tokens Array of tokens to be subscribed
+   * Set mode for an array of tokens
+   *
+   * @param mode mode to set
+   * @param tokens Array of tokens to be subscribed
    *
    * @example
+   * ```
    * ticker.setMode(ticker.modeFull, [738561]);
+   * ```
    */
   setMode(mode: 'ltp' | 'quote' | 'full', tokens: number[]) {
     if (tokens.length > 0) {
@@ -474,7 +543,7 @@ export class KiteTicker {
     return tokens;
   }
 
-  triggerDisconnect(e?: any) {
+  private triggerDisconnect(e?: any) {
     this.ws = null;
     this.trigger('disconnect', [e]);
     if (this.auto_reconnect) this.attemptReconnection();
@@ -482,7 +551,7 @@ export class KiteTicker {
 
   // send a message via the socket
   // automatically encodes json if possible
-  send(message: any) {
+  private send(message: any) {
     if (!this.ws || this.ws.readyState != ws.OPEN) return;
 
     try {
@@ -496,14 +565,14 @@ export class KiteTicker {
   }
 
   // trigger event callbacks
-  trigger(e: TickerEvent, args?: any) {
+  private trigger(e: TickerEvent, args?: any) {
     if (!this.triggers[e]) return;
     for (let n = 0; n < this.triggers[e].length; n++) {
       this.triggers[e][n]?.apply(this.triggers[e][n], args ? args : []);
     }
   }
 
-  parseTextMessage(dataString: string) {
+  private parseTextMessage(dataString: string) {
     let data: any;
     try {
       data = JSON.parse(dataString);
@@ -516,16 +585,9 @@ export class KiteTicker {
     }
   }
 
-  /**
-   * Parse received binary message
-   * @memberOf KiteTicker
-   * @method parseBinary
-   * @instance
-   * @param {ArrayBufferTypes} binpacks - tick buffer packets
-   */
   // parse received binary message. each message is a combination of multiple tick packets
   // [2-bytes num packets][size1][tick1][size2][tick2] ...
-  parseBinary(binpacks: ArrayBuffer) {
+  private parseBinary(binpacks: ArrayBuffer) {
     const packets = this.splitPackets(binpacks);
     const ticks = [];
 
@@ -656,7 +718,7 @@ export class KiteTicker {
   }
 
   // split one long binary message into individual tick packets
-  splitPackets(bin: ArrayBuffer) {
+  private splitPackets(bin: ArrayBuffer) {
     // number of packets
     const num = this.buf2long(bin.slice(0, 2));
     let j = 2;
@@ -675,7 +737,7 @@ export class KiteTicker {
     return packets;
   }
 
-  attemptReconnection() {
+  private attemptReconnection() {
     // Try reconnecting only so many times.
     if (this.current_reconnection_count > this.reconnect_max_tries) {
       this.trigger('noreconnect');
@@ -708,7 +770,7 @@ export class KiteTicker {
   }
 
   // Big endian byte array to long.
-  buf2long(buf: ArrayBuffer) {
+  private buf2long(buf: ArrayBuffer) {
     const b = new Uint8Array(buf);
     let val = 0;
     const len = b.length;
