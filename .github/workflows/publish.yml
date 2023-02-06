@@ -1,8 +1,10 @@
-name: CI
+name: Publish
 on:
   push:
     branches:
-      - "**"
+      - "main"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   build:
@@ -18,4 +20,8 @@ jobs:
           cache: "pnpm"
 
       - run: pnpm install --frozen-lockfile
-      - run: npm run lint && pnpm run build
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run build

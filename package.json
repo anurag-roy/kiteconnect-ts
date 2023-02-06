@@ -1,45 +1,19 @@
 {
-  "version": "0.2.0",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=12"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "kiteconnect-ts",
   "author": "Anurag Roy",
   "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
+  "license": "MIT",
+  "version": "0.2.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anurag2pirad/kiteconnect-ts.git"
+    "url": "git+https://github.com/anurag-roy/kiteconnect-ts.git"
   },
-  "homepage": "https://github.com/anurag2pirad/kiteconnect-ts#readme",
+  "homepage": "https://github.com/anurag-roy/kiteconnect-ts#readme",
   "bugs": {
-    "url": "https://github.com/anurag2pirad/kiteconnect-ts/issues"
+    "url": "https://github.com/anurag-roy/kiteconnect-ts/issues"
   },
   "keywords": [
     "Zerodha",
@@ -47,23 +21,20 @@
     "KiteTicker",
     "TypeScript"
   ],
-  "module": "dist/kiteconnect-ts.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/kiteconnect-ts.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/kiteconnect-ts.esm.js",
-      "limit": "10 KB"
-    }
-  ],
+  "scripts": {
+    "build": "tsup lib/index.ts --format cjs,esm --dts",
+    "lint": "tsc",
+    "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
+    "docs:preview": "pnpx serve docs"
+  },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^5.0.3",
-    "@weiran.zsd/tsdx": "^0.15.2",
-    "husky": "^7.0.1",
-    "size-limit": "^5.0.3",
-    "tslib": "^2.3.1",
-    "typescript": "^4.3.5"
+    "@changesets/cli": "^2.26.0",
+    "@types/ws": "^8.5.4",
+    "tsup": "^6.5.0",
+    "typedoc": "^0.23.24",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "ws": "^8.12.0"
   }
 }
