@@ -22,7 +22,7 @@
     "TypeScript"
   ],
   "scripts": {
-    "build": "tsup index.ts --format cjs,esm --dts",
+    "build": "tsup lib/index.ts --format cjs,esm --dts",
     "lint": "tsc",
     "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
     "docs:preview": "pnpx serve docs"
