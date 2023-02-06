@@ -12,9 +12,17 @@ Add via yarn
 
     yarn add kiteconnect-ts
 
+Add via pnpm
+
+    pnpm add kiteconnect-ts
+
+## Docs
+
+Read the docs [here](https://kiteconnect.anuragroy.dev)
+
 ## KiteConnect
 
-Coming soon!
+Coming very soon!
 
 ## KiteTicker
 
@@ -22,8 +30,8 @@ Coming soon!
 import { KiteTicker, TickFull } from 'kiteconnectts';
 
 const ticker: KiteTicker = new KiteTicker({
-  apiKey: 'YOUR_API_KEY',
-  accessToken: 'YOUR_ACCESS_TOKEN',
+  api_key: 'YOUR_API_KEY',
+  access_token: 'YOUR_ACCESS_TOKEN',
 });
 
 ticker.on('ticks', (ticks: TickFull) => {

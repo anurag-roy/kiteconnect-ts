@@ -1,14 +1,31 @@
 {
   "name": "kiteconnect-ts",
+  "author": "Anurag Roy",
+  "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anurag-roy/kiteconnect-ts.git"
+  },
+  "homepage": "https://github.com/anurag-roy/kiteconnect-ts#readme",
+  "bugs": {
+    "url": "https://github.com/anurag-roy/kiteconnect-ts/issues"
+  },
+  "keywords": [
+    "Zerodha",
+    "KiteConnect",
+    "KiteTicker",
+    "TypeScript"
+  ],
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
     "lint": "tsc",
-    "gen-docs": "typedoc lib/ticker.ts --name KiteConnectTS"
+    "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
+    "docs:preview": "pnpx serve docs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
