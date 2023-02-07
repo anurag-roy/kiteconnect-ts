@@ -7,6 +7,9 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anurag-roy/kiteconnect-ts.git"
@@ -22,8 +25,9 @@
     "TypeScript"
   ],
   "scripts": {
-    "build": "tsup lib/index.ts --format cjs,esm --dts",
     "lint": "tsc",
+    "build": "tsup lib/index.ts --format cjs,esm --dts",
+    "release": "pnpm build && pnpm publish",
     "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
     "docs:preview": "pnpx serve docs"
   },
