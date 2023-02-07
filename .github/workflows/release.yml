@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 on:
   push:
     branches:
@@ -7,19 +7,27 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 7
-      - uses: actions/setup-node@v3
+      
+      - name: Setup Node.js 18 with pnpm cache
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
