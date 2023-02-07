@@ -1,80 +1,6 @@
 import ws, { WebSocket } from 'ws';
-import { getUserAgent } from './utils';
-
-/**
- * Params to construct a KiteTicker class
- */
-export type KiteTickerParams = {
-  /**
-   * API key issued to you.
-   */
-  api_key: string;
-  /**
-   * Access token obtained after successful login flow.
-   */
-  access_token: string;
-  /**
-   * Enable/Disable auto reconnect. Enabled by default.
-   *
-   * @defaultValue `true`
-   */
-  reconnect?: boolean;
-  /**
-   * The maximum number of re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts.
-   *
-   * @defaultValue 50
-   */
-  max_retry?: number;
-  /**
-   * The maximum delay in seconds after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s.
-   *
-   * @defaultValue 60
-   */
-  max_delay?: number;
-  /**
-   * Kite websocket root.
-   *
-   * @defaultValue "wss://ws.kite.trade/"
-   */
-  root?: string;
-};
-
-/**
- * Available KiteTicker Events
- *
- * All events:
- * ----
- * `connect` -  when connection is successfully established.
- *
- * `ticks` - when ticks are available (Arrays of `ticks` object as the first argument).
- *
- * `disconnect` - when socket connection is disconnected. Error is received as a first param.
- *
- * `error` - when socket connection is closed with error. Error is received as a first param.
- *
- * `close` - when socket connection is closed cleanly.
- *
- * `reconnect` - When reconnecting (current re-connection count and reconnect interval as arguments respectively).
- *
- * `noreconnect` - When re-connection fails after n number times.
- *
- * `order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
- *
- * `message` - when binary message is received from the server.
- *
- * ----
- *
- */
-export type TickerEvent =
-  | 'connect'
-  | 'ticks'
-  | 'disconnect'
-  | 'error'
-  | 'close'
-  | 'reconnect'
-  | 'noreconnect'
-  | 'order_update'
-  | 'message';
+import { getUserAgent } from '../utils';
+import { KiteTickerParams, TickerEvent } from './types';
 
 /**
  * The WebSocket client for connecting to Kite connect streaming quotes service.
@@ -734,3 +660,5 @@ export class KiteTicker {
     return val;
   }
 }
+
+export * from './types';
