@@ -27,7 +27,7 @@
   "scripts": {
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
-    "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
+    "docs:generate": "typedoc typedoc/index.ts --name kiteconnect-ts --readme none",
     "docs:preview": "pnpx serve docs"
   },
   "devDependencies": {
