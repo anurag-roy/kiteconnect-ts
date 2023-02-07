@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.3.1
+
+### Patch Changes
+
+- ff21cf7: Add types for tick packets
+
 ## 0.3.0
 
 ### Minor Changes
