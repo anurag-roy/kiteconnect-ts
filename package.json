@@ -27,7 +27,6 @@
   "scripts": {
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
-    "release": "pnpm build && pnpm publish",
     "docs:generate": "typedoc lib/index.ts --name kiteconnect-ts --readme none",
     "docs:preview": "pnpx serve docs"
   },
