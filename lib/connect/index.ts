@@ -1128,7 +1128,7 @@ export class KiteConnect {
   }
 
   // Get API params from user defined GTT params.
-  _getGTTPayload(params: GTTParams) {
+  private _getGTTPayload(params: GTTParams) {
     if (
       params.trigger_type !== this.GTT_TYPE_OCO &&
       params.trigger_type !== this.GTT_TYPE_SINGLE
