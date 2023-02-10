@@ -48,27 +48,29 @@ import {
  * ```ts
  * import { KiteConnect } from "kiteconnect-ts";
  *
- * const kc = new KiteConnect({api_key: "your_api_key"});
+ * const kc = new KiteConnect({
+ *   api_key: 'YOUR_API_KEY',
+ * });
  *
- * kc.generateSession("request_token", "api_secret")
- * 	.then(function(response) {
- * 		init();
- * 	})
- * 	.catch(function(err) {
- * 		console.log(err);
- * 	})
+ * // Get access token
+ * try {
+ *   const { access_token } = await kc.generateSession(
+ *     'request_token',
+ *     'YOUR_API_SECRET'
+ *   );
+ *   console.log('Access token:', access_token);
+ * } catch (error) {
+ *   console.error('Error while generating session', error);
+ *   process.exit(1);
+ * }
  *
- * function init() {
- * 	// Fetch equity margins.
- * 	// You can have other api calls here.
- *
- * 	kc.getMargins()
- * 		.then(function(response) {
- * 			// You got user's margin details.
- * 		}).catch(function(err) {
- * 			// Something went wrong.
- * 		});
- *  }
+ * // Get equity margins
+ * try {
+ *   const margins = await kc.getMargins('equity');
+ *   console.log('Equity margins', margins.equity);
+ * } catch (error) {
+ *   console.error('Error while fetching equity margins', error);
+ * }
  * ```
  *
  * @example
