@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.4.0
+
+### Minor Changes
+
+- b56ae78: Add KiteConnect module
+
 ## 0.3.1
 
 ### Patch Changes
