@@ -1515,7 +1515,7 @@ export class KiteConnect {
       data: payload,
       // Set auth header
       headers: {} as any,
-      transformResponse: null as any,
+      transformResponse: undefined as any,
     };
 
     // Send auth token
