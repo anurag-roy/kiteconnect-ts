@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.4.1
+
+### Patch Changes
+
+- 21fce0a: fix: Make parameter optional in `getInstruments`
+
 ## 0.4.0
 
 ### Minor Changes
