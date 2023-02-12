@@ -757,7 +757,7 @@ export class KiteConnect {
    *
    * @param exchange Filter instruments based on exchange (NSE, BSE, NFO, BFO, CDS, MCX). If no `segment` is specified, all instruments are returned.
    */
-  getInstruments(exchange: Exchange[]): Promise<Instrument[]> {
+  getInstruments(exchange?: Exchange[]): Promise<Instrument[]> {
     if (exchange) {
       return this._get(
         'market.instruments',
