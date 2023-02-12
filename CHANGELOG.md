@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.4.2
+
+### Patch Changes
+
+- 2a30929: fix: Allow axios to transform responses by default
+
 ## 0.4.1
 
 ### Patch Changes
