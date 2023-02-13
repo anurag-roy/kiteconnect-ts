@@ -118,6 +118,10 @@ export interface TickQuote extends Omit<TickLtp, 'mode'> {
      */
     close: number;
   };
+  /**
+   * Price change
+   */
+  change: number;
 }
 
 /**

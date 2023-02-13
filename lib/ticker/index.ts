@@ -107,15 +107,15 @@ export class KiteTicker {
   /**
    * Set mode full
    */
-  public static readonly modeFull = 'full'; // Full quote including market depth. 164 bytes.
+  public readonly modeFull = 'full'; // Full quote including market depth. 164 bytes.
   /**
    * Set mode quote
    */
-  public static readonly modeQuote = 'quote'; // Quote excluding market depth. 52 bytes.
+  public readonly modeQuote = 'quote'; // Quote excluding market depth. 52 bytes.
   /**
    * Set mode LTP
    */
-  public static readonly modeLTP = 'ltp';
+  public readonly modeLTP = 'ltp';
 
   private ws: WebSocket | null = null;
   private triggers: Record<TickerEvent, Function[]> = {
@@ -489,14 +489,14 @@ export class KiteTicker {
       if (bin.byteLength === 8) {
         ticks.push({
           tradable: tradable,
-          mode: KiteTicker.modeLTP,
+          mode: this.modeLTP,
           instrument_token: instrument_token,
           last_price: this.buf2long(bin.slice(4, 8)) / divisor,
         });
         // Parse indices quote and full mode
       } else if (bin.byteLength === 28 || bin.byteLength === 32) {
-        let mode = KiteTicker.modeQuote;
-        if (bin.byteLength === 32) mode = KiteTicker.modeFull;
+        let mode = this.modeQuote;
+        if (bin.byteLength === 32) mode = this.modeFull;
 
         const tick: any = {
           tradable: tradable,
@@ -527,8 +527,8 @@ export class KiteTicker {
 
         ticks.push(tick);
       } else if (bin.byteLength === 44 || bin.byteLength === 184) {
-        let mode = KiteTicker.modeQuote;
-        if (bin.byteLength === 184) mode = KiteTicker.modeFull;
+        let mode = this.modeQuote;
+        if (bin.byteLength === 184) mode = this.modeFull;
 
         const tick: any = {
           tradable: tradable,
