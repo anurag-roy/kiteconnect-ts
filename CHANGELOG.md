@@ -1,5 +1,14 @@
 # kiteconnect-ts
 
+## 0.4.3
+
+### Patch Changes
+
+- 60d0dbb: fix: Configure axios params serializer
+- 0ed0c9f: fix: Add `change` to TickerQuote and TickerFull types
+
+  fix: Make `modeFull`, `modeQuote` and `modeLTP` in KiteTicker non-static for better compatibility with kiteconnectjs
+
 ## 0.4.2
 
 ### Patch Changes
