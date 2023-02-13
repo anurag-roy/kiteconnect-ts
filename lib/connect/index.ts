@@ -284,6 +284,9 @@ export class KiteConnect {
         'X-Kite-Version': this.kiteVersion,
         'User-Agent': this.userAgent,
       },
+      paramsSerializer: {
+        indexes: null,
+      },
     });
 
     // Add a request interceptor
