@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.4.4
+
+### Patch Changes
+
+- 0a89c53: Add notes on browser support
+
 ## 0.4.3
 
 ### Patch Changes
