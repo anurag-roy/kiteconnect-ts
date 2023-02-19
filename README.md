@@ -6,27 +6,7 @@ All classes and APIs are one-to-one with Zerodha's [official kiteconnectjs libra
 
 If you notice a bug, please [open an issue](https://github.com/anurag-roy/kiteconnect-ts/issues/new) or consider [contributing](./CONTRIBUTING.md).
 
-## Installation
-
-Install via `npm`:
-
-```
-npm install kiteconnect-ts
-```
-
-Add via `yarn`:
-
-```
-yarn add kiteconnect-ts
-```
-
-Add via `pnpm`:
-
-```
-pnpm add kiteconnect-ts
-```
-
-## Docs
+## Documentation
 
 Docs are auto-generated from TsDoc comments using [TypeDoc](https://typedoc.org/).
 
@@ -46,6 +26,32 @@ Browse the full docs [here](https://kiteconnect.anuragroy.dev) or go to a specif
 
 - [Zerodha's kiteconnectjs docs](https://kite.trade/docs/kiteconnectjs/v3)
 - [Kite Connect HTTP API documentation](https://kite.trade/docs/connect/v3)
+
+## Requirements
+
+- Node.js `v14+`
+
+Please note: Browser environments are not supported. See [Browser Support](#browser-support) for more details.
+
+## Installation
+
+#### npm
+
+```
+npm install kiteconnect-ts
+```
+
+#### yarn
+
+```
+yarn add kiteconnect-ts
+```
+
+#### pnpm
+
+```
+pnpm add kiteconnect-ts
+```
 
 ## KiteConnect
 
@@ -99,6 +105,69 @@ ticker.on('connect', () => {
 ticker.connect();
 ```
 
+## Browser Support
+
+Unfortunately this library does not work on the browser, so you cannot use it on your Angular, React, Vue, etc front-ends. However, if you use a meta/full-stack framework (Next.js, Nuxt, etc) with SSR, you can definitely install and use it on the server side.
+
+This is not a limitation of this library per say, rather a limitation from Zerodha as they [do not want you to use Kite APIs directly from the browser](https://kite.trade/forum/discussion/comment/25372/#Comment_25372). This is also evident once you try to access any Kite API endpoint from your browser and you are greeted with a CORS error.
+
+However, you can connect to [Kite Websocket](https://kite.trade/docs/connect/v3/websocket/) from your browser using `WebSocket`. You'd need to write your own parser or adapt the code from [here](https://github.com/anurag-roy/kiteconnect-ts/blob/main/lib/ticker/index.ts#L87).
+
+Here's an extremely simple full tick parser that just gets the `token`, `firstBid` and `firstAsk`.
+
+```typescript
+// Tick structure reference: https://kite.trade/docs/connect/v3/websocket/#message-structure
+const parseBinary = (dataView: DataView) => {
+  const numberOfPackets = dataView.getInt16(0);
+  let index = 4;
+  const ticks: { token: number; firstBid: number; firstAsk: number }[] = [];
+
+  for (let i = 0; i < numberOfPackets; i++) {
+    const size = dataView.getInt16(index - 2);
+
+    // Parse whatever you need
+    ticks.push({
+      token: dataView.getInt32(index),
+      firstBid: dataView.getInt32(index + 68) / 100,
+      firstAsk: dataView.getInt32(index + 128) / 100,
+    });
+
+    index = index + 4 + size;
+  }
+
+  return ticks;
+};
+
+const API_KEY = 'INSERT_API_KEY_HERE';
+const ACCESS_TOKEN = 'INSERT_ACCESS_TOKEN_HERE';
+
+const ws = new WebSocket(
+  `wss://ws.kite.trade?api_key=${API_KEY}&access_token=${ACCESS_TOKEN}`
+);
+
+ws.onopen = (_event) => {
+  console.log('Connected to Zerodha Kite Socket!');
+
+  const setModeMessage = { a: 'mode', v: ['full', [61512711]] };
+  ws.send(JSON.stringify(setModeMessage));
+};
+
+ws.onerror = (error) => {
+  console.log('Some error occurred', error);
+};
+
+ws.onmessage = async (message) => {
+  if (message.data instanceof Blob && message.data.size > 2) {
+    const arrayBuffer = await message.data.arrayBuffer();
+    const dataView = new DataView(arrayBuffer);
+    const ticks = parseBinary(dataView);
+    console.log(ticks);
+  }
+};
+
+export {};
+```
+
 ## Todos
 
 - Add more examples
@@ -106,7 +175,7 @@ ticker.connect();
 
 ## Changelog
 
-Check the [changelog]('./CHANGELOG.md').
+Check the [changelog](./CHANGELOG.md).
 
 ## Contributing
 
@@ -115,3 +184,7 @@ See the [Contribution Guide](./CONTRIBUTING.md).
 ## License
 
 [MIT](./LICENSE) © [Anurag Roy](https://github.com/anurag-roy)
+
+## Credits
+
+Code was adapted from [kiteconnectjs](https://github.com/zerodha/kiteconnectjs), MIT License, Copyright 2018 [Zerodha Technology](http://zerodha.com)

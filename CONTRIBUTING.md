@@ -12,8 +12,10 @@ Something not working as expected like types not matching the actual response or
 
 ## How to contribute
 
+`pnpm` is used as the package manager of choice. Installation instructions can be found [here](https://pnpm.io/installation).
+
 1. Fork the repository and clone it locally on your machine.
-2. Install dependencies using `pnpm`.
+2. Install dependencies.
 
 ```
 pnpm install
@@ -35,6 +37,8 @@ pnpm changeset
 6. Push your changes and you're ready to raise a PR!
 7. Tag [me](https://github.com/anurag-roy) as a reviewer and I'll get your PR reviewed and merged.
 
-> Please try to keep the PR limited to a single area of change and try not to club multiple changes in a single PR.
+Please try to keep PRs limited to a single area of change and try not to club multiple changes in a single PR.
+
+---
 
 :sparkles: Thanks for your contribution! It is highly appreciated.
