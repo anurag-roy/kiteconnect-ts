@@ -955,7 +955,7 @@ export interface Position {
   day_sell_value: number;
 }
 
-export interface Margin {
+export interface CompactMargin {
   /**
    * equity/commodity
    */
@@ -968,6 +968,13 @@ export interface Margin {
    * Name of the exchange
    */
   exchange: string;
+  /**
+   * Total margin block
+   */
+  total: number;
+}
+
+export interface Margin extends CompactMargin {
   /**
    * SPAN margins
    */
@@ -1061,10 +1068,6 @@ export interface Margin {
       total: number;
     };
   };
-  /**
-   * Total margin block
-   */
-  total: number;
 }
 
 export interface MarginOrder {

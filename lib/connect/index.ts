@@ -8,6 +8,7 @@ import csvParse from 'papaparse';
 import querystring from 'querystring';
 import { getUserAgent } from '../utils';
 import {
+  CompactMargin,
   ConvertPositionParams,
   Exchange,
   GTTParams,
@@ -674,6 +675,12 @@ export class KiteConnect {
    * @param orders Margin fetch orders.
    * @param mode (optional) Compact mode will only give the total margins
    */
+  orderMargins(orders: MarginOrder[]): Promise<Margin[]>;
+  orderMargins(
+    orders: MarginOrder[],
+    mode: 'compact'
+  ): Promise<CompactMargin[]>;
+
   orderMargins(
     orders: MarginOrder[],
     mode: 'compact' | null = null
@@ -690,6 +697,29 @@ export class KiteConnect {
    * @param consider_positions Boolean to consider users positions while calculating margins. Defauls to true
    * @param mode (optional) Compact mode will only give the total margins
    */
+  orderBasketMargins(orders: MarginOrder[]): Promise<{
+    initial: Margin;
+    final: Margin;
+    orders: Margin[];
+  }>;
+  orderBasketMargins(
+    orders: MarginOrder[],
+    consider_positions: boolean
+  ): Promise<{
+    initial: Margin;
+    final: Margin;
+    orders: Margin[];
+  }>;
+  orderBasketMargins(
+    orders: MarginOrder[],
+    consider_positions: boolean,
+    mode: 'compact'
+  ): Promise<{
+    initial: CompactMargin;
+    final: CompactMargin;
+    orders: CompactMargin[];
+  }>;
+
   orderBasketMargins(
     orders: MarginOrder[],
     consider_positions = true,
