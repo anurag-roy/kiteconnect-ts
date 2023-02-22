@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.4.5
+
+### Patch Changes
+
+- a018479: Fix return types for margin APIs when `compact` flag is true
+
 ## 0.4.4
 
 ### Patch Changes
