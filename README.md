@@ -132,7 +132,7 @@ const parseBinary = (dataView: DataView) => {
       firstAsk: dataView.getInt32(index + 128) / 100,
     });
 
-    index = index + 4 + size;
+    index = index + 2 + size;
   }
 
   return ticks;
