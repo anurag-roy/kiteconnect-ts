@@ -28,8 +28,7 @@
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && pnpm changeset publish",
-    "docs:generate": "typedoc typedoc/index.ts",
-    "docs:preview": "pnpx serve docs"
+    "docs:generate": "typedoc"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
@@ -38,6 +37,7 @@
     "@types/ws": "^8.5.4",
     "tsup": "^6.5.0",
     "typedoc": "^0.23.24",
+    "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.9.5"
   },
   "dependencies": {
