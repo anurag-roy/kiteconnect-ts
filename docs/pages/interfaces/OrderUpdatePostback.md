@@ -1,5 +1,3 @@
-[kiteconnect-ts](../README.md) / [Exports](../modules.md) / OrderUpdatePostback
-
 # Interface: OrderUpdatePostback
 
 Data returned on `order_update` event
@@ -10,42 +8,11 @@ Data returned on `order_update` event
 
   ↳ **`OrderUpdatePostback`**
 
-## Table of contents
-
-### Properties
-
-- [constructor](OrderUpdatePostback.md#constructor)
-
-### Methods
-
-- [hasOwnProperty](OrderUpdatePostback.md#hasownproperty)
-- [isPrototypeOf](OrderUpdatePostback.md#isprototypeof)
-- [propertyIsEnumerable](OrderUpdatePostback.md#propertyisenumerable)
-- [toLocaleString](OrderUpdatePostback.md#tolocalestring)
-- [toString](OrderUpdatePostback.md#tostring)
-- [valueOf](OrderUpdatePostback.md#valueof)
-
-## Properties
-
-### constructor
-
-• **constructor**: `Function`
-
-The initial value of Object.prototype.constructor is the standard built-in Object constructor.
-
-#### Inherited from
-
-Object.constructor
-
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:124
-
 ## Methods
 
 ### hasOwnProperty
 
-▸ **hasOwnProperty**(`v`): `boolean`
+**hasOwnProperty**(`v`): `boolean`
 
 Determines whether an object has a property with the specified name.
 
@@ -63,15 +30,11 @@ Determines whether an object has a property with the specified name.
 
 Object.hasOwnProperty
 
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:139
-
 ___
 
 ### isPrototypeOf
 
-▸ **isPrototypeOf**(`v`): `boolean`
+**isPrototypeOf**(`v`): `boolean`
 
 Determines whether an object exists in another object's prototype chain.
 
@@ -89,15 +52,11 @@ Determines whether an object exists in another object's prototype chain.
 
 Object.isPrototypeOf
 
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:145
-
 ___
 
 ### propertyIsEnumerable
 
-▸ **propertyIsEnumerable**(`v`): `boolean`
+**propertyIsEnumerable**(`v`): `boolean`
 
 Determines whether a specified property is enumerable.
 
@@ -115,15 +74,11 @@ Determines whether a specified property is enumerable.
 
 Object.propertyIsEnumerable
 
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:151
-
 ___
 
 ### toLocaleString
 
-▸ **toLocaleString**(): `string`
+**toLocaleString**(): `string`
 
 Returns a date converted to a string using the current locale.
 
@@ -135,15 +90,11 @@ Returns a date converted to a string using the current locale.
 
 Object.toLocaleString
 
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:130
-
 ___
 
 ### toString
 
-▸ **toString**(): `string`
+**toString**(): `string`
 
 Returns a string representation of an object.
 
@@ -155,15 +106,11 @@ Returns a string representation of an object.
 
 Object.toString
 
-#### Defined in
-
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:127
-
 ___
 
 ### valueOf
 
-▸ **valueOf**(): `Object`
+**valueOf**(): `Object`
 
 Returns the primitive value of the specified object.
 
@@ -175,6 +122,14 @@ Returns the primitive value of the specified object.
 
 Object.valueOf
 
-#### Defined in
+## Properties
 
-node_modules/.pnpm/typescript@4.9.5/node_modules/typescript/lib/lib.es5.d.ts:133
+### constructor
+
+ **constructor**: `Function`
+
+The initial value of Object.prototype.constructor is the standard built-in Object constructor.
+
+#### Inherited from
+
+Object.constructor

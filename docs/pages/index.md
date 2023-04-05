@@ -1,6 +1,4 @@
-kiteconnect-ts / [Exports](modules.md)
-
-# Kite Connect <img src="https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg" width="20" height="20" />
+# kiteconnect-ts
 
 Unofficial library for the Kite Connect trading APIs, written in [TypeScript](https://www.typescriptlang.org/).
 

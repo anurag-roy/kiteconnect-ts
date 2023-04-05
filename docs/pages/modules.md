@@ -1,15 +1,11 @@
-[kiteconnect-ts](README.md) / Exports
-
 # kiteconnect-ts
 
-## Table of contents
-
-### Classes
+## Classes
 
 - [KiteConnect](classes/KiteConnect.md)
 - [KiteTicker](classes/KiteTicker.md)
 
-### Interfaces
+## Interfaces
 
 - [CompactMargin](interfaces/CompactMargin.md)
 - [ConvertPositionParams](interfaces/ConvertPositionParams.md)
@@ -39,34 +35,17 @@
 - [UserMargin](interfaces/UserMargin.md)
 - [UserProfile](interfaces/UserProfile.md)
 
-### Type Aliases
-
-- [Exchange](modules.md#exchange)
-- [KiteTickerParams](modules.md#kitetickerparams)
-- [OrderType](modules.md#ordertype)
-- [Product](modules.md#product)
-- [Tick](modules.md#tick)
-- [TickerEvent](modules.md#tickerevent)
-- [TransactionType](modules.md#transactiontype)
-- [TriggerType](modules.md#triggertype)
-- [Validity](modules.md#validity)
-- [Variety](modules.md#variety)
-
 ## Type Aliases
 
 ### Exchange
 
-Ƭ **Exchange**: [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_CDS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BCD"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_MCX"``]
-
-#### Defined in
-
-[lib/connect/types.ts:3](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L3)
+ **Exchange**: [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_CDS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BCD"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_MCX"``]
 
 ___
 
 ### KiteTickerParams
 
-Ƭ **KiteTickerParams**: `Object`
+ **KiteTickerParams**: `Object`
 
 Params to construct a KiteTicker class
 
@@ -81,47 +60,31 @@ Params to construct a KiteTicker class
 | `reconnect?` | `boolean` | Enable/Disable auto reconnect. Enabled by default. **`Default Value`** `true` |
 | `root?` | `string` | Kite websocket root. **`Default Value`** "wss://ws.kite.trade/" |
 
-#### Defined in
-
-[lib/ticker/types.ts:253](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/types.ts#L253)
-
 ___
 
 ### OrderType
 
-Ƭ **OrderType**: [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_LIMIT"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_MARKET"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SL"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SLM"``]
-
-#### Defined in
-
-[lib/connect/types.ts:21](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L21)
+ **OrderType**: [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_LIMIT"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_MARKET"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SL"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SLM"``]
 
 ___
 
 ### Product
 
-Ƭ **Product**: [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_NRML"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_MIS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_CNC"``]
-
-#### Defined in
-
-[lib/connect/types.ts:16](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L16)
+ **Product**: [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_NRML"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_MIS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_CNC"``]
 
 ___
 
 ### Tick
 
-Ƭ **Tick**: [`TickLtp`](interfaces/TickLtp.md) \| [`TickIndexQuote`](interfaces/TickIndexQuote.md) \| [`TickIndexFull`](interfaces/TickIndexFull.md) \| [`TickQuote`](interfaces/TickQuote.md) \| [`TickFull`](interfaces/TickFull.md)
+ **Tick**: [`TickLtp`](interfaces/TickLtp.md) \| [`TickIndexQuote`](interfaces/TickIndexQuote.md) \| [`TickIndexFull`](interfaces/TickIndexFull.md) \| [`TickQuote`](interfaces/TickQuote.md) \| [`TickFull`](interfaces/TickFull.md)
 
 Types of possible tick packet structures
-
-#### Defined in
-
-[lib/ticker/types.ts:206](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/types.ts#L206)
 
 ___
 
 ### TickerEvent
 
-Ƭ **TickerEvent**: ``"connect"`` \| ``"ticks"`` \| ``"disconnect"`` \| ``"error"`` \| ``"close"`` \| ``"reconnect"`` \| ``"noreconnect"`` \| ``"order_update"`` \| ``"message"``
+ **TickerEvent**: ``"connect"`` \| ``"ticks"`` \| ``"disconnect"`` \| ``"error"`` \| ``"close"`` \| ``"reconnect"`` \| ``"noreconnect"`` \| ``"order_update"`` \| ``"message"``
 
 Available KiteTicker Events
 
@@ -147,46 +110,26 @@ All events:
 
 ----
 
-#### Defined in
-
-[lib/ticker/types.ts:239](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/types.ts#L239)
-
 ___
 
 ### TransactionType
 
-Ƭ **TransactionType**: [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_BUY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_SELL"``]
-
-#### Defined in
-
-[lib/connect/types.ts:12](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L12)
+ **TransactionType**: [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_BUY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_SELL"``]
 
 ___
 
 ### TriggerType
 
-Ƭ **TriggerType**: [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_OCO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_SINGLE"``]
-
-#### Defined in
-
-[lib/connect/types.ts:40](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L40)
+ **TriggerType**: [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_OCO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_SINGLE"``]
 
 ___
 
 ### Validity
 
-Ƭ **Validity**: [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_DAY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_IOC"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_TTL"``]
-
-#### Defined in
-
-[lib/connect/types.ts:35](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L35)
+ **Validity**: [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_DAY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_IOC"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_TTL"``]
 
 ___
 
 ### Variety
 
-Ƭ **Variety**: [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AMO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AUCTION"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_BO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_CO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_ICEBERG"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_REGULAR"``]
-
-#### Defined in
-
-[lib/connect/types.ts:27](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L27)
+ **Variety**: [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AMO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AUCTION"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_BO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_CO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_ICEBERG"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_REGULAR"``]

@@ -3,5 +3,32 @@
   "entryPoints": ["./lib/index.ts"],
   "out": "docs/pages",
   "plugin": ["typedoc-plugin-markdown"],
-  "excludePrivate": true
+  "excludePrivate": true,
+  "disableSources": true,
+  "kindSortOrder": [
+    "Reference",
+    "Project",
+    "Module",
+    "Namespace",
+    "Enum",
+    "EnumMember",
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Constructor",
+    "Method",
+    "Property",
+    "Variable",
+    "Function",
+    "Accessor",
+    "ObjectLiteral",
+    "Parameter",
+    "TypeParameter",
+    "TypeLiteral",
+    "CallSignature",
+    "ConstructorSignature",
+    "IndexSignature",
+    "GetSignature",
+    "SetSignature"
+  ]
 }

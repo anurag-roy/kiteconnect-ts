@@ -1,21 +1,10 @@
-[kiteconnect-ts](../README.md) / [Exports](../modules.md) / UserMargin
-
 # Interface: UserMargin
-
-## Table of contents
-
-### Properties
-
-- [available](UserMargin.md#available)
-- [enabled](UserMargin.md#enabled)
-- [net](UserMargin.md#net)
-- [utilised](UserMargin.md#utilised)
 
 ## Properties
 
 ### available
 
-• **available**: `Object`
+ **available**: `Object`
 
 #### Type declaration
 
@@ -28,39 +17,27 @@
 | `live_balance` | `number` | Current available balance |
 | `opening_balance` | `number` | Opening balance at the day start |
 
-#### Defined in
-
-[lib/connect/types.ts:321](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L321)
-
 ___
 
 ### enabled
 
-• **enabled**: `boolean`
+ **enabled**: `boolean`
 
 Indicates whether the segment is enabled for the user
-
-#### Defined in
-
-[lib/connect/types.ts:316](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L316)
 
 ___
 
 ### net
 
-• **net**: `number`
+ **net**: `number`
 
 Net cash balance available for trading (`intraday_payin` + `adhoc_margin` + `collateral`)
-
-#### Defined in
-
-[lib/connect/types.ts:320](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L320)
 
 ___
 
 ### utilised
 
-• **utilised**: `Object`
+ **utilised**: `Object`
 
 #### Type declaration
 
@@ -78,7 +55,3 @@ ___
 | `span` | `number` | SPAN margin blocked for all open F&O positions |
 | `stock_collateral` | `number` | Margin utilised against pledged stocks/ETFs |
 | `turnover` | `number` | Utilised portion of the maximum turnover limit (only applicable to certain clients) |
-
-#### Defined in
-
-[lib/connect/types.ts:347](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/connect/types.ts#L347)

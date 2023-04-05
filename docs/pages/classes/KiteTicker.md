@@ -1,5 +1,3 @@
-[kiteconnect-ts](../README.md) / [Exports](../modules.md) / KiteTicker
-
 # Class: KiteTicker
 
 The WebSocket client for connecting to Kite connect streaming quotes service.
@@ -85,34 +83,11 @@ function subscribe() {
 }
 ```
 
-## Table of contents
-
-### Constructors
-
-- [constructor](KiteTicker.md#constructor)
-
-### Properties
-
-- [modeFull](KiteTicker.md#modefull)
-- [modeLTP](KiteTicker.md#modeltp)
-- [modeQuote](KiteTicker.md#modequote)
-
-### Methods
-
-- [autoReconnect](KiteTicker.md#autoreconnect)
-- [connect](KiteTicker.md#connect)
-- [connected](KiteTicker.md#connected)
-- [disconnect](KiteTicker.md#disconnect)
-- [on](KiteTicker.md#on)
-- [setMode](KiteTicker.md#setmode)
-- [subscribe](KiteTicker.md#subscribe)
-- [unsubscribe](KiteTicker.md#unsubscribe)
-
 ## Constructors
 
 ### constructor
 
-• **new KiteTicker**(`params`)
+**new KiteTicker**(`params`)
 
 KiteTicker constructor
 
@@ -122,51 +97,11 @@ KiteTicker constructor
 | :------ | :------ | :------ |
 | `params` | [`KiteTickerParams`](../modules.md#kitetickerparams) | KiteTicker parameters |
 
-#### Defined in
-
-[lib/ticker/index.ts:161](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L161)
-
-## Properties
-
-### modeFull
-
-• `Readonly` **modeFull**: ``"full"``
-
-Set mode full
-
-#### Defined in
-
-[lib/ticker/index.ts:110](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L110)
-
-___
-
-### modeLTP
-
-• `Readonly` **modeLTP**: ``"ltp"``
-
-Set mode LTP
-
-#### Defined in
-
-[lib/ticker/index.ts:118](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L118)
-
-___
-
-### modeQuote
-
-• `Readonly` **modeQuote**: ``"quote"``
-
-Set mode quote
-
-#### Defined in
-
-[lib/ticker/index.ts:114](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L114)
-
 ## Methods
 
 ### autoReconnect
 
-▸ **autoReconnect**(`t`, `max_retry?`, `max_delay?`): `void`
+**autoReconnect**(`t`, `max_retry?`, `max_delay?`): `void`
 
 Auto reconnect settings
 
@@ -182,15 +117,11 @@ Auto reconnect settings
 
 `void`
 
-#### Defined in
-
-[lib/ticker/index.ts:178](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L178)
-
 ___
 
 ### connect
 
-▸ **connect**(): `void`
+**connect**(): `void`
 
 Initiate a websocket connection
 
@@ -198,15 +129,11 @@ Initiate a websocket connection
 
 `void`
 
-#### Defined in
-
-[lib/ticker/index.ts:199](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L199)
-
 ___
 
 ### connected
 
-▸ **connected**(): `boolean`
+**connected**(): `boolean`
 
 Check if the ticker is connected
 
@@ -216,15 +143,11 @@ Check if the ticker is connected
 
 `true` if the ticker is connected or `false` otherwise.
 
-#### Defined in
-
-[lib/ticker/index.ts:304](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L304)
-
 ___
 
 ### disconnect
 
-▸ **disconnect**(): `void`
+**disconnect**(): `void`
 
 Close the websocket connection
 
@@ -232,15 +155,11 @@ Close the websocket connection
 
 `void`
 
-#### Defined in
-
-[lib/ticker/index.ts:289](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L289)
-
 ___
 
 ### on
 
-▸ **on**(`e`, `callback`): `void`
+**on**(`e`, `callback`): `void`
 
 Register websocket event callbacks
 
@@ -304,15 +223,11 @@ Tick structure (passed to the tick callback you assign):
 
 `void`
 
-#### Defined in
-
-[lib/ticker/index.ts:366](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L366)
-
 ___
 
 ### setMode
 
-▸ **setMode**(`mode`, `tokens`): `number`[]
+**setMode**(`mode`, `tokens`): `number`[]
 
 Set mode for an array of tokens
 
@@ -333,15 +248,11 @@ ticker.setMode(ticker.modeFull, [738561]);
 
 `number`[]
 
-#### Defined in
-
-[lib/ticker/index.ts:417](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L417)
-
 ___
 
 ### subscribe
 
-▸ **subscribe**(`tokens`): `number`[]
+**subscribe**(`tokens`): `number`[]
 
 Subscribe to array of tokens
 
@@ -361,15 +272,11 @@ ticker.subscribe([738561]);
 
 `number`[]
 
-#### Defined in
-
-[lib/ticker/index.ts:382](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L382)
-
 ___
 
 ### unsubscribe
 
-▸ **unsubscribe**(`tokens`): `number`[]
+**unsubscribe**(`tokens`): `number`[]
 
 Unsubscribe from array of tokens
 
@@ -389,6 +296,26 @@ ticker.unsubscribe([738561]);
 
 `number`[]
 
-#### Defined in
+## Properties
 
-[lib/ticker/index.ts:399](https://github.com/anurag-roy/kiteconnect-ts/blob/327f526/lib/ticker/index.ts#L399)
+### modeFull
+
+ `Readonly` **modeFull**: ``"full"``
+
+Set mode full
+
+___
+
+### modeLTP
+
+ `Readonly` **modeLTP**: ``"ltp"``
+
+Set mode LTP
+
+___
+
+### modeQuote
+
+ `Readonly` **modeQuote**: ``"quote"``
+
+Set mode quote
