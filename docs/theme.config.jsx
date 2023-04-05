@@ -14,16 +14,9 @@ export default {
       titleTemplate: '%s – kiteconnect-ts',
     };
   },
-  docsRepositoryBase:
-    'https://github.com/anurag-roy/kiteconnect-ts/blob/docs/pages',
+  docsRepositoryBase: 'https://github.com/anurag-roy/kiteconnect-ts/blob/docs',
   logo: <b>kiteconnect-ts</b>,
   project: {
     link: 'https://github.com/anurag-roy/kiteconnect-ts',
-  },
-  editLink: {
-    text: null,
-  },
-  feedback: {
-    content: null,
   },
 };
