@@ -19,4 +19,14 @@ export default {
   project: {
     link: 'https://github.com/anurag-roy/kiteconnect-ts',
   },
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a href="https://twitter.com/anurag__roy" target="_blank">
+          Anurag Roy
+        </a>
+      </span>
+    ),
+  },
 };

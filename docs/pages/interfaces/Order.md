@@ -1,5 +1,13 @@
 # Interface: Order
 
+Single Order response.
+
+## Hierarchy
+
+- **`Order`**
+
+  ↳ [`OrderUpdatePostback`](OrderUpdatePostback.md)
+
 ## Properties
 
 ### average\_price

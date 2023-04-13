@@ -28,7 +28,7 @@
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && pnpm changeset publish",
-    "docs:generate": "typedoc --entryDocument index.md --hideBreadcrumbs true --hideMembersSymbol true --hideInPageTOC true"
+    "generateDocs": "node typedoc/generateDocs.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",

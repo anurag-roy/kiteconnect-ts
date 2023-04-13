@@ -1,5 +1,7 @@
 # Interface: Margin
 
+Full response from the Margin API calculator.
+
 ## Hierarchy
 
 - [`CompactMargin`](CompactMargin.md)

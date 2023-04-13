@@ -1,5 +1,7 @@
 # Interface: Trigger
 
+Single GTT response.
+
 ## Properties
 
 ### condition

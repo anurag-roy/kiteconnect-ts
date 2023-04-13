@@ -1,5 +1,7 @@
 # Interface: MFInstrument
 
+Single Mutual Fund instrument response.
+
 ## Properties
 
 ### amc

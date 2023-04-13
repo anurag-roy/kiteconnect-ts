@@ -8,7 +8,7 @@ for the complete list of APIs, supported parameters and values, and response for
 
 **`Example`**
 
-Getting started with API
+Getting started
 ------------------------
 ```ts
 import { KiteConnect } from "kiteconnect-ts";

@@ -1,5 +1,7 @@
 # Interface: ConvertPositionParams
 
+Params to convert a position.
+
 ## Properties
 
 ### exchange

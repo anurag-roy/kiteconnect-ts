@@ -1,5 +1,7 @@
 # Interface: MFSIP
 
+Single Mutual Fund SIP response.
+
 ## Properties
 
 ### completed\_instalments

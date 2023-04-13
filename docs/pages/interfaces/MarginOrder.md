@@ -1,5 +1,7 @@
 # Interface: MarginOrder
 
+An order in the Margin API calculator.
+
 ## Properties
 
 ### exchange

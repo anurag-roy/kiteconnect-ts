@@ -1,5 +1,7 @@
 # Interface: UserProfile
 
+User prodile response.
+
 ## Properties
 
 ### avatar\_url

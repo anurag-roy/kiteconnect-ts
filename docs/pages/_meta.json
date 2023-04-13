@@ -1,6 +1,6 @@
 {
   "index": "Introduction",
-  "modules": "Modules",
   "classes": "Classes",
-  "interfaces": "Extra Types"
+  "interfaces": "Interfaces",
+  "modules": "Modules"
 }

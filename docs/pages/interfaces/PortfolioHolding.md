@@ -1,5 +1,7 @@
 # Interface: PortfolioHolding
 
+Single holdings response.
+
 ## Properties
 
 ### authorised\_date

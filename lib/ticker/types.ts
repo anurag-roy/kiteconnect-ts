@@ -1,3 +1,5 @@
+import { Order } from '../connect';
+
 /**
  * LTP Packet
  */
@@ -198,7 +200,7 @@ export interface TickFull extends Omit<TickQuote, 'mode'> {
 /**
  * Data returned on `order_update` event
  */
-export interface OrderUpdatePostback extends Object {}
+export interface OrderUpdatePostback extends Order {}
 
 /**
  * Types of possible tick packet structures

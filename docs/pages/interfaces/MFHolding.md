@@ -1,5 +1,7 @@
 # Interface: MFHolding
 
+Single Mutual Fund holding.
+
 ## Properties
 
 ### average\_price

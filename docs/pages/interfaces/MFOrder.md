@@ -1,5 +1,7 @@
 # Interface: MFOrder
 
+Single Mutual Fund order response.
+
 ## Properties
 
 ### amount

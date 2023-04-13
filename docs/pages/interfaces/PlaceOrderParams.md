@@ -1,5 +1,7 @@
 # Interface: PlaceOrderParams
 
+Params to place an order.
+
 ## Properties
 
 ### auction\_number

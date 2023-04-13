@@ -1,5 +1,7 @@
 # Interface: CompactMargin
 
+Compact response from the Margin API calculator.
+
 ## Hierarchy
 
 - **`CompactMargin`**

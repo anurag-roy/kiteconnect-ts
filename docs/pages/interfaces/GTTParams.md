@@ -1,5 +1,7 @@
 # Interface: GTTParams
 
+Params for placing a GTT.
+
 ## Properties
 
 ### exchange
@@ -36,7 +38,7 @@ ___
 
  **trigger\_type**: [`TriggerType`](../modules.md#triggertype)
 
-GTT type, its either self.GTT_TYPE_OCO or self.GTT_TYPE_SINGLE.
+GTT type, its either KiteConnect.GTT_TYPE_OCO or KiteConnect.GTT_TYPE_SINGLE.
 
 ___
 

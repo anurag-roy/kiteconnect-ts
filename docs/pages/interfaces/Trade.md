@@ -1,5 +1,7 @@
 # Interface: Trade
 
+Single Trade response.
+
 ## Properties
 
 ### average\_price

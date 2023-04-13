@@ -1,5 +1,7 @@
 # Interface: SessionData
 
+Response after successful authentication.
+
 ## Properties
 
 ### access\_token

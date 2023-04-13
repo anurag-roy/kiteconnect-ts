@@ -161,7 +161,7 @@ ___
 
 **on**(`e`, `callback`): `void`
 
-Register websocket event callbacks
+Register websocket event callbacks. See [TickerEvent](../modules.md#tickerevent) for all available events.
 
 **`Example`**
 
@@ -172,7 +172,6 @@ ticker.on("disconnect", callback);
 ```
 
 Tick structure (passed to the tick callback you assign):
-----
 ```
 [
   {
@@ -216,7 +215,7 @@ Tick structure (passed to the tick callback you assign):
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `e` | [`TickerEvent`](../modules.md#tickerevent) | Event to register callback on |
+| `e` | [`TickerEvent`](../modules.md#tickerevent) | Event to register callback on. |
 | `callback` | `Function` | Callback function |
 
 #### Returns

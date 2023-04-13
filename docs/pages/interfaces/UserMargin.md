@@ -1,10 +1,14 @@
 # Interface: UserMargin
 
+User margins for a segment.
+
 ## Properties
 
 ### available
 
  **available**: `Object`
+
+Available margins for the segment
 
 #### Type declaration
 
@@ -38,6 +42,8 @@ ___
 ### utilised
 
  **utilised**: `Object`
+
+Used margins for the segment
 
 #### Type declaration
 

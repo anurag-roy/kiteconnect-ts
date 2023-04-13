@@ -1,5 +1,7 @@
 # Interface: Position
 
+Single Position response.
+
 ## Properties
 
 ### average\_price

@@ -1,5 +1,7 @@
 # Interface: Instrument
 
+Single Instrument response.
+
 ## Properties
 
 ### exchange

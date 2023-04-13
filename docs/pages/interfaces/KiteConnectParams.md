@@ -1,5 +1,7 @@
 # Interface: KiteConnectParams
 
+Params to construct a KiteConnect class.
+
 ## Properties
 
 ### access\_token
@@ -11,7 +13,9 @@ Pre-login, this will default to null, but once you have obtained it, you
 should persist it in a database or session to pass to the Kite Connect
 class initialisation for subsequent requests.
 
-Defaults to `null`
+**`Default Value`**
+
+`null`
 
 ___
 
@@ -29,7 +33,9 @@ ___
 
 If set to true, will console log requests and responses.
 
-Defaults to `false`
+**`Default Value`**
+
+`false`
 
 ___
 
@@ -39,7 +45,9 @@ ___
 
 Kite connect login url
 
-Defaults to "https://kite.trade/connect/login"
+**`Default Value`**
+
+"https://kite.trade/connect/login"
 
 ___
 
@@ -50,7 +58,9 @@ ___
 API end point root. Unless you explicitly want to send API requests to a
 non-default endpoint, this can be ignored.
 
-Defaults to "https://api.kite.trade"
+**`Default Value`**
+
+"https://api.kite.trade"
 
 ___
 
@@ -60,4 +70,6 @@ ___
 
 Time (milliseconds) for which the API client will wait for a request to complete before it fails.
 
-Defaults to `7000`
+**`Default Value`**
+
+`7000`

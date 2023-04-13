@@ -14,12 +14,12 @@ import {
   GTTParams,
   Instrument,
   KiteConnectParams,
-  Margin,
-  MarginOrder,
   MFHolding,
   MFInstrument,
   MFOrder,
   MFSIP,
+  Margin,
+  MarginOrder,
   Order,
   OrderType,
   PlaceOrderParams,
@@ -44,7 +44,7 @@ import {
  * for the complete list of APIs, supported parameters and values, and response formats.
  *
  * @example
- * Getting started with API
+ * Getting started
  * ------------------------
  * ```ts
  * import { KiteConnect } from "kiteconnect-ts";

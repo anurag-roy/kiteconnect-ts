@@ -1,5 +1,7 @@
 # Interface: Quote
 
+Single Quote response.
+
 ## Properties
 
 ### average\_price
