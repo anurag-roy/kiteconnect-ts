@@ -250,7 +250,7 @@ export type TickerEvent =
 /**
  * Params to construct a KiteTicker class
  */
-export type KiteTickerParams = {
+export interface KiteTickerParams {
   /**
    * API key issued to you.
    */
@@ -283,4 +283,4 @@ export type KiteTickerParams = {
    * @defaultValue "wss://ws.kite.trade/"
    */
   root?: string;
-};
+}

@@ -95,7 +95,7 @@ KiteTicker constructor
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | [`KiteTickerParams`](../modules.md#kitetickerparams) | KiteTicker parameters |
+| `params` | [`KiteTickerParams`](../interfaces/KiteTickerParams.md) | KiteTicker parameters |
 
 ## Methods
 

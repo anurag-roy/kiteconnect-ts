@@ -12,6 +12,7 @@
 - [GTTParams](interfaces/GTTParams.md)
 - [Instrument](interfaces/Instrument.md)
 - [KiteConnectParams](interfaces/KiteConnectParams.md)
+- [KiteTickerParams](interfaces/KiteTickerParams.md)
 - [MFHolding](interfaces/MFHolding.md)
 - [MFInstrument](interfaces/MFInstrument.md)
 - [MFOrder](interfaces/MFOrder.md)
@@ -40,25 +41,6 @@
 ### Exchange
 
  **Exchange**: [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_CDS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BCD"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_MCX"``]
-
-___
-
-### KiteTickerParams
-
- **KiteTickerParams**: `Object`
-
-Params to construct a KiteTicker class
-
-#### Type declaration
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `access_token` | `string` | Access token obtained after successful login flow. |
-| `api_key` | `string` | API key issued to you. |
-| `max_delay?` | `number` | The maximum delay in seconds after which subsequent re-connection interval will become constant. Defaults to 60s and minimum acceptable value is 5s. **`Default Value`** 60 |
-| `max_retry?` | `number` | The maximum number of re-connection attempts. Defaults to 50 attempts and maximum up to 300 attempts. **`Default Value`** 50 |
-| `reconnect?` | `boolean` | Enable/Disable auto reconnect. Enabled by default. **`Default Value`** `true` |
-| `root?` | `string` | Kite websocket root. **`Default Value`** "wss://ws.kite.trade/" |
 
 ___
 
