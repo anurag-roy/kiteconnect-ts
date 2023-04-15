@@ -27,8 +27,8 @@ const createMetaFiles = () => {
       {
         index: 'Introduction',
         modules: 'Modules',
-        enums: 'Enums',
         classes: 'Classes',
+        enums: 'Enums',
         interfaces: 'Interfaces',
       },
       null,

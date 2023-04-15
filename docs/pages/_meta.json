@@ -1,7 +1,7 @@
 {
   "index": "Introduction",
   "modules": "Modules",
-  "enums": "Enums",
   "classes": "Classes",
+  "enums": "Enums",
   "interfaces": "Interfaces"
 }

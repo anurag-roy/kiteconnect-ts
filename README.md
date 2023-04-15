@@ -12,15 +12,12 @@ Docs are auto-generated from TsDoc comments using [TypeDoc](https://typedoc.org/
 
 Browse the full docs [here](https://kiteconnect.anuragroy.dev) or go to a specific part:
 
-### KiteConnect
+### kiteconnect-ts
 
-- [Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteConnect.KiteConnect.html)
-- [Extra types and interfaces](https://kiteconnect.anuragroy.dev/modules/KiteConnect.html)
-
-### KiteTicker
-
-- [Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteTicker.KiteTicker.html)
-- [Extra types and interfaces](https://kiteconnect.anuragroy.dev/modules/KiteTicker.html)
+- [KiteConnect Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteConnect)
+- [KiteTicker Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteTicker)
+- [Enums](https://kiteconnect.anuragroy.dev/modules#enumerations)
+- [Interfaces](https://kiteconnect.anuragroy.dev/modules#interfaces)
 
 ### Other
 

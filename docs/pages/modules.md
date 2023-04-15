@@ -5,6 +5,7 @@
 - [Exchange](enums/Exchange.md)
 - [OrderType](enums/OrderType.md)
 - [ProductType](enums/ProductType.md)
+- [TickerEvent](enums/TickerEvent.md)
 - [TransactionType](enums/TransactionType.md)
 - [TriggerType](enums/TriggerType.md)
 - [Validity](enums/Validity.md)
@@ -53,29 +54,3 @@
  **Tick**: [`TickLtp`](interfaces/TickLtp.md) \| [`TickIndexQuote`](interfaces/TickIndexQuote.md) \| [`TickIndexFull`](interfaces/TickIndexFull.md) \| [`TickQuote`](interfaces/TickQuote.md) \| [`TickFull`](interfaces/TickFull.md)
 
 Types of possible tick packet structures
-
-___
-
-### TickerEvent
-
- **TickerEvent**: ``"connect"`` \| ``"ticks"`` \| ``"disconnect"`` \| ``"error"`` \| ``"close"`` \| ``"reconnect"`` \| ``"noreconnect"`` \| ``"order_update"`` \| ``"message"``
-
-All available KiteTicker events:
-
-`connect` -  when connection is successfully established.
-
-`ticks` - when ticks are available (Arrays of [Tick](modules.md#tick) object as the first argument).
-
-`disconnect` - when socket connection is disconnected. Error is received as a first param.
-
-`error` - when socket connection is closed with error. Error is received as a first param.
-
-`close` - when socket connection is closed cleanly.
-
-`reconnect` - When reconnecting (current re-connection count and reconnect interval as arguments respectively).
-
-`noreconnect` - When re-connection fails after n number times.
-
-`order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
-
-`message` - when binary message is received from the server.
