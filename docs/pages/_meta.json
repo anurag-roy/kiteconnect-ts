@@ -1,0 +1,11 @@
+{
+  "index": "Introduction",
+  "quickStart": "Quick Start",
+  "modules": "Modules",
+  "classes": "Classes",
+  "enums": "Enums",
+  "interfaces": "Interfaces",
+  "CHANGELOG": "Changelog",
+  "CONTRIBUTING": "Contributing",
+  "CODE_OF_CONDUCT": "Code of Conduct"
+}

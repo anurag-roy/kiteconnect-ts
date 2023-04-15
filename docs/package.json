@@ -1,0 +1,21 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "Docs for kiteconnect-ts using Nextra",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build && next export",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "Anurag Roy <anuragroy@duck.com> (https://anuragroy.dev/)",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.2.4",
+    "nextra": "^2.3.0",
+    "nextra-theme-docs": "^2.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

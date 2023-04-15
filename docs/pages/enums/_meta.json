@@ -1,0 +1,10 @@
+{
+  "Exchange": "Exchange",
+  "OrderType": "OrderType",
+  "ProductType": "ProductType",
+  "TickerEvent": "TickerEvent",
+  "TransactionType": "TransactionType",
+  "TriggerType": "TriggerType",
+  "Validity": "Validity",
+  "Variety": "Variety"
+}

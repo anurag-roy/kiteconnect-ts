@@ -1,0 +1,49 @@
+:root {
+  --shiki-color-text: #24292f !important;
+  --shiki-color-background: transparent;
+  --shiki-token-constant: #0550ae !important;
+  --shiki-token-string: #0a3069 !important;
+  --shiki-token-comment: #6e7781 !important;
+  --shiki-token-keyword: #cf222e !important;
+  --shiki-token-parameter: #116329 !important;
+  --shiki-token-function: #8250df !important;
+  --shiki-token-string-expression: #0a3069 !important;
+  --shiki-token-punctuation: #212121 !important;
+  --shiki-token-link: #0a3069 !important;
+}
+
+.dark {
+  --shiki-color-text: #c9d1d9 !important;
+  --shiki-color-background: transparent;
+  --shiki-token-constant: #79c0ff !important;
+  --shiki-token-string: #a5d6ff !important;
+  --shiki-token-comment: #8b949e !important;
+  --shiki-token-keyword: #ff7b72 !important;
+  --shiki-token-parameter: #7ee787 !important;
+  --shiki-token-function: #d2a8ff !important;
+  --shiki-token-string-expression: #a5d6ff !important;
+  --shiki-token-punctuation: #212121 !important;
+  --shiki-token-link: #a5d6ff !important;
+}
+
+code .line {
+  line-height: 1.75;
+}
+
+pre {
+  background-color: #f6f8fa !important;
+}
+
+.dark pre {
+  background-color: #161b22 !important;
+}
+
+code .line.highlighted {
+  background-color: #d0d7de60 !important;
+  --tw-shadow: 2px 0 #0969da inset !important;
+}
+
+.dark code .line.highlighted {
+  background-color: #30363d80 !important;
+  --tw-shadow: 2px 0 #58a6ff inset !important;
+}

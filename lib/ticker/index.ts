@@ -310,9 +310,9 @@ export class KiteTicker {
   }
 
   /**
-   * Register websocket event callbacks
+   * Register websocket event callbacks. See {@link TickerEvent} for all available events.
    *
-   * @param e Event to register callback on
+   * @param e Event to register callback on.
    * @param callback Callback function
    *
    * @example
@@ -323,7 +323,6 @@ export class KiteTicker {
    * ```
    *
    * Tick structure (passed to the tick callback you assign):
-   * ----
    * ```
    * [
    *   {

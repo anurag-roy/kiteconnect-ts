@@ -1,3 +1,5 @@
+import { Order } from '../connect';
+
 /**
  * LTP Packet
  */
@@ -198,7 +200,7 @@ export interface TickFull extends Omit<TickQuote, 'mode'> {
 /**
  * Data returned on `order_update` event
  */
-export interface OrderUpdatePostback extends Object {}
+export interface OrderUpdatePostback extends Order {}
 
 /**
  * Types of possible tick packet structures
@@ -211,46 +213,53 @@ export type Tick =
   | TickFull;
 
 /**
- * Available KiteTicker Events
- *
- * All events:
- * ----
- * `connect` -  when connection is successfully established.
- *
- * `ticks` - when ticks are available (Arrays of {@link Tick} object as the first argument).
- *
- * `disconnect` - when socket connection is disconnected. Error is received as a first param.
- *
- * `error` - when socket connection is closed with error. Error is received as a first param.
- *
- * `close` - when socket connection is closed cleanly.
- *
- * `reconnect` - When reconnecting (current re-connection count and reconnect interval as arguments respectively).
- *
- * `noreconnect` - When re-connection fails after n number times.
- *
- * `order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
- *
- * `message` - when binary message is received from the server.
- *
- * ----
- *
+ * @enum All available KiteTicker events.
  */
-export type TickerEvent =
-  | 'connect'
-  | 'ticks'
-  | 'disconnect'
-  | 'error'
-  | 'close'
-  | 'reconnect'
-  | 'noreconnect'
-  | 'order_update'
-  | 'message';
+export const TickerEvent = {
+  /**
+   * When connection is successfully established.
+   */
+  connect: 'connect',
+  /**
+   * When ticks are available (Arrays of {@link Tick} object as the first argument).
+   */
+  ticks: 'ticks',
+  /**
+   * When socket connection is disconnected. Error is received as a first param.
+   */
+  disconnect: 'disconnect',
+  /**
+   * When socket connection is closed with error. Error is received as a first param.
+   */
+  error: 'error',
+  /**
+   * When socket connection is closed cleanly.
+   */
+  close: 'close',
+  /**
+   * When reconnecting (current re-connection count and reconnect interval as arguments respectively).
+   */
+  reconnect: 'reconnect',
+  /**
+   * When re-connection fails after n number times.
+   */
+  noreconnect: 'noreconnect',
+  /**
+   * When order update (postback) is received for the connected user ({@link Order} is received as first argument).
+   */
+  order_update: 'order_update',
+  /**
+   * When binary message is received from the server.
+   */
+  message: 'message',
+} as const;
+
+export type TickerEvent = keyof typeof TickerEvent;
 
 /**
  * Params to construct a KiteTicker class
  */
-export type KiteTickerParams = {
+export interface KiteTickerParams {
   /**
    * API key issued to you.
    */
@@ -283,4 +292,4 @@ export type KiteTickerParams = {
    * @defaultValue "wss://ws.kite.trade/"
    */
   root?: string;
-};
+}
