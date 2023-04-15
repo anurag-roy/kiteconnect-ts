@@ -210,8 +210,6 @@ ws.onmessage = async (message) => {
     console.log(ticks);
   }
 };
-
-export {};
 ```
 
 ## Todos

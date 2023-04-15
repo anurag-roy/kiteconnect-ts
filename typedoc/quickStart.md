@@ -26,7 +26,7 @@ pnpm add kiteconnect-ts
 
 ## KiteConnect
 
-```typescript
+```typescript copy
 import { KiteConnect } from 'kiteconnect-ts';
 
 const kc = new KiteConnect({
@@ -56,7 +56,7 @@ try {
 
 ## KiteTicker
 
-```typescript
+```typescript copy
 import { KiteTicker, Tick } from 'kiteconnect-ts';
 
 const ticker: KiteTicker = new KiteTicker({
@@ -84,7 +84,7 @@ This library does not export Typescript enums, but rather JavaScript const objec
 
 All params which accept specific values provide type validation and autocomplete. So a simple string literal works as follows:
 
-```typescript
+```typescript {8}
 import { KiteConnect } from 'kiteconnect-ts';
 import env from './env.json';
 
@@ -99,7 +99,7 @@ const instruments = await kc.getInstruments(['NSE']);
 
 You could also import the enum and use as follows:
 
-```typescript
+```typescript {1,8}
 import { Exchange, KiteConnect } from 'kiteconnect-ts';
 import env from './env.json';
 
@@ -114,7 +114,7 @@ const instruments = await kc.getInstruments([Exchange.NSE]);
 
 This is mainly for backwards compatibility if you are migrating `kiteconnectjs` code to `kiteconnect-ts`.
 
-```typescript
+```typescript {8}
 import { KiteConnect } from 'kiteconnect-ts';
 import env from './env.json';
 
@@ -135,7 +135,7 @@ However, you can connect to [Kite Websocket](https://kite.trade/docs/connect/v3/
 
 Here's an extremely simple full tick parser that just gets the `token`, `firstBid` and `firstAsk`.
 
-```typescript
+```typescript copy filename="parseTick.ts"
 // Tick structure reference: https://kite.trade/docs/connect/v3/websocket/#message-structure
 const parseBinary = (dataView: DataView) => {
   const numberOfPackets = dataView.getInt16(0);
@@ -184,6 +184,4 @@ ws.onmessage = async (message) => {
     console.log(ticks);
   }
 };
-
-export {};
 ```
