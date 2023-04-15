@@ -213,10 +213,8 @@ export type Tick =
   | TickFull;
 
 /**
- * Available KiteTicker Events
+ * All available KiteTicker events:
  *
- * All events:
- * ----
  * `connect` -  when connection is successfully established.
  *
  * `ticks` - when ticks are available (Arrays of {@link Tick} object as the first argument).
@@ -234,8 +232,6 @@ export type Tick =
  * `order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
  *
  * `message` - when binary message is received from the server.
- *
- * ----
  *
  */
 export type TickerEvent =

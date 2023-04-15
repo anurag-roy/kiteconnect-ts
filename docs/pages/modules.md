@@ -1,5 +1,15 @@
 # kiteconnect-ts
 
+## Enumerations
+
+- [Exchange](enums/Exchange.md)
+- [OrderType](enums/OrderType.md)
+- [ProductType](enums/ProductType.md)
+- [TransactionType](enums/TransactionType.md)
+- [TriggerType](enums/TriggerType.md)
+- [Validity](enums/Validity.md)
+- [Variety](enums/Variety.md)
+
 ## Classes
 
 - [KiteConnect](classes/KiteConnect.md)
@@ -38,24 +48,6 @@
 
 ## Type Aliases
 
-### Exchange
-
- **Exchange**: [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BSE"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_NFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_CDS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BCD"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_BFO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"EXCHANGE_MCX"``]
-
-___
-
-### OrderType
-
- **OrderType**: [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_LIMIT"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_MARKET"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SL"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"ORDER_TYPE_SLM"``]
-
-___
-
-### Product
-
- **Product**: [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_NRML"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_MIS"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"PRODUCT_CNC"``]
-
-___
-
 ### Tick
 
  **Tick**: [`TickLtp`](interfaces/TickLtp.md) \| [`TickIndexQuote`](interfaces/TickIndexQuote.md) \| [`TickIndexFull`](interfaces/TickIndexFull.md) \| [`TickQuote`](interfaces/TickQuote.md) \| [`TickFull`](interfaces/TickFull.md)
@@ -68,10 +60,8 @@ ___
 
  **TickerEvent**: ``"connect"`` \| ``"ticks"`` \| ``"disconnect"`` \| ``"error"`` \| ``"close"`` \| ``"reconnect"`` \| ``"noreconnect"`` \| ``"order_update"`` \| ``"message"``
 
-Available KiteTicker Events
+All available KiteTicker events:
 
-All events:
-----
 `connect` -  when connection is successfully established.
 
 `ticks` - when ticks are available (Arrays of [Tick](modules.md#tick) object as the first argument).
@@ -89,29 +79,3 @@ All events:
 `order_update` - When order update (postback) is received for the connected user (Data object is received as first argument).
 
 `message` - when binary message is received from the server.
-
-----
-
-___
-
-### TransactionType
-
- **TransactionType**: [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_BUY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"TRANSACTION_TYPE_SELL"``]
-
-___
-
-### TriggerType
-
- **TriggerType**: [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_OCO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"GTT_TYPE_SINGLE"``]
-
-___
-
-### Validity
-
- **Validity**: [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_DAY"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_IOC"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VALIDITY_TTL"``]
-
-___
-
-### Variety
-
- **Variety**: [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AMO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_AUCTION"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_BO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_CO"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_ICEBERG"``] \| [`KiteConnect`](classes/KiteConnect.md)[``"VARIETY_REGULAR"``]

@@ -5,15 +5,31 @@ const TypeDoc = require('typedoc');
 
 const DOCS_DIR = join('docs', 'pages');
 
+// Explicity create a '_meta.json' file with camelCase names
+// Because Nextra defaults them to title case
+const preserveCamelCaseNaming = (/**@type string*/ folder) => {
+  const meta = {};
+  for (const fileName of readdirSync(folder)) {
+    const [name] = fileName.split('.');
+    meta[name] = name;
+  }
+  writeFileSync(
+    join(folder, '_meta.json'),
+    JSON.stringify(meta, null, 2),
+    'utf-8'
+  );
+};
+
 const createMetaFiles = () => {
   writeFileSync(
     join(DOCS_DIR, '_meta.json'),
     JSON.stringify(
       {
         index: 'Introduction',
+        modules: 'Modules',
+        enums: 'Enums',
         classes: 'Classes',
         interfaces: 'Interfaces',
-        modules: 'Modules',
       },
       null,
       2
@@ -21,30 +37,9 @@ const createMetaFiles = () => {
     'utf-8'
   );
 
-  writeFileSync(
-    join(DOCS_DIR, 'classes', '_meta.json'),
-    JSON.stringify(
-      {
-        KiteConnect: 'KiteConnect',
-        KiteTicker: 'KiteTicker',
-      },
-      null,
-      2
-    ),
-    'utf-8'
-  );
-
-  const interfacesFolder = join(DOCS_DIR, 'interfaces');
-  const interfacesMeta = {};
-  for (const fileName of readdirSync(interfacesFolder)) {
-    const [interfaceName] = fileName.split('.');
-    interfacesMeta[interfaceName] = interfaceName;
-  }
-  writeFileSync(
-    join(interfacesFolder, '_meta.json'),
-    JSON.stringify(interfacesMeta, null, 2),
-    'utf-8'
-  );
+  preserveCamelCaseNaming(join(DOCS_DIR, 'classes'));
+  preserveCamelCaseNaming(join(DOCS_DIR, 'interfaces'));
+  preserveCamelCaseNaming(join(DOCS_DIR, 'enums'));
 };
 
 async function main() {

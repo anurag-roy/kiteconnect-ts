@@ -22,7 +22,7 @@ ___
 
 ### exchange
 
- **exchange**: [`Exchange`](../modules.md#exchange)
+ **exchange**: ``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``
 
 Exchange in which instrument is listed (NSE, BSE, NFO, BFO, CDS, MCX).
 
@@ -46,7 +46,7 @@ ___
 
 ### order\_type
 
- **order\_type**: [`OrderType`](../modules.md#ordertype)
+ **order\_type**: ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"``
 
 Order type (LIMIT, SL, SL-M, MARKET).
 
@@ -62,7 +62,7 @@ ___
 
 ### product
 
- **product**: [`Product`](../modules.md#product)
+ **product**: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"``
 
 Product code (NRML, MIS, CNC).
 
@@ -118,7 +118,7 @@ ___
 
 ### transaction\_type
 
- **transaction\_type**: [`TransactionType`](../modules.md#transactiontype)
+ **transaction\_type**: ``"BUY"`` \| ``"SELL"``
 
 Transaction type (BUY or SELL).
 
@@ -134,7 +134,7 @@ ___
 
 ### validity
 
- `Optional` **validity**: [`Validity`](../modules.md#validity)
+ `Optional` **validity**: ``"DAY"`` \| ``"IOC"`` \| ``"TTL"``
 
 Order validity (DAY, IOC).
 

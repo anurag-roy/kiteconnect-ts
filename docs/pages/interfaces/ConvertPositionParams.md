@@ -6,7 +6,7 @@ Params to convert a position.
 
 ### exchange
 
- **exchange**: [`Exchange`](../modules.md#exchange)
+ **exchange**: ``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``
 
 Exchange in which instrument is listed (NSE, BSE, NFO, BFO, CDS, MCX).
 
@@ -14,7 +14,7 @@ ___
 
 ### new\_product
 
- **new\_product**: [`Product`](../modules.md#product)
+ **new\_product**: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"``
 
 New Product code (NRML, MIS, CNC).
 
@@ -22,7 +22,7 @@ ___
 
 ### old\_product
 
- **old\_product**: [`Product`](../modules.md#product)
+ **old\_product**: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"``
 
 Current product code (NRML, MIS, CNC).
 
@@ -54,6 +54,6 @@ ___
 
 ### transaction\_type
 
- **transaction\_type**: [`TransactionType`](../modules.md#transactiontype)
+ **transaction\_type**: ``"BUY"`` \| ``"SELL"``
 
 Transaction type (BUY or SELL).

@@ -1,45 +1,87 @@
-import { KiteConnect } from '.';
+/**
+ * @enum Exchanges.
+ */
+export const Exchange = {
+  NSE: 'NSE',
+  BSE: 'BSE',
+  NFO: 'NFO',
+  CDS: 'CDS',
+  BCD: 'BCD',
+  BFO: 'BFO',
+  MCX: 'MCX',
+} as const;
 
-export type Exchange =
-  | KiteConnect['EXCHANGE_NSE']
-  | KiteConnect['EXCHANGE_BSE']
-  | KiteConnect['EXCHANGE_NFO']
-  | KiteConnect['EXCHANGE_CDS']
-  | KiteConnect['EXCHANGE_BCD']
-  | KiteConnect['EXCHANGE_BFO']
-  | KiteConnect['EXCHANGE_MCX'];
+export type Exchange = keyof typeof Exchange;
 
-export type TransactionType =
-  | KiteConnect['TRANSACTION_TYPE_BUY']
-  | KiteConnect['TRANSACTION_TYPE_SELL'];
+/**
+ * @enum Transaction types.
+ */
+export const TransactionType = {
+  BUY: 'BUY',
+  SELL: 'SELL',
+} as const;
 
-export type Product =
-  | KiteConnect['PRODUCT_NRML']
-  | KiteConnect['PRODUCT_MIS']
-  | KiteConnect['PRODUCT_CNC'];
+export type TransactionType = keyof typeof TransactionType;
 
-export type OrderType =
-  | KiteConnect['ORDER_TYPE_LIMIT']
-  | KiteConnect['ORDER_TYPE_MARKET']
-  | KiteConnect['ORDER_TYPE_SL']
-  | KiteConnect['ORDER_TYPE_SLM'];
+/**
+ * @enum Product types.
+ */
+export const ProductType = {
+  NRML: 'NRML',
+  MIS: 'MIS',
+  CNC: 'CNC',
+  CO: 'CO',
+  BO: 'BO',
+} as const;
 
-export type Variety =
-  | KiteConnect['VARIETY_AMO']
-  | KiteConnect['VARIETY_AUCTION']
-  | KiteConnect['VARIETY_BO']
-  | KiteConnect['VARIETY_CO']
-  | KiteConnect['VARIETY_ICEBERG']
-  | KiteConnect['VARIETY_REGULAR'];
+export type ProductType = keyof typeof ProductType;
 
-export type Validity =
-  | KiteConnect['VALIDITY_DAY']
-  | KiteConnect['VALIDITY_IOC']
-  | KiteConnect['VALIDITY_TTL'];
+/**
+ * @enum Order types.
+ */
+export const OrderType = {
+  LIMIT: 'LIMIT',
+  MARKET: 'MARKET',
+  SL: 'SL',
+  'SL-M': 'SL-M',
+} as const;
 
-export type TriggerType =
-  | KiteConnect['GTT_TYPE_OCO']
-  | KiteConnect['GTT_TYPE_SINGLE'];
+export type OrderType = keyof typeof OrderType;
+
+/**
+ * @enum Varieties.
+ */
+export const Variety = {
+  amo: 'amo',
+  auction: 'auction',
+  bo: 'bo',
+  co: 'co',
+  iceberg: 'iceberg',
+  regular: 'regular',
+} as const;
+
+export type Variety = keyof typeof Variety;
+
+/**
+ * @enum Validities.
+ */
+export const Validity = {
+  DAY: 'DAY',
+  IOC: 'IOC',
+  TTL: 'TTL',
+} as const;
+
+export type Validity = keyof typeof Validity;
+
+/**
+ * @enum Trigger Types
+ */
+export const TriggerType = {
+  'two-leg': 'two-leg',
+  single: 'single',
+} as const;
+
+export type TriggerType = keyof typeof TriggerType;
 
 /**
  * Response after successful authentication.
@@ -1141,7 +1183,7 @@ export interface MarginOrder {
   /**
    * Margin product to use for the order
    */
-  product: Product;
+  product: ProductType;
   /**
    * Order type (MARKET, LIMIT etc.)
    */
@@ -1196,7 +1238,7 @@ export interface GTTParams {
     /**
      * Product code (NRML, MIS, CNC).
      */
-    product: Product;
+    product: ProductType;
     /**
      * Order type (LIMIT, SL, SL-M, MARKET).
      */
@@ -1279,11 +1321,11 @@ export interface ConvertPositionParams {
   /**
    * Current product code (NRML, MIS, CNC).
    */
-  old_product: Product;
+  old_product: ProductType;
   /**
    * New Product code (NRML, MIS, CNC).
    */
-  new_product: Product;
+  new_product: ProductType;
 }
 
 /**
@@ -1480,7 +1522,7 @@ export interface PlaceOrderParams {
   /**
    * Product code (NRML, MIS, CNC).
    */
-  product: Product;
+  product: ProductType;
   /**
    * Order type (LIMIT, SL, SL-M, MARKET).
    */

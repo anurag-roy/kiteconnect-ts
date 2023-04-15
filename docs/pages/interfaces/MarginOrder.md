@@ -6,7 +6,7 @@ An order in the Margin API calculator.
 
 ### exchange
 
- **exchange**: [`Exchange`](../modules.md#exchange)
+ **exchange**: ``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``
 
 Name of the exchange(eg. NSE, BSE, NFO, CDS, MCX)
 
@@ -14,7 +14,7 @@ ___
 
 ### order\_type
 
- **order\_type**: [`OrderType`](../modules.md#ordertype)
+ **order\_type**: ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"``
 
 Order type (MARKET, LIMIT etc.)
 
@@ -30,7 +30,7 @@ ___
 
 ### product
 
- **product**: [`Product`](../modules.md#product)
+ **product**: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"``
 
 Margin product to use for the order
 
@@ -54,7 +54,7 @@ ___
 
 ### transaction\_type
 
- **transaction\_type**: [`TransactionType`](../modules.md#transactiontype)
+ **transaction\_type**: ``"BUY"`` \| ``"SELL"``
 
 eg. BUY, SELL
 
@@ -70,6 +70,6 @@ ___
 
 ### variety
 
- **variety**: [`Variety`](../modules.md#variety)
+ **variety**: ``"amo"`` \| ``"auction"`` \| ``"bo"`` \| ``"co"`` \| ``"iceberg"`` \| ``"regular"``
 
 Order variety (regular, amo, bo, co etc.)

@@ -121,7 +121,7 @@ Cancel an order
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `variety` | [`Variety`](../modules.md#variety) | Order variety (ex. bo, co, amo) |
+| `variety` | ``"amo"`` \| ``"auction"`` \| ``"bo"`` \| ``"co"`` \| ``"iceberg"`` \| ``"regular"`` | Order variety (ex. bo, co, amo) |
 | `order_id` | `string` | ID of the order. |
 | `params?` | `Object` | Order params. regular). |
 | `params.parent_order_id?` | `string` | Parent order id incase of multilegged orders. |
@@ -178,7 +178,7 @@ Exit an order
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `variety` | [`Variety`](../modules.md#variety) | Order variety (ex. bo, co, amo) |
+| `variety` | ``"amo"`` \| ``"auction"`` \| ``"bo"`` \| ``"co"`` \| ``"iceberg"`` \| ``"regular"`` | Order variety (ex. bo, co, amo) |
 | `order_id` | `string` | ID of the order. |
 | `params?` | `Object` | Order params. |
 | `params.parent_order_id?` | `string` | Parent order id incase of multilegged orders. |
@@ -332,7 +332,7 @@ Response is array for objects.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `exchange?` | [`Exchange`](../modules.md#exchange)[] | Filter instruments based on exchange (NSE, BSE, NFO, BFO, CDS, MCX). If no `segment` is specified, all instruments are returned. |
+| `exchange?` | (``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``)[] | Filter instruments based on exchange (NSE, BSE, NFO, BFO, CDS, MCX). If no `segment` is specified, all instruments are returned. |
 
 #### Returns
 
@@ -660,16 +660,16 @@ Modify an order
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `variety` | [`Variety`](../modules.md#variety) | Order variety (ex. bo, co, amo, regular). |
+| `variety` | ``"amo"`` \| ``"auction"`` \| ``"bo"`` \| ``"co"`` \| ``"iceberg"`` \| ``"regular"`` | Order variety (ex. bo, co, amo, regular). |
 | `order_id` | `string` | ID of the order. |
 | `params` | `Object` | Order modify params. |
 | `params.disclosed_quantity?` | `number` | Disclosed quantity |
-| `params.order_type?` | [`OrderType`](../modules.md#ordertype) | Order type (NRML, SL, SL-M, MARKET). |
+| `params.order_type?` | ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"`` | Order type (NRML, SL, SL-M, MARKET). |
 | `params.parent_order_id?` | `string` | Parent order id incase of multilegged orders. |
 | `params.price?` | `number` | Order Price |
 | `params.quantity?` | `number` | Order quantity |
 | `params.trigger_price?` | `number` | Trigger price |
-| `params.validity?` | [`Validity`](../modules.md#validity) | Order validity (DAY, IOC). |
+| `params.validity?` | ``"DAY"`` \| ``"IOC"`` \| ``"TTL"`` | Order validity (DAY, IOC). |
 
 #### Returns
 
@@ -786,7 +786,7 @@ Place a mutual fund order.
 | `params.quantity?` | `number` | Quantity to SELL. Not applicable on BUYs. |
 | `params.tag?` | `string` | An optional tag to apply to an order to identify it (alphanumeric, max 20 chars) |
 | `params.tradingsymbol` | `string` | Tradingsymbol (ISIN) of the fund. |
-| `params.transaction_type` | [`TransactionType`](../modules.md#transactiontype) | Transaction type (BUY or SELL). |
+| `params.transaction_type` | ``"BUY"`` \| ``"SELL"`` | Transaction type (BUY or SELL). |
 
 #### Returns
 
@@ -829,7 +829,7 @@ Place an order.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `variety` | [`Variety`](../modules.md#variety) | Order variety (ex. bo, co, amo, regular). |
+| `variety` | ``"amo"`` \| ``"auction"`` \| ``"bo"`` \| ``"co"`` \| ``"iceberg"`` \| ``"regular"`` | Order variety (ex. bo, co, amo, regular). |
 | `params` | [`PlaceOrderParams`](../interfaces/PlaceOrderParams.md) | Order params. |
 
 #### Returns

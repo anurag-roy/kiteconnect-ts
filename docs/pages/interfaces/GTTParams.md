@@ -6,7 +6,7 @@ Params for placing a GTT.
 
 ### exchange
 
- **exchange**: [`Exchange`](../modules.md#exchange)
+ **exchange**: ``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``
 
 Exchange in which instrument is listed (NSE, BSE, NFO, BFO, CDS, MCX).
 
@@ -22,7 +22,7 @@ ___
 
 ### orders
 
- **orders**: { `order_type`: [`OrderType`](../modules.md#ordertype) ; `price`: `number` ; `product`: [`Product`](../modules.md#product) ; `quantity`: `number` ; `transaction_type`: [`TransactionType`](../modules.md#transactiontype)  }[]
+ **orders**: { `order_type`: ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"`` ; `price`: `number` ; `product`: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"`` ; `quantity`: `number` ; `transaction_type`: ``"BUY"`` \| ``"SELL"``  }[]
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 ### trigger\_type
 
- **trigger\_type**: [`TriggerType`](../modules.md#triggertype)
+ **trigger\_type**: ``"two-leg"`` \| ``"single"``
 
 GTT type, its either KiteConnect.GTT_TYPE_OCO or KiteConnect.GTT_TYPE_SINGLE.
 

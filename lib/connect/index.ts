@@ -25,11 +25,13 @@ import {
   PlaceOrderParams,
   PortfolioHolding,
   Position,
+  ProductType,
   Quote,
   SessionData,
   Trade,
   TransactionType,
   Trigger,
+  TriggerType,
   UserMargin,
   UserProfile,
   Validity,
@@ -100,69 +102,69 @@ export class KiteConnect {
   // Constants
 
   // Products
-  public readonly PRODUCT_MIS = 'MIS';
+  public readonly PRODUCT_MIS = ProductType.MIS;
 
-  public readonly PRODUCT_CNC = 'CNC';
+  public readonly PRODUCT_CNC = ProductType.CNC;
 
-  public readonly PRODUCT_NRML = 'NRML';
+  public readonly PRODUCT_NRML = ProductType.NRML;
 
-  public readonly PRODUCT_CO = 'CO';
+  public readonly PRODUCT_CO = ProductType.CO;
 
-  public readonly PRODUCT_BO = 'BO';
+  public readonly PRODUCT_BO = ProductType.BO;
 
   // Order types
 
-  public readonly ORDER_TYPE_MARKET = 'MARKET';
+  public readonly ORDER_TYPE_MARKET = OrderType.MARKET;
 
-  public readonly ORDER_TYPE_LIMIT = 'LIMIT';
+  public readonly ORDER_TYPE_LIMIT = OrderType.LIMIT;
 
-  public readonly ORDER_TYPE_SLM = 'SL-M';
+  public readonly ORDER_TYPE_SLM = OrderType['SL-M'];
 
-  public readonly ORDER_TYPE_SL = 'SL';
+  public readonly ORDER_TYPE_SL = OrderType.SL;
 
-  // Varities
+  // Varieties
 
-  public readonly VARIETY_REGULAR = 'regular';
+  public readonly VARIETY_REGULAR = Variety.regular;
 
-  public readonly VARIETY_BO = 'bo';
+  public readonly VARIETY_BO = Variety.bo;
 
-  public readonly VARIETY_CO = 'co';
+  public readonly VARIETY_CO = Variety.co;
 
-  public readonly VARIETY_AMO = 'amo';
+  public readonly VARIETY_AMO = Variety.amo;
 
-  public readonly VARIETY_ICEBERG = 'iceberg';
+  public readonly VARIETY_ICEBERG = Variety.iceberg;
 
-  public readonly VARIETY_AUCTION = 'auction';
+  public readonly VARIETY_AUCTION = Variety.auction;
 
-  // Transaction type
+  // Transaction types
 
-  public readonly TRANSACTION_TYPE_BUY = 'BUY';
+  public readonly TRANSACTION_TYPE_BUY = TransactionType.BUY;
 
-  public readonly TRANSACTION_TYPE_SELL = 'SELL';
+  public readonly TRANSACTION_TYPE_SELL = TransactionType.SELL;
 
-  // Validity
+  // Validities
 
-  public readonly VALIDITY_DAY = 'DAY';
+  public readonly VALIDITY_DAY = Validity.DAY;
 
-  public readonly VALIDITY_IOC = 'IOC';
+  public readonly VALIDITY_IOC = Validity.IOC;
 
-  public readonly VALIDITY_TTL = 'TTL';
+  public readonly VALIDITY_TTL = Validity.TTL;
 
   // Exchanges
 
-  public readonly EXCHANGE_NSE = 'NSE';
+  public readonly EXCHANGE_NSE = Exchange.NSE;
 
-  public readonly EXCHANGE_BSE = 'BSE';
+  public readonly EXCHANGE_BSE = Exchange.BSE;
 
-  public readonly EXCHANGE_NFO = 'NFO';
+  public readonly EXCHANGE_NFO = Exchange.NFO;
 
-  public readonly EXCHANGE_CDS = 'CDS';
+  public readonly EXCHANGE_CDS = Exchange.CDS;
 
-  public readonly EXCHANGE_BCD = 'BCD';
+  public readonly EXCHANGE_BCD = Exchange.BCD;
 
-  public readonly EXCHANGE_BFO = 'BFO';
+  public readonly EXCHANGE_BFO = Exchange.BFO;
 
-  public readonly EXCHANGE_MCX = 'MCX';
+  public readonly EXCHANGE_MCX = Exchange.MCX;
 
   // Margins segments
 
@@ -176,9 +178,9 @@ export class KiteConnect {
 
   public readonly STATUS_COMPLETE = 'COMPLETE';
 
-  public readonly GTT_TYPE_OCO = 'two-leg';
+  public readonly GTT_TYPE_OCO = TriggerType['two-leg'];
 
-  public readonly GTT_TYPE_SINGLE = 'single';
+  public readonly GTT_TYPE_SINGLE = TriggerType.single;
 
   public readonly GTT_STATUS_ACTIVE = 'active';
 

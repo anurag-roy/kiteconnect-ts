@@ -6,7 +6,7 @@ Single Instrument response.
 
 ### exchange
 
- **exchange**: [`Exchange`](../modules.md#exchange)
+ **exchange**: ``"NSE"`` \| ``"BSE"`` \| ``"NFO"`` \| ``"CDS"`` \| ``"BCD"`` \| ``"BFO"`` \| ``"MCX"``
 
 Exchange
 
