@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 0.5.0
+
+### Minor Changes
+
+- 5e7c7e9: Add enums for KiteConnect and KiteTicker. See [note on enum usage](https://github.com/anurag-roy/kiteconnect-ts#using-provided-enums) for more details.
+
 ## 0.4.5
 
 ### Patch Changes

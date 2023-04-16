@@ -6,7 +6,7 @@ const TypeDoc = require('typedoc');
 const DOCS_DIR = join('docs', 'pages');
 
 const copyFilesToDocs = () => {
-  copyFileSync(join('typedoc', '_app.js'), join(DOCS_DIR, '_app.js'));
+  copyFileSync(join('typedoc', '_app.mdx'), join(DOCS_DIR, '_app.mdx'));
   copyFileSync(join('typedoc', '_meta.json'), join(DOCS_DIR, '_meta.json'));
   copyFileSync(
     join('typedoc', 'quickStart.md'),
