@@ -159,9 +159,9 @@ ___
 
 ### on
 
-**on**(`e`, `callback`): `void`
+**on**<`K`\>(`e`, `callback`): `void`
 
-Register websocket event callbacks. See [TickerEvent](../enums/TickerEvent.md) for all available events.
+Register websocket event callbacks. See [TickerEvent](../modules.md#tickerevent) for all available events.
 
 **`Example`**
 
@@ -211,12 +211,18 @@ Tick structure (passed to the tick callback you assign):
 ]
 ```
 
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends keyof [`TickerEvents`](../modules.md#tickerevents) |
+
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `e` | ``"message"`` \| ``"connect"`` \| ``"ticks"`` \| ``"disconnect"`` \| ``"error"`` \| ``"close"`` \| ``"reconnect"`` \| ``"noreconnect"`` \| ``"order_update"`` | Event to register callback on. |
-| `callback` | `Function` | Callback function |
+| `e` | `K` | Event to register callback on. |
+| `callback` | [`TickerEvents`](../modules.md#tickerevents)[`K`] | Callback function |
 
 #### Returns
 

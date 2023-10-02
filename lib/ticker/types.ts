@@ -213,48 +213,54 @@ export type Tick =
   | TickFull;
 
 /**
- * @enum All available KiteTicker events.
+ * All Ticker events and their corresponding callback functon signatures.
  */
-export const TickerEvent = {
+export type TickerEvents = {
   /**
    * When connection is successfully established.
    */
-  connect: 'connect',
+  connect: () => void | Promise<void>;
   /**
    * When ticks are available (Arrays of {@link Tick} object as the first argument).
+   *
+   * The type has been purposefully kept as `any` because the structure of the tick packet is not known
+   * and there can be multiple types of tick packets.
    */
-  ticks: 'ticks',
+  ticks: (ticks: any[]) => void | Promise<void>;
   /**
    * When socket connection is disconnected. Error is received as a first param.
    */
-  disconnect: 'disconnect',
+  disconnect: (error: Error) => void | Promise<void>;
   /**
    * When socket connection is closed with error. Error is received as a first param.
    */
-  error: 'error',
+  error: (error: Error) => void | Promise<void>;
   /**
    * When socket connection is closed cleanly.
    */
-  close: 'close',
+  close: () => void | Promise<void>;
   /**
    * When reconnecting (current re-connection count and reconnect interval as arguments respectively).
    */
-  reconnect: 'reconnect',
+  reconnect: (retries: number, interval: number) => void | Promise<void>;
   /**
    * When re-connection fails after n number times.
    */
-  noreconnect: 'noreconnect',
+  noreconnect: () => void | Promise<void>;
   /**
    * When order update (postback) is received for the connected user ({@link Order} is received as first argument).
    */
-  order_update: 'order_update',
+  order_update: (order: Order) => void | Promise<void>;
   /**
    * When binary message is received from the server.
    */
-  message: 'message',
-} as const;
+  message: (data: ArrayBuffer) => void | Promise<void>;
+};
 
-export type TickerEvent = keyof typeof TickerEvent;
+/**
+ * All Ticker events
+ */
+export type TickerEvent = keyof TickerEvents;
 
 /**
  * Params to construct a KiteTicker class
