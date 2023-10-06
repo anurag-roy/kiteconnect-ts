@@ -3,7 +3,7 @@
   "author": "Anurag Roy",
   "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
   "license": "MIT",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
