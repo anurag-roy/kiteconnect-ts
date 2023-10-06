@@ -5,7 +5,6 @@
 - [Exchange](enums/Exchange.md)
 - [OrderType](enums/OrderType.md)
 - [ProductType](enums/ProductType.md)
-- [TickerEvent](enums/TickerEvent.md)
 - [TransactionType](enums/TransactionType.md)
 - [TriggerType](enums/TriggerType.md)
 - [Validity](enums/Validity.md)
@@ -54,3 +53,33 @@
  **Tick**: [`TickLtp`](interfaces/TickLtp.md) \| [`TickIndexQuote`](interfaces/TickIndexQuote.md) \| [`TickIndexFull`](interfaces/TickIndexFull.md) \| [`TickQuote`](interfaces/TickQuote.md) \| [`TickFull`](interfaces/TickFull.md)
 
 Types of possible tick packet structures
+
+___
+
+### TickerEvent
+
+ **TickerEvent**: keyof [`TickerEvents`](modules.md#tickerevents)
+
+All Ticker events
+
+___
+
+### TickerEvents
+
+ **TickerEvents**: `Object`
+
+All Ticker events and their corresponding callback functon signatures.
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `close` | () => `void` \| `Promise`<`void`\> |
+| `connect` | () => `void` \| `Promise`<`void`\> |
+| `disconnect` | (`error`: `Error`) => `void` \| `Promise`<`void`\> |
+| `error` | (`error`: `Error`) => `void` \| `Promise`<`void`\> |
+| `message` | (`data`: `ArrayBuffer`) => `void` \| `Promise`<`void`\> |
+| `noreconnect` | () => `void` \| `Promise`<`void`\> |
+| `order_update` | (`order`: [`Order`](interfaces/Order.md)) => `void` \| `Promise`<`void`\> |
+| `reconnect` | (`retries`: `number`, `interval`: `number`) => `void` \| `Promise`<`void`\> |
+| `ticks` | (`ticks`: `any`[]) => `void` \| `Promise`<`void`\> |

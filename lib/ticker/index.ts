@@ -1,6 +1,6 @@
 import ws, { WebSocket } from 'ws';
 import { getUserAgent } from '../utils';
-import { KiteTickerParams, TickerEvent } from './types';
+import { KiteTickerParams, TickerEvent, TickerEvents } from './types';
 
 /**
  * The WebSocket client for connecting to Kite connect streaming quotes service.
@@ -362,7 +362,7 @@ export class KiteTicker {
    * ]
    * ```
    */
-  on(e: TickerEvent, callback: Function) {
+  on<K extends TickerEvent>(e: K, callback: TickerEvents[K]) {
     if (this.triggers.hasOwnProperty(e)) {
       this.triggers[e].push(callback);
     }
