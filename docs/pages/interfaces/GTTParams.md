@@ -22,7 +22,7 @@ ___
 
 ### orders
 
- **orders**: { `order_type`: ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"`` ; `price`: `number` ; `product`: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"`` ; `quantity`: `number` ; `transaction_type`: ``"BUY"`` \| ``"SELL"``  }[]
+ **orders**: \{ `order_type`: ``"LIMIT"`` \| ``"MARKET"`` \| ``"SL"`` \| ``"SL-M"`` ; `price`: `number` ; `product`: ``"NRML"`` \| ``"MIS"`` \| ``"CNC"`` \| ``"CO"`` \| ``"BO"`` ; `quantity`: `number` ; `transaction_type`: ``"BUY"`` \| ``"SELL"``  }[]
 
 ___
 

@@ -87,7 +87,7 @@ function subscribe() {
 
 ### constructor
 
-**new KiteTicker**(`params`)
+**new KiteTicker**(`params`): [`KiteTicker`](KiteTicker.md)
 
 KiteTicker constructor
 
@@ -96,6 +96,36 @@ KiteTicker constructor
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `params` | [`KiteTickerParams`](../interfaces/KiteTickerParams.md) | KiteTicker parameters |
+
+#### Returns
+
+[`KiteTicker`](KiteTicker.md)
+
+An instance of The KiteTicker class
+
+## Properties
+
+### modeFull
+
+ `Readonly` **modeFull**: ``"full"``
+
+Set mode full
+
+___
+
+### modeLTP
+
+ `Readonly` **modeLTP**: ``"ltp"``
+
+Set mode LTP
+
+___
+
+### modeQuote
+
+ `Readonly` **modeQuote**: ``"quote"``
+
+Set mode quote
 
 ## Methods
 
@@ -159,9 +189,26 @@ ___
 
 ### on
 
-**on**<`K`\>(`e`, `callback`): `void`
+**on**\<`K`\>(`e`, `callback`): `void`
 
 Register websocket event callbacks. See [TickerEvent](../modules.md#tickerevent) for all available events.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends keyof [`TickerEvents`](../modules.md#tickerevents) |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `e` | `K` | Event to register callback on. |
+| `callback` | [`TickerEvents`](../modules.md#tickerevents)[`K`] | Callback function |
+
+#### Returns
+
+`void`
 
 **`Example`**
 
@@ -211,23 +258,6 @@ Tick structure (passed to the tick callback you assign):
 ]
 ```
 
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`TickerEvents`](../modules.md#tickerevents) |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `e` | `K` | Event to register callback on. |
-| `callback` | [`TickerEvents`](../modules.md#tickerevents)[`K`] | Callback function |
-
-#### Returns
-
-`void`
-
 ___
 
 ### setMode
@@ -235,12 +265,6 @@ ___
 **setMode**(`mode`, `tokens`): `number`[]
 
 Set mode for an array of tokens
-
-**`Example`**
-
-```
-ticker.setMode(ticker.modeFull, [738561]);
-```
 
 #### Parameters
 
@@ -253,6 +277,12 @@ ticker.setMode(ticker.modeFull, [738561]);
 
 `number`[]
 
+**`Example`**
+
+```
+ticker.setMode(ticker.modeFull, [738561]);
+```
+
 ___
 
 ### subscribe
@@ -260,12 +290,6 @@ ___
 **subscribe**(`tokens`): `number`[]
 
 Subscribe to array of tokens
-
-**`Example`**
-
-```ts
-ticker.subscribe([738561]);
-```
 
 #### Parameters
 
@@ -277,6 +301,12 @@ ticker.subscribe([738561]);
 
 `number`[]
 
+**`Example`**
+
+```ts
+ticker.subscribe([738561]);
+```
+
 ___
 
 ### unsubscribe
@@ -284,12 +314,6 @@ ___
 **unsubscribe**(`tokens`): `number`[]
 
 Unsubscribe from array of tokens
-
-**`Example`**
-
-```ts
-ticker.unsubscribe([738561]);
-```
 
 #### Parameters
 
@@ -301,26 +325,8 @@ ticker.unsubscribe([738561]);
 
 `number`[]
 
-## Properties
+**`Example`**
 
-### modeFull
-
- `Readonly` **modeFull**: ``"full"``
-
-Set mode full
-
-___
-
-### modeLTP
-
- `Readonly` **modeLTP**: ``"ltp"``
-
-Set mode LTP
-
-___
-
-### modeQuote
-
- `Readonly` **modeQuote**: ``"quote"``
-
-Set mode quote
+```ts
+ticker.unsubscribe([738561]);
+```

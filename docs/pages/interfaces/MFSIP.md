@@ -122,7 +122,7 @@ ___
 
 ### step\_up
 
- **step\_up**: `Record`<`string`, `number`\>
+ **step\_up**: `Record`\<`string`, `number`\>
 
 ___
 

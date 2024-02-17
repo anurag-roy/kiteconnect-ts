@@ -28,8 +28,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `buy` | { `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] |
-| `sell` | { `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] |
+| `buy` | \{ `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] |
+| `sell` | \{ `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] |
 
 ___
 

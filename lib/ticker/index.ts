@@ -1,3 +1,4 @@
+import { clearInterval } from "node:timers";
 import ws, { WebSocket } from 'ws';
 import { getUserAgent } from '../utils';
 import { KiteTickerParams, TickerEvent, TickerEvents } from './types';
@@ -129,9 +130,9 @@ export class KiteTicker {
     message: [],
     order_update: [],
   };
-  private read_timer: NodeJS.Timer | null = null;
+  private read_timer: NodeJS.Timeout | null = null;
   private last_read: number = 0;
-  private reconnect_timer: NodeJS.Timer | null = null;
+  private reconnect_timer: NodeJS.Timeout | null = null;
   private auto_reconnect = false;
   private current_reconnection_count = 0;
   private last_reconnect_interval: number | null = 0;

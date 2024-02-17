@@ -4,7 +4,7 @@ Full packet with Market Depth data
 
 ## Hierarchy
 
-- `Omit`<[`TickQuote`](TickQuote.md), ``"mode"``\>
+- `Omit`\<[`TickQuote`](TickQuote.md), ``"mode"``\>
 
   ↳ **`TickFull`**
 
@@ -46,8 +46,8 @@ There are ten entries in succession — five bid entries and five offer entries.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `buy` | { `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] | Bid entries |
-| `sell` | { `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] | Offer entries |
+| `buy` | \{ `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] | Bid entries |
+| `sell` | \{ `orders`: `number` ; `price`: `number` ; `quantity`: `number`  }[] | Offer entries |
 
 ___
 

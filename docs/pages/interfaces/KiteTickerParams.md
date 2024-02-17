@@ -28,7 +28,9 @@ The maximum delay in seconds after which subsequent re-connection interval will 
 
 **`Default Value`**
 
+```ts
 60
+```
 
 ___
 
@@ -40,7 +42,9 @@ The maximum number of re-connection attempts. Defaults to 50 attempts and maximu
 
 **`Default Value`**
 
+```ts
 50
+```
 
 ___
 
@@ -64,4 +68,6 @@ Kite websocket root.
 
 **`Default Value`**
 
+```ts
 "wss://ws.kite.trade/"
+```

@@ -4,7 +4,7 @@ Index Quote packet
 
 ## Hierarchy
 
-- `Omit`<[`TickLtp`](TickLtp.md), ``"mode"``\>
+- `Omit`\<[`TickLtp`](TickLtp.md), ``"mode"``\>
 
   ↳ **`TickIndexQuote`**
 
