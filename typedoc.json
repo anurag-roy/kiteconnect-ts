@@ -22,7 +22,6 @@
     "Variable",
     "Function",
     "Accessor",
-    "ObjectLiteral",
     "Parameter",
     "TypeParameter",
     "TypeLiteral",

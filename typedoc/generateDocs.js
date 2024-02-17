@@ -33,14 +33,12 @@ const preserveCamelCaseNaming = (/**@type string*/ folder) => {
 };
 
 async function main() {
-  const app = new TypeDoc.Application();
+  const app = await TypeDoc.Application.bootstrapWithPlugins();
 
   app.options.addReader(new TypeDoc.TSConfigReader());
   app.options.addReader(new TypeDoc.TypeDocReader());
 
-  app.bootstrap({});
-
-  const project = app.convert();
+  const project = await app.convert();
 
   if (project) {
     await app.generateDocs(project, DOCS_DIR);
