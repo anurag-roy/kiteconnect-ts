@@ -4,7 +4,7 @@ Index Full packet
 
 ## Hierarchy
 
-- `Omit`<[`TickIndexQuote`](TickIndexQuote.md), ``"mode"``\>
+- `Omit`\<[`TickIndexQuote`](TickIndexQuote.md), ``"mode"``\>
 
   ↳ **`TickIndexFull`**
 

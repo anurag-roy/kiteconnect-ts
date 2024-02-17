@@ -46,7 +46,7 @@ The breakdown of the various charges that will be applied to an order
 | :------ | :------ | :------ |
 | `brokerage` | `number` | The brokerage charge for a particular trade |
 | `exchange_turnover_charge` | `number` | Charge levied by the exchange on the total turnover of the day |
-| `gst` | { `cgst`: `number` ; `igst`: `number` ; `sgst`: `number` ; `total`: `number`  } | - |
+| `gst` | \{ `cgst`: `number` ; `igst`: `number` ; `sgst`: `number` ; `total`: `number`  } | - |
 | `gst.cgst` | `number` | Central Goods and Services Tax levied by the government |
 | `gst.igst` | `number` | Integrated Goods and Services Tax levied by the government |
 | `gst.sgst` | `number` | State Goods and Services Tax levied by the government |

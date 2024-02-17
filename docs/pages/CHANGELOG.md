@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 1.0.0
+
+### Major Changes
+
+- ad715dd: Add types to KiteTicker event callbacks
+
 ## 0.5.0
 
 ### Minor Changes

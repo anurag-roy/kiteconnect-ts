@@ -46,7 +46,7 @@ ___
 
 ### orders
 
- **orders**: { `exchange`: `string` ; `order_type`: `string` ; `price`: `number` ; `product`: `string` ; `quantity`: `number` ; `result`: ``null`` \| { `account_id`: `string` ; `exchange`: `string` ; `meta`: `string` ; `order_result`: { `order_id`: `string` ; `rejection_reason`: `string` ; `status`: `string`  } ; `order_type`: `string` ; `price`: `number` ; `product`: `string` ; `quantity`: `number` ; `timestamp`: `string` ; `tradingsymbol`: `string` ; `transaction_type`: `string` ; `triggered_at`: `number` ; `validity`: `string`  } ; `tradingsymbol`: `string` ; `transaction_type`: `string`  }[]
+ **orders**: \{ `exchange`: `string` ; `order_type`: `string` ; `price`: `number` ; `product`: `string` ; `quantity`: `number` ; `result`: ``null`` \| \{ `account_id`: `string` ; `exchange`: `string` ; `meta`: `string` ; `order_result`: \{ `order_id`: `string` ; `rejection_reason`: `string` ; `status`: `string`  } ; `order_type`: `string` ; `price`: `number` ; `product`: `string` ; `quantity`: `number` ; `timestamp`: `string` ; `tradingsymbol`: `string` ; `transaction_type`: `string` ; `triggered_at`: `number` ; `validity`: `string`  } ; `tradingsymbol`: `string` ; `transaction_type`: `string`  }[]
 
 ___
 

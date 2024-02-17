@@ -47,7 +47,9 @@ Kite connect login url
 
 **`Default Value`**
 
+```ts
 "https://kite.trade/connect/login"
+```
 
 ___
 
@@ -60,7 +62,9 @@ non-default endpoint, this can be ignored.
 
 **`Default Value`**
 
+```ts
 "https://api.kite.trade"
+```
 
 ___
 
