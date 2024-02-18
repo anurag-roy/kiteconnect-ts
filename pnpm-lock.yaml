@@ -8,9 +8,6 @@ dependencies:
   axios:
     specifier: ^1.6.7
     version: 1.6.7
-  crypto-js:
-    specifier: ^4.2.0
-    version: 4.2.0
   papaparse:
     specifier: ^5.4.1
     version: 5.4.1
@@ -22,9 +19,6 @@ devDependencies:
   '@changesets/cli':
     specifier: ^2.27.1
     version: 2.27.1
-  '@types/crypto-js':
-    specifier: ^4.2.2
-    version: 4.2.2
   '@types/papaparse':
     specifier: ^5.3.14
     version: 5.3.14
@@ -662,10 +656,6 @@ packages:
     dev: true
     optional: true
 
-  /@types/crypto-js@4.2.2:
-    resolution: {integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==}
-    dev: true
-
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
@@ -1008,10 +998,6 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
-
-  /crypto-js@4.2.0:
-    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
-    dev: false
 
   /csv-generate@3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==}
