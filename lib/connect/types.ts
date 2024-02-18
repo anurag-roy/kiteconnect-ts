@@ -1195,11 +1195,11 @@ export interface MarginOrder {
   /**
    * Price at which the order is going to be placed (LIMIT orders)
    */
-  price: number;
+  price?: number;
   /**
    * Trigger price (for SL, SL-M, CO orders)
    */
-  trigger_price: number;
+  trigger_price?: number;
 }
 
 /**
