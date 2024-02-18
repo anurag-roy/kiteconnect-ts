@@ -815,10 +815,10 @@ export class KiteConnect {
   /**
    * Retrieve quote and market depth for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getQuote(instruments: string[]): Promise<Record<string, Quote>> {
+  getQuote(instruments: string | string[]): Promise<Record<string, Quote>> {
     return this._get(
       'market.quote',
       { i: instruments },
@@ -830,10 +830,10 @@ export class KiteConnect {
   /**
    * Retrieve OHLC for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getOHLC(instruments: string[]): Promise<
+  getOHLC(instruments: string | string[]): Promise<
     Record<
       string,
       {
@@ -872,10 +872,10 @@ export class KiteConnect {
   /**
    * Retrieve LTP for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getLTP(instruments: string[]): Promise<
+  getLTP(instruments: string | string[]): Promise<
     Record<
       string,
       {
