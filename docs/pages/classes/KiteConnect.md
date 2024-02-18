@@ -612,7 +612,7 @@ Retrieve LTP for list of instruments.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `instruments` | `string`[] | is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
+| `instruments` | `string` \| `string`[] | is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
 
 #### Returns
 
@@ -721,7 +721,7 @@ Retrieve OHLC for list of instruments.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `instruments` | `string`[] | is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
+| `instruments` | `string` \| `string`[] | is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
 
 #### Returns
 
@@ -813,7 +813,7 @@ Retrieve quote and market depth for list of instruments.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `instruments` | `string`[] | is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
+| `instruments` | `string` \| `string`[] | is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`. For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..] |
 
 #### Returns
 

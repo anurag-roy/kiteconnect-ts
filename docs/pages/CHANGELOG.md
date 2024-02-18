@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 1.0.1
+
+### Patch Changes
+
+- 67f21b0: Upgrade dependencies
+
 ## 1.0.0
 
 ### Major Changes
