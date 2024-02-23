@@ -1,5 +1,14 @@
 # kiteconnect-ts
 
+## 1.1.0
+
+### Minor Changes
+
+- cf80baa: - Add tests
+  - Fix `getQuotes`, `getLTP`, `getOHLC` to also accept single instrument as argument
+  - Fix `MarginOrder` model
+  - Remove dependency on `crypto-js`
+
 ## 1.0.1
 
 ### Patch Changes
