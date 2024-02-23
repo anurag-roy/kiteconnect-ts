@@ -28,7 +28,10 @@
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && pnpm changeset publish",
-    "generateDocs": "node typedoc/generateDocs.js"
+    "generateDocs": "node typedoc/generateDocs.js",
+    "test:kiteconnect": "tsx tests/kiteconnect.test.ts",
+    "test:kiteticker": "tsx tests/kiteticker.test.ts",
+    "test": "pnpm run test:kiteconnect && pnpm run test:kiteticker"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
