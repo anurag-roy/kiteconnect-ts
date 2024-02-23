@@ -28,21 +28,24 @@
     "lint": "tsc",
     "build": "tsup lib/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && pnpm changeset publish",
-    "generateDocs": "node typedoc/generateDocs.js"
+    "generateDocs": "tsx typedoc/generateDocs.ts",
+    "test:kiteconnect": "tsx tests/kiteconnect.test.ts",
+    "test:kiteticker": "tsx tests/kiteticker.test.ts",
+    "test": "pnpm run test:kiteconnect && pnpm run test:kiteticker"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@types/crypto-js": "^4.2.2",
     "@types/papaparse": "^5.3.14",
     "@types/ws": "^8.5.10",
+    "nock": "14.0.0-beta.3",
     "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
     "typedoc": "^0.25.8",
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "crypto-js": "^4.2.0",
     "papaparse": "^5.4.1",
     "ws": "^8.16.0"
   },

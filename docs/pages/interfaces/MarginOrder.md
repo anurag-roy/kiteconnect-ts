@@ -22,7 +22,7 @@ ___
 
 ### price
 
- **price**: `number`
+ `Optional` **price**: `number`
 
 Price at which the order is going to be placed (LIMIT orders)
 
@@ -62,7 +62,7 @@ ___
 
 ### trigger\_price
 
- **trigger\_price**: `number`
+ `Optional` **trigger\_price**: `number`
 
 Trigger price (for SL, SL-M, CO orders)
 

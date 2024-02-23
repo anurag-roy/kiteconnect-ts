@@ -1,7 +1,6 @@
-//@ts-check
-const { writeFileSync, readdirSync, copyFileSync } = require('node:fs');
-const { join } = require('node:path');
-const TypeDoc = require('typedoc');
+import { copyFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import * as TypeDoc from 'typedoc';
 
 const DOCS_DIR = join('docs', 'pages');
 
@@ -19,10 +18,11 @@ const copyFilesToDocs = () => {
 
 // Explicity create a '_meta.json' file with camelCase names
 // Because Nextra defaults them to title case
-const preserveCamelCaseNaming = (/**@type string*/ folder) => {
-  const meta = {};
+const preserveCamelCaseNaming = (folder: string) => {
+  const meta: Record<string, string> = {};
   for (const fileName of readdirSync(folder)) {
     const [name] = fileName.split('.');
+    if (!name) continue;
     meta[name] = name;
   }
   writeFileSync(

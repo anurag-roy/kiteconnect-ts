@@ -3,9 +3,9 @@ import axios, {
   AxiosResponse,
   AxiosResponseTransformer,
 } from 'axios';
-import sha256 from 'crypto-js/sha256';
+import { createHash } from 'node:crypto';
+import querystring from 'node:querystring';
 import csvParse from 'papaparse';
-import querystring from 'querystring';
 import { getUserAgent } from '../utils';
 import {
   CompactMargin,
@@ -421,9 +421,9 @@ export class KiteConnect {
     api_secret: string
   ): Promise<SessionData> {
     return new Promise((resolve, reject) => {
-      const checksum = sha256(
-        this.api_key + request_token + api_secret
-      ).toString();
+      const checksum = createHash('sha256')
+        .update(this.api_key + request_token + api_secret)
+        .digest('hex');
       const p = this._post(
         'api.token',
         {
@@ -471,9 +471,9 @@ export class KiteConnect {
     api_secret: string
   ): Promise<SessionData> {
     return new Promise((resolve, reject) => {
-      const checksum = sha256(
-        this.api_key + refresh_token + api_secret
-      ).toString();
+      const checksum = createHash('sha256')
+        .update(this.api_key + refresh_token + api_secret)
+        .digest('hex');
 
       const p = this._post('api.token.renew', {
         api_key: this.api_key,
@@ -815,10 +815,10 @@ export class KiteConnect {
   /**
    * Retrieve quote and market depth for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getQuote(instruments: string[]): Promise<Record<string, Quote>> {
+  getQuote(instruments: string | string[]): Promise<Record<string, Quote>> {
     return this._get(
       'market.quote',
       { i: instruments },
@@ -830,10 +830,10 @@ export class KiteConnect {
   /**
    * Retrieve OHLC for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getOHLC(instruments: string[]): Promise<
+  getOHLC(instruments: string | string[]): Promise<
     Record<
       string,
       {
@@ -872,10 +872,10 @@ export class KiteConnect {
   /**
    * Retrieve LTP for list of instruments.
    *
-   * @param instruments is a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
+   * @param instruments is a single instrument or a list of instruments, Instrument are in the format of `exchange:tradingsymbol`.
    * For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..]
    */
-  getLTP(instruments: string[]): Promise<
+  getLTP(instruments: string | string[]): Promise<
     Record<
       string,
       {
@@ -1275,7 +1275,7 @@ export class KiteConnect {
       postback_data.order_id + postback_data.order_timestamp + api_secret;
     let checksum;
     try {
-      checksum = sha256(inputString).toString();
+      checksum = createHash('sha256').update(inputString).digest('hex');
     } catch (e) {
       throw e;
     }
