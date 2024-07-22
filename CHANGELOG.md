@@ -1,5 +1,12 @@
 # kiteconnect-ts
 
+## 1.1.1
+
+### Patch Changes
+
+- abaa060: Upgrade deps
+- 1290e17: fix: Return `Date` object in socket order payload
+
 ## 1.1.0
 
 ### Minor Changes
