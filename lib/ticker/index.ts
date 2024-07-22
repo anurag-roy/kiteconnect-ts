@@ -1,4 +1,4 @@
-import { clearInterval } from "node:timers";
+import { clearInterval } from 'node:timers';
 import ws, { WebSocket } from 'ws';
 import { getUserAgent } from '../utils';
 import { KiteTickerParams, TickerEvent, TickerEvents } from './types';
@@ -459,6 +459,12 @@ export class KiteTicker {
     }
 
     if (data.type === 'order') {
+      if (data.data.order_timestamp) {
+        data.data.order_timestamp = new Date(data.data.order_timestamp);
+      }
+      if (data.data.exchange_timestamp) {
+        data.data.exchange_timestamp = new Date(data.data.exchange_timestamp);
+      }
       this.trigger('order_update', [data.data]);
     }
   }
