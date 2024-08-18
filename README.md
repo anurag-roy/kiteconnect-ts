@@ -10,14 +10,14 @@ If you notice a bug, please [open an issue](https://github.com/anurag-roy/kiteco
 
 Docs are auto-generated from TsDoc comments using [TypeDoc](https://typedoc.org/), [typedoc-plugin-markdown](https://github.com/tgreyuk/typedoc-plugin-markdown) and [Nextra](https://nextra.site/).
 
-Browse the full docs [here](https://kiteconnect.anuragroy.dev) or go to a specific part:
+Browse the full docs [here](https://kiteconnect-ts.vercel.app) or go to a specific part:
 
 ### kiteconnect-ts
 
-- [KiteConnect Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteConnect)
-- [KiteTicker Class, properties and methods](https://kiteconnect.anuragroy.dev/classes/KiteTicker)
-- [Enums](https://kiteconnect.anuragroy.dev/modules#enumerations)
-- [Interfaces](https://kiteconnect.anuragroy.dev/modules#interfaces)
+- [KiteConnect Class, properties and methods](https://kiteconnect-ts.vercel.app/classes/KiteConnect)
+- [KiteTicker Class, properties and methods](https://kiteconnect-ts.vercel.app/classes/KiteTicker)
+- [Enums](https://kiteconnect-ts.vercel.app/modules#enumerations)
+- [Interfaces](https://kiteconnect-ts.vercel.app/modules#interfaces)
 
 ### Other
 
