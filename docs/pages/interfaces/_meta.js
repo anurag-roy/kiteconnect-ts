@@ -1,4 +1,4 @@
-{
+export default {
   "CompactMargin": "CompactMargin",
   "ConvertPositionParams": "ConvertPositionParams",
   "GTTParams": "GTTParams",

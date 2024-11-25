@@ -1,12 +1,15 @@
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.jsx',
+import nextra from "nextra";
+
+const withNextra = nextra({
+	theme: "nextra-theme-docs",
+	themeConfig: "./theme.config.jsx",
 });
 
-module.exports = withNextra({
-  images: {
-    unoptimized: true,
-  },
+export default withNextra({
+	images: {
+		unoptimized: true,
+	},
+	transpilePackages: ["geist"],
 });
 
 // If you have other Next.js configurations, you can pass them as the parameter:

@@ -1,4 +1,4 @@
-{
+export default {
   "Exchange": "Exchange",
   "OrderType": "OrderType",
   "ProductType": "ProductType",
