@@ -51,11 +51,11 @@ try {
   process.exit(1);
 }
 
-// Get equity margins
-try {
-  const margins = await kc.getMargins('equity');
-  console.log('Equity margins', margins.equity);
-} catch (error) {
+  // Get equity margins
+  try {
+    const margins = await kc.getMargins('equity');
+    console.log('Equity margins', margins);
+  } catch (error) {
   console.error('Error while fetching equity margins', error);
 }
 ```

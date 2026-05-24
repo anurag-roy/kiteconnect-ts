@@ -35,6 +35,7 @@ import {
   Trigger,
   TriggerType,
   UserMargin,
+  UserMargins,
   UserProfile,
   Validity,
   Variety,
@@ -72,7 +73,7 @@ import {
  * // Get equity margins
  * try {
  *   const margins = await kc.getMargins('equity');
- *   console.log('Equity margins', margins.equity);
+ *   console.log('Equity margins', margins);
  * } catch (error) {
  *   console.error('Error while fetching equity margins', error);
  * }
@@ -514,14 +515,16 @@ export class KiteConnect {
   }
 
   /**
+   * Get account balance and cash margin details for all segments.
+   */
+  getMargins(): Promise<UserMargins>;
+  /**
    * Get account balance and cash margin details for a particular segment.
    *
    * @param segment trading segment (eg: equity or commodity).
    */
-  getMargins(segment?: 'equity' | 'commodity'): Promise<{
-    equity?: UserMargin;
-    commodity?: UserMargin;
-  }> {
+  getMargins(segment: 'equity' | 'commodity'): Promise<UserMargin>;
+  getMargins(segment?: 'equity' | 'commodity'): Promise<UserMargins | UserMargin> {
     if (segment) {
       return this._get('user.margins.segment', { segment: segment });
     } else {

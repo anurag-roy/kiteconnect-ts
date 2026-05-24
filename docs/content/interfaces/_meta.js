@@ -8,6 +8,7 @@ export default {
   "Quote": "Quote",
   "PlaceOrderParams": "PlaceOrderParams",
   "MFOrder": "MFOrder",
+  "UserMargins": "UserMargins",
   "GTTParams": "GTTParams",
   "TickFull": "TickFull",
   "SessionData": "SessionData",

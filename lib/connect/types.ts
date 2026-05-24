@@ -470,6 +470,14 @@ export interface UserMargin {
 }
 
 /**
+ * User margins for all supported segments.
+ */
+export interface UserMargins {
+  equity: UserMargin;
+  commodity: UserMargin;
+}
+
+/**
  * Single Mutual Fund holding.
  */
 export interface MFHolding {

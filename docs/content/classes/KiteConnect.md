@@ -32,7 +32,7 @@ try {
 // Get equity margins
 try {
   const margins = await kc.getMargins('equity');
-  console.log('Equity margins', margins.equity);
+  console.log('Equity margins', margins);
 } catch (error) {
   console.error('Error while fetching equity margins', error);
 }
@@ -711,21 +711,33 @@ For example NSE:INFY and for list of instruments ["NSE:RELIANCE", "NSE:SBIN", ..
 
 ### getMargins()
 
-> **getMargins**(`segment?`): `Promise`\<\{ `commodity?`: [`UserMargin`](../interfaces/UserMargin.md); `equity?`: [`UserMargin`](../interfaces/UserMargin.md); \}\>
+#### Call Signature
+
+> **getMargins**(): `Promise`\<[`UserMargins`](../interfaces/UserMargins.md)\>
+
+Get account balance and cash margin details for all segments.
+
+##### Returns
+
+`Promise`\<[`UserMargins`](../interfaces/UserMargins.md)\>
+
+#### Call Signature
+
+> **getMargins**(`segment`): `Promise`\<[`UserMargin`](../interfaces/UserMargin.md)\>
 
 Get account balance and cash margin details for a particular segment.
 
-#### Parameters
+##### Parameters
 
-##### segment?
+###### segment
 
 `"equity"` \| `"commodity"`
 
 trading segment (eg: equity or commodity).
 
-#### Returns
+##### Returns
 
-`Promise`\<\{ `commodity?`: [`UserMargin`](../interfaces/UserMargin.md); `equity?`: [`UserMargin`](../interfaces/UserMargin.md); \}\>
+`Promise`\<[`UserMargin`](../interfaces/UserMargin.md)\>
 
 ***
 

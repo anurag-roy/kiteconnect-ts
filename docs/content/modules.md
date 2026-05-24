@@ -46,6 +46,7 @@
 - [Trade](interfaces/Trade.md)
 - [Trigger](interfaces/Trigger.md)
 - [UserMargin](interfaces/UserMargin.md)
+- [UserMargins](interfaces/UserMargins.md)
 - [UserProfile](interfaces/UserProfile.md)
 
 ## Type Aliases

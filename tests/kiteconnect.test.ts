@@ -229,13 +229,13 @@ describe('KiteConnect', () => {
   // fetch user fund detail
   it('fetch equity and commodity segment funds', async () => {
     const response = await kc.getMargins();
-    assert.ok(response.hasOwnProperty('equity'));
-    assert.ok(response.hasOwnProperty('commodity'));
+    assert.ok(response.equity.enabled);
+    assert.ok(response.commodity.enabled);
   });
 
   it('fetch equity specific segment funds', async () => {
     const response = await kc.getMargins('equity');
-    assert.ok(response.hasOwnProperty('enabled'));
+    assert.ok(response.enabled);
   });
 
   // Order APIs
