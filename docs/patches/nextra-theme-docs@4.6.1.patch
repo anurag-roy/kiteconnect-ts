@@ -1,0 +1,26 @@
+diff --git a/dist/schemas.d.mts b/dist/schemas.d.mts
+index 97cdb97..ea37d31 100644
+--- a/dist/schemas.d.mts
++++ b/dist/schemas.d.mts
+@@ -4,7 +4,7 @@ import { z } from 'zod';
+ 
+ declare const LayoutPropsSchema: z.ZodObject<{
+     banner: z.ZodOptional<z.ZodCustom<react.ReactNode, react.ReactNode>>;
+-    children: z.ZodCustom<react.ReactNode, react.ReactNode>;
++    children: z.ZodOptional<z.ZodCustom<react.ReactNode, react.ReactNode>>;
+     copyPageButton: z.ZodDefault<z.ZodBoolean>;
+     darkMode: z.ZodDefault<z.ZodBoolean>;
+     docsRepositoryBase: z.ZodDefault<z.ZodString>;
+diff --git a/dist/schemas.js b/dist/schemas.js
+index 090d2ea..673b11a 100644
+--- a/dist/schemas.js
++++ b/dist/schemas.js
+@@ -65,7 +65,7 @@ const LayoutPropsSchema = z.strictObject({
+   banner: reactNode.optional().meta({
+     description: "Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`"
+   }),
+-  children: reactNode,
++  children: reactNode.optional(),
+   copyPageButton: z.boolean().default(true).meta({
+     description: "Hide/show copy page content button."
+   }),

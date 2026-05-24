@@ -2,10 +2,9 @@ import { copyFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import * as TypeDoc from "typedoc";
 
-const DOCS_DIR = join("docs", "pages");
+const DOCS_DIR = join("docs", "content");
 
 const copyFilesToDocs = () => {
-	copyFileSync(join("typedoc", "_app.jsx"), join(DOCS_DIR, "_app.jsx"));
 	copyFileSync(join("typedoc", "_meta.js"), join(DOCS_DIR, "_meta.js"));
 	copyFileSync(
 		join("typedoc", "quickStart.md"),
@@ -38,13 +37,13 @@ async function main() {
 	const project = await app.convert();
 
 	if (project) {
-		await app.generateDocs(project, DOCS_DIR);
+		await app.generateOutputs(project);
 
 		// Copy extra md and json files
 		copyFilesToDocs();
 
 		// Create _meta.json files with camelCased naming
-		const folders = ["classes", "interfaces", "enums"];
+		const folders = ["classes", "interfaces", "enumerations", "type-aliases"];
 		for (const folder of folders) {
 			preserveCamelCaseNaming(join(DOCS_DIR, folder));
 		}

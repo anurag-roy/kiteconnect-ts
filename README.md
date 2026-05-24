@@ -26,7 +26,7 @@ Browse the full docs [here](https://kiteconnect.anuragroy.dev) or go to a specif
 
 ## Requirements
 
-- Node.js `v14+`
+- Node.js `v24+`
 
 Please note: Browser environments are not supported. See [Browser Support](#browser-support) for more details.
 
@@ -48,6 +48,12 @@ yarn add kiteconnect-ts
 
 ```
 pnpm add kiteconnect-ts
+```
+
+#### Bun
+
+```
+bun add kiteconnect-ts
 ```
 
 ## KiteConnect

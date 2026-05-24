@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
+    "target": "ES2024",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2024"],
+    "types": ["node", "bun"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -9,5 +12,6 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["dist", "docs", "node_modules"]
 }

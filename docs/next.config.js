@@ -1,16 +1,25 @@
 import nextra from "nextra";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const withNextra = nextra({
-	theme: "nextra-theme-docs",
-	themeConfig: "./theme.config.jsx",
-});
+const withNextra = nextra({});
+const root = dirname(fileURLToPath(import.meta.url));
 
 export default withNextra({
+	async redirects() {
+		return [
+			{
+				source: "/enums/:path*",
+				destination: "/enumerations/:path*",
+				permanent: true,
+			},
+		];
+	},
 	images: {
 		unoptimized: true,
 	},
 	transpilePackages: ["geist"],
+	turbopack: {
+		root,
+	},
 });
-
-// If you have other Next.js configurations, you can pass them as the parameter:
-// module.exports = withNextra({ /* other next.js config */ })

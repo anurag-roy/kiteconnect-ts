@@ -14,19 +14,26 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20.x
-          cache: 'pnpm'
+          node-version: 24.x
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
 
-      - run: pnpm install --frozen-lockfile
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run build
+      - run: bun run test
+      - run: bun run smoke:node
+      - run: bun run package:check
+      - run: bun run pack:dry-run
       - name: Create Release Pull Request or Publish
         permissions: write-all
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm run release
+          publish: bun run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
