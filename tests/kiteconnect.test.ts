@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   Exchange,
   KiteConnect,
+  MarketProtections,
   OrderType,
   ProductType,
   TransactionType,
@@ -237,10 +238,31 @@ describe('KiteConnect', () => {
     assert.ok(response.hasOwnProperty('order_id'));
   });
 
+  it('Place market order with market_protection', async () => {
+    const response = await kc.placeOrder(Variety.regular, {
+      exchange: Exchange.NSE,
+      tradingsymbol: 'SBIN',
+      transaction_type: TransactionType.BUY,
+      quantity: 1,
+      product: ProductType.MIS,
+      order_type: OrderType.MARKET,
+      market_protection: MarketProtections.AUTO,
+    });
+    assert.ok(response.hasOwnProperty('order_id'));
+  });
+
   // modify open pending order
   it('Modify an open order', async () => {
     const response = await kc.modifyOrder(Variety.regular, mockId, {
       price: 10,
+    });
+    assert.ok(response.hasOwnProperty('order_id'));
+  });
+
+  it('Modify an open order with market_protection', async () => {
+    const response = await kc.modifyOrder(Variety.regular, mockId, {
+      price: 10,
+      market_protection: MarketProtections.AUTO,
     });
     assert.ok(response.hasOwnProperty('order_id'));
   });

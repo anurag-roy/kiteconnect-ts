@@ -20,6 +20,7 @@ import {
   MFSIP,
   Margin,
   MarginOrder,
+  ModifyOrderParams,
   Order,
   OrderType,
   PlaceOrderParams,
@@ -550,36 +551,7 @@ export class KiteConnect {
   modifyOrder(
     variety: Variety,
     order_id: string,
-    params: {
-      /**
-       * Order quantity
-       */
-      quantity?: number;
-      /**
-       * Order Price
-       */
-      price?: number;
-      /**
-       * Order type (NRML, SL, SL-M, MARKET).
-       */
-      order_type?: OrderType;
-      /**
-       * Order validity (DAY, IOC).
-       */
-      validity?: Validity;
-      /**
-       * Disclosed quantity
-       */
-      disclosed_quantity?: number;
-      /**
-       * Trigger price
-       */
-      trigger_price?: number;
-      /**
-       * Parent order id incase of multilegged orders.
-       */
-      parent_order_id?: string;
-    }
+    params: ModifyOrderParams
   ): Promise<{ order_id: string }> {
     return this._put('order.modify', { variety, order_id, ...params });
   }

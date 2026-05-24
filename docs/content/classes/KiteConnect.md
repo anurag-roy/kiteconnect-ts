@@ -1065,49 +1065,9 @@ ID of the order.
 
 ##### params
 
+[`ModifyOrderParams`](../interfaces/ModifyOrderParams.md)
+
 Order modify params.
-
-###### disclosed_quantity?
-
-`number`
-
-Disclosed quantity
-
-###### order_type?
-
-`"LIMIT"` \| `"MARKET"` \| `"SL"` \| `"SL-M"`
-
-Order type (NRML, SL, SL-M, MARKET).
-
-###### parent_order_id?
-
-`string`
-
-Parent order id incase of multilegged orders.
-
-###### price?
-
-`number`
-
-Order Price
-
-###### quantity?
-
-`number`
-
-Order quantity
-
-###### trigger_price?
-
-`number`
-
-Trigger price
-
-###### validity?
-
-`"DAY"` \| `"IOC"` \| `"TTL"`
-
-Order validity (DAY, IOC).
 
 #### Returns
 

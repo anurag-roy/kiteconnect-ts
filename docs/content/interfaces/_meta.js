@@ -13,6 +13,7 @@ export default {
   "SessionData": "SessionData",
   "OrderUpdatePostback": "OrderUpdatePostback",
   "MFHolding": "MFHolding",
+  "ModifyOrderParams": "ModifyOrderParams",
   "TickIndexQuote": "TickIndexQuote",
   "CompactMargin": "CompactMargin",
   "TickIndexFull": "TickIndexFull",

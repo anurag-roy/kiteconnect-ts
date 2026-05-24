@@ -74,6 +74,16 @@ export const Validity = {
 export type Validity = keyof typeof Validity;
 
 /**
+ * @enum Market protection values.
+ */
+export const MarketProtections = {
+  AUTO: -1,
+} as const;
+
+export type MarketProtections =
+  (typeof MarketProtections)[keyof typeof MarketProtections];
+
+/**
  * @enum Trigger Types
  */
 export const TriggerType = {
@@ -1536,6 +1546,11 @@ export interface PlaceOrderParams {
    */
   price?: number;
   /**
+   * Set to `-1` for system-default market protection,
+   * or a percentage value greater than `0` up to `100`.
+   */
+  market_protection?: number;
+  /**
    * Disclosed quantity
    */
   disclosed_quantity?: number;
@@ -1575,4 +1590,43 @@ export interface PlaceOrderParams {
    * An optional tag to apply to an order to identify it (alphanumeric, max 20 chars)
    */
   tag?: string;
+}
+
+/**
+ * Params to modify an order.
+ */
+export interface ModifyOrderParams {
+  /**
+   * Order quantity
+   */
+  quantity?: number;
+  /**
+   * Order Price
+   */
+  price?: number;
+  /**
+   * Order type (NRML, SL, SL-M, MARKET).
+   */
+  order_type?: OrderType;
+  /**
+   * Order validity (DAY, IOC).
+   */
+  validity?: Validity;
+  /**
+   * Disclosed quantity
+   */
+  disclosed_quantity?: number;
+  /**
+   * Trigger price
+   */
+  trigger_price?: number;
+  /**
+   * Set to `-1` for system-default market protection,
+   * or a percentage value greater than `0` up to `100`.
+   */
+  market_protection?: number;
+  /**
+   * Parent order id incase of multilegged orders.
+   */
+  parent_order_id?: string;
 }

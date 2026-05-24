@@ -44,6 +44,15 @@ Split quantity for each iceberg leg order
 
 ***
 
+### market\_protection?
+
+> `optional` **market\_protection?**: `number`
+
+Set to `-1` for system-default market protection,
+or a percentage value greater than `0` up to `100`.
+
+***
+
 ### order\_type
 
 > **order\_type**: `"LIMIT"` \| `"MARKET"` \| `"SL"` \| `"SL-M"`

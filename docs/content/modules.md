@@ -3,6 +3,7 @@
 ## Enumerations
 
 - [Exchange](enumerations/Exchange.md)
+- [MarketProtections](enumerations/MarketProtections.md)
 - [OrderType](enumerations/OrderType.md)
 - [ProductType](enumerations/ProductType.md)
 - [TransactionType](enumerations/TransactionType.md)
@@ -29,6 +30,7 @@
 - [MFInstrument](interfaces/MFInstrument.md)
 - [MFOrder](interfaces/MFOrder.md)
 - [MFSIP](interfaces/MFSIP.md)
+- [ModifyOrderParams](interfaces/ModifyOrderParams.md)
 - [Order](interfaces/Order.md)
 - [OrderUpdatePostback](interfaces/OrderUpdatePostback.md)
 - [PlaceOrderParams](interfaces/PlaceOrderParams.md)
