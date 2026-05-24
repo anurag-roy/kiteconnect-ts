@@ -1328,9 +1328,14 @@ Tradingsymbol (ISIN) of the fund.
 
 ### placeOrder()
 
-> **placeOrder**(`variety`, `params`): `Promise`\<\{ `order_id`: `string`; \}\>
+> **placeOrder**(`variety`, `params`): `Promise`\<[`AutosliceOrderResponse`](../type-aliases/AutosliceOrderResponse.md)\>
 
 Place an order.
+
+When `params.autoslice` is `true`, the backend may split the order into
+multiple child slices. In that case, the resolved response includes a
+`children` array, where each entry either carries an `order_id` or an
+`error` payload.
 
 #### Parameters
 
@@ -1344,11 +1349,11 @@ Order variety (ex. bo, co, amo, regular).
 
 [`PlaceOrderParams`](../interfaces/PlaceOrderParams.md)
 
-Order params.
+Order params. Set `autoslice: true` to allow automatic order slicing.
 
 #### Returns
 
-`Promise`\<\{ `order_id`: `string`; \}\>
+`Promise`\<[`AutosliceOrderResponse`](../type-aliases/AutosliceOrderResponse.md)\>
 
 ***
 

@@ -8,6 +8,7 @@ import querystring from 'node:querystring';
 import csvParse from 'papaparse';
 import { getUserAgent } from '../utils';
 import {
+  AutosliceOrderResponse,
   CompactMargin,
   ConvertPositionParams,
   Exchange,
@@ -531,13 +532,18 @@ export class KiteConnect {
   /**
    * Place an order.
    *
+   * When `params.autoslice` is `true`, the backend may split the order into
+   * multiple child slices. In that case, the resolved response includes a
+   * `children` array, where each entry either carries an `order_id` or an
+   * `error` payload.
+   *
    * @param variety Order variety (ex. bo, co, amo, regular).
-   * @param params Order params.
+   * @param params Order params. Set `autoslice: true` to allow automatic order slicing.
    */
   placeOrder(
     variety: Variety,
     params: PlaceOrderParams
-  ): Promise<{ order_id: string }> {
+  ): Promise<AutosliceOrderResponse> {
     return this._post('order.place', { variety, ...params });
   }
 

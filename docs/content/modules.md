@@ -50,6 +50,8 @@
 
 ## Type Aliases
 
+- [AutosliceChild](type-aliases/AutosliceChild.md)
+- [AutosliceOrderResponse](type-aliases/AutosliceOrderResponse.md)
 - [Tick](type-aliases/Tick.md)
 - [TickerEvent](type-aliases/TickerEvent.md)
 - [TickerEvents](type-aliases/TickerEvents.md)

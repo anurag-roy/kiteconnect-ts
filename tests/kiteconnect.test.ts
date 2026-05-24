@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, it } from 'bun:test';
 import * as assert from 'node:assert/strict';
-import { createServer, type Server } from 'node:http';
+import { createServer, type IncomingMessage, type Server } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -38,6 +38,16 @@ const fixture = (fileName: string, query?: Record<string, string>): Fixture => (
   fileName,
   query,
 });
+
+const readRequestBody = async (request: IncomingMessage) => {
+  const chunks: Buffer[] = [];
+
+  for await (const chunk of request) {
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+  }
+
+  return Buffer.concat(chunks).toString('utf-8');
+};
 
 const fixtures = new Map([
   ['GET /user/profile', fixture('profile.json')],
@@ -117,9 +127,7 @@ let server: Server | null = null;
 let kc: KiteConnect;
 
 const createFixtureServer = () =>
-  createServer((request, response) => {
-    request.resume();
-
+  createServer(async (request, response) => {
     const requestUrl = new URL(request.url ?? '/', 'http://localhost');
     const key = `${request.method ?? 'GET'} ${requestUrl.pathname}`;
     const routeFixture = fixtures.get(key);
@@ -142,8 +150,14 @@ const createFixtureServer = () =>
       }
     }
 
+    const requestBody = await readRequestBody(request);
+    const fileName =
+      key === 'POST /orders/regular' && requestBody.includes('autoslice=true')
+        ? 'autoslice_response.json'
+        : routeFixture.fileName;
+
     response.writeHead(200, { 'content-type': 'application/json' });
-    response.end(JSON.stringify(parseJson(routeFixture.fileName)));
+    response.end(JSON.stringify(parseJson(fileName)));
   });
 
 const listenOnPort = async (port: number) => {
@@ -249,6 +263,22 @@ describe('KiteConnect', () => {
       market_protection: MarketProtections.AUTO,
     });
     assert.ok(response.hasOwnProperty('order_id'));
+  });
+
+  it('Place order with autoslice enabled', async () => {
+    const response = await kc.placeOrder(Variety.regular, {
+      exchange: Exchange.NSE,
+      tradingsymbol: 'SBIN',
+      transaction_type: TransactionType.BUY,
+      quantity: 100000,
+      product: ProductType.MIS,
+      order_type: OrderType.MARKET,
+      autoslice: true,
+    });
+
+    assert.ok(response.hasOwnProperty('order_id'));
+    assert.ok(Array.isArray(response.children));
+    assert.equal(response.children?.[2]?.error?.error_type, 'MarginException');
   });
 
   // modify open pending order

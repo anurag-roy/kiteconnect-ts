@@ -12,6 +12,14 @@ A unique identifier for a particular auction
 
 ***
 
+### autoslice?
+
+> `optional` **autoslice?**: `boolean`
+
+Set to `true` to allow automatic order slicing for quantities exceeding freeze limits.
+
+***
+
 ### disclosed\_quantity?
 
 > `optional` **disclosed\_quantity?**: `number`

@@ -1305,6 +1305,29 @@ export interface KiteConnectParams {
 }
 
 /**
+ * A single child slice in an autoslice order response. Each entry either
+ * carries an `order_id` on success or an `error` payload on failure.
+ */
+export type AutosliceChild = {
+  order_id?: string;
+  error?: {
+    code?: number;
+    error_type?: string;
+    message?: string;
+    data?: unknown;
+  };
+};
+
+/**
+ * Response for an autoslice order placement. The top-level `order_id` is the
+ * parent, and `children` holds the per-slice results.
+ */
+export type AutosliceOrderResponse = {
+  order_id: string;
+  children?: AutosliceChild[];
+};
+
+/**
  * Params to convert a position.
  */
 export interface ConvertPositionParams {
@@ -1550,6 +1573,10 @@ export interface PlaceOrderParams {
    * or a percentage value greater than `0` up to `100`.
    */
   market_protection?: number;
+  /**
+   * Set to `true` to allow automatic order slicing for quantities exceeding freeze limits.
+   */
+  autoslice?: boolean;
   /**
    * Disclosed quantity
    */
