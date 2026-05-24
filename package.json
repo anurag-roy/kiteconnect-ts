@@ -4,12 +4,17 @@
   "description": "Unofficial library for the Kite Connect trading APIs, written in TypeScript.",
   "license": "MIT",
   "version": "1.1.1",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anurag-roy/kiteconnect-ts.git"
@@ -26,30 +31,47 @@
   ],
   "scripts": {
     "lint": "tsc",
-    "build": "tsup lib/index.ts --format cjs,esm --dts",
-    "release": "pnpm run build && pnpm changeset publish",
-    "generateDocs": "tsx typedoc/generateDocs.ts",
-    "test": "node --import tsx --test tests/*.test.ts"
+    "build": "tsdown",
+    "release": "bun run build && bun run changeset publish",
+    "generateDocs": "bun typedoc/generateDocs.ts",
+    "test": "bun test",
+    "smoke:node": "node tests/package-smoke.cjs",
+    "package:check": "publint",
+    "pack:dry-run": "npm --cache /tmp/kiteconnect-ts-npm-cache pack --dry-run"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
-    "@types/papaparse": "^5.3.14",
-    "@types/ws": "^8.5.11",
-    "nock": "14.0.0-beta.8",
-    "tsup": "^8.2.2",
-    "tsx": "^4.16.2",
-    "typedoc": "^0.25.8",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.3.3"
+    "@changesets/cli": "^2.31.0",
+    "@types/bun": "^1.3.14",
+    "@types/node": "^24.12.4",
+    "@types/papaparse": "^5.5.2",
+    "@types/ws": "^8.18.1",
+    "publint": "^0.3.21",
+    "tsdown": "^0.22.0",
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "axios": "^1.7.2",
-    "papaparse": "^5.4.1",
-    "ws": "^8.18.0"
+    "axios": "^1.16.1",
+    "papaparse": "^5.5.3",
+    "ws": "^8.21.0"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+  "packageManager": "bun@1.3.14",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  }
 }

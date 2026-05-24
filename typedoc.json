@@ -2,10 +2,11 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./lib/index.ts"],
   "readme": "typedoc/index.md",
-  "out": "docs/pages",
+  "out": "docs/content",
   "plugin": ["typedoc-plugin-markdown"],
   "excludePrivate": true,
   "disableSources": true,
+  "githubPages": false,
   "kindSortOrder": [
     "Reference",
     "Project",
@@ -31,8 +32,8 @@
     "GetSignature",
     "SetSignature"
   ],
-  "entryDocument": "index.md",
+  "entryFileName": "index",
+  "modulesFileName": "modules",
   "hideBreadcrumbs": true,
-  "hideMembersSymbol": true,
-  "hideInPageTOC": true
+  "hidePageHeader": true
 }

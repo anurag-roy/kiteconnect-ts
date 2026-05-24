@@ -8,6 +8,7 @@ import querystring from 'node:querystring';
 import csvParse from 'papaparse';
 import { getUserAgent } from '../utils';
 import {
+  AutosliceOrderResponse,
   CompactMargin,
   ConvertPositionParams,
   Exchange,
@@ -20,6 +21,7 @@ import {
   MFSIP,
   Margin,
   MarginOrder,
+  ModifyOrderParams,
   Order,
   OrderType,
   PlaceOrderParams,
@@ -33,6 +35,7 @@ import {
   Trigger,
   TriggerType,
   UserMargin,
+  UserMargins,
   UserProfile,
   Validity,
   Variety,
@@ -70,7 +73,7 @@ import {
  * // Get equity margins
  * try {
  *   const margins = await kc.getMargins('equity');
- *   console.log('Equity margins', margins.equity);
+ *   console.log('Equity margins', margins);
  * } catch (error) {
  *   console.error('Error while fetching equity margins', error);
  * }
@@ -512,14 +515,16 @@ export class KiteConnect {
   }
 
   /**
+   * Get account balance and cash margin details for all segments.
+   */
+  getMargins(): Promise<UserMargins>;
+  /**
    * Get account balance and cash margin details for a particular segment.
    *
    * @param segment trading segment (eg: equity or commodity).
    */
-  getMargins(segment?: 'equity' | 'commodity'): Promise<{
-    equity?: UserMargin;
-    commodity?: UserMargin;
-  }> {
+  getMargins(segment: 'equity' | 'commodity'): Promise<UserMargin>;
+  getMargins(segment?: 'equity' | 'commodity'): Promise<UserMargins | UserMargin> {
     if (segment) {
       return this._get('user.margins.segment', { segment: segment });
     } else {
@@ -530,13 +535,18 @@ export class KiteConnect {
   /**
    * Place an order.
    *
+   * When `params.autoslice` is `true`, the backend may split the order into
+   * multiple child slices. In that case, the resolved response includes a
+   * `children` array, where each entry either carries an `order_id` or an
+   * `error` payload.
+   *
    * @param variety Order variety (ex. bo, co, amo, regular).
-   * @param params Order params.
+   * @param params Order params. Set `autoslice: true` to allow automatic order slicing.
    */
   placeOrder(
     variety: Variety,
     params: PlaceOrderParams
-  ): Promise<{ order_id: string }> {
+  ): Promise<AutosliceOrderResponse> {
     return this._post('order.place', { variety, ...params });
   }
 
@@ -550,36 +560,7 @@ export class KiteConnect {
   modifyOrder(
     variety: Variety,
     order_id: string,
-    params: {
-      /**
-       * Order quantity
-       */
-      quantity?: number;
-      /**
-       * Order Price
-       */
-      price?: number;
-      /**
-       * Order type (NRML, SL, SL-M, MARKET).
-       */
-      order_type?: OrderType;
-      /**
-       * Order validity (DAY, IOC).
-       */
-      validity?: Validity;
-      /**
-       * Disclosed quantity
-       */
-      disclosed_quantity?: number;
-      /**
-       * Trigger price
-       */
-      trigger_price?: number;
-      /**
-       * Parent order id incase of multilegged orders.
-       */
-      parent_order_id?: string;
-    }
+    params: ModifyOrderParams
   ): Promise<{ order_id: string }> {
     return this._put('order.modify', { variety, order_id, ...params });
   }
