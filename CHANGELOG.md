@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 2.0.1
+
+### Patch Changes
+
+- 4897fb8: Fix `getHistoricalData` type
+
 ## 2.0.0
 
 ### Major Changes
