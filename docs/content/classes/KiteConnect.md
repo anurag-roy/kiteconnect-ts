@@ -559,7 +559,7 @@ Get GTTs list
 
 ### getHistoricalData()
 
-> **getHistoricalData**(`instrument_token`, `interval`, `from_date`, `to_date`, `continuous?`, `oi?`): `Promise`\<\{ `close`: `number`; `date`: `Date`; `high`: `number`; `low`: `number`; `oi?`: `number`; `open`: `number`; `volume`: `number`; \}\>
+> **getHistoricalData**(`instrument_token`, `interval`, `from_date`, `to_date`, `continuous?`, `oi?`): `Promise`\<`object`[]\>
 
 Retrieve historical data (candles) for an instrument.
 Although the actual response JSON from the API does not have field
@@ -606,7 +606,7 @@ is a bool flag to include OI data for futures and options instruments. Defaults 
 
 #### Returns
 
-`Promise`\<\{ `close`: `number`; `date`: `Date`; `high`: `number`; `low`: `number`; `oi?`: `number`; `open`: `number`; `volume`: `number`; \}\>
+`Promise`\<`object`[]\>
 
 #### Example
 
