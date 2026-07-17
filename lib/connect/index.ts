@@ -922,7 +922,7 @@ export class KiteConnect {
     close: number;
     volume: number;
     oi?: number;
-  }> {
+  }[]> {
     return this._get(
       'market.historical',
       {
