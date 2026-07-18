@@ -1,8 +1,8 @@
-import { afterAll, beforeAll, describe, it } from 'bun:test';
 import * as assert from 'node:assert/strict';
 import { createServer, type IncomingMessage, type Server } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import { after, before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
   Exchange,
@@ -13,31 +13,39 @@ import {
   TransactionType,
   TriggerType,
   Variety,
-} from '../lib';
+} from 'kiteconnect-ts';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(
+  fileURLToPath((import.meta as ImportMeta & { url: string }).url)
+);
 const mockDir = 'kiteconnect-mocks';
 const mockId = '100';
-
-const parseJson = (fileName: string) => {
-  // read and parse mock json file
-  const rawdata = fs.readFileSync(
-    path.join(__dirname, mockDir, fileName),
-    'utf-8'
-  );
-  const mockData = JSON.parse(rawdata);
-  return mockData;
-};
 
 type Fixture = {
   fileName: string;
   query?: Record<string, string>;
+  contentType?: string;
 };
 
-const fixture = (fileName: string, query?: Record<string, string>): Fixture => ({
+const fixture = (
+  fileName: string,
+  query?: Record<string, string>,
+  contentType?: string
+): Fixture => ({
   fileName,
   query,
+  contentType,
 });
+
+type RecordedRequest = {
+  method: string;
+  pathname: string;
+  url: URL;
+  headers: IncomingMessage['headers'];
+  body: string;
+};
+
+const requests: RecordedRequest[] = [];
 
 const readRequestBody = async (request: IncomingMessage) => {
   const chunks: Buffer[] = [];
@@ -96,6 +104,14 @@ const fixtures = new Map([
   ],
   ['GET /mf/holdings', fixture('mf_holdings.json')],
   [
+    'GET /instruments',
+    fixture('instruments_all.csv', undefined, 'text/csv; charset=utf-8'),
+  ],
+  [
+    'GET /mf/instruments',
+    fixture('mf_instruments.csv', undefined, 'text/csv; charset=utf-8'),
+  ],
+  [
     `GET /instruments/historical/${mockId}/minute`,
     fixture('historical_minute.json', {
       instrument_token: mockId,
@@ -131,16 +147,29 @@ const createFixtureServer = () =>
     const requestUrl = new URL(request.url ?? '/', 'http://localhost');
     const key = `${request.method ?? 'GET'} ${requestUrl.pathname}`;
     const routeFixture = fixtures.get(key);
+    const requestBody = await readRequestBody(request);
+
+    requests.push({
+      method: request.method ?? 'GET',
+      pathname: requestUrl.pathname,
+      url: requestUrl,
+      headers: request.headers,
+      body: requestBody,
+    });
 
     if (!routeFixture) {
-      response.writeHead(404, { 'content-type': 'application/json' });
+      response.writeHead(404, {
+        'content-type': 'application/json; charset=utf-8',
+      });
       response.end(JSON.stringify({ error: `No fixture for ${key}` }));
       return;
     }
 
     for (const [name, value] of Object.entries(routeFixture.query ?? {})) {
       if (requestUrl.searchParams.get(name) !== value) {
-        response.writeHead(400, { 'content-type': 'application/json' });
+        response.writeHead(400, {
+          'content-type': 'application/json; charset=utf-8',
+        });
         response.end(
           JSON.stringify({
             error: `Expected query ${name}=${value} for ${key}`,
@@ -150,14 +179,37 @@ const createFixtureServer = () =>
       }
     }
 
-    const requestBody = await readRequestBody(request);
     const fileName =
       key === 'POST /orders/regular' && requestBody.includes('autoslice=true')
         ? 'autoslice_response.json'
         : routeFixture.fileName;
+    const contentType =
+      routeFixture.contentType ?? 'application/json; charset=utf-8';
+    const rawData = fs.readFileSync(
+      path.join(__dirname, mockDir, fileName),
+      'utf-8'
+    );
 
-    response.writeHead(200, { 'content-type': 'application/json' });
-    response.end(JSON.stringify(parseJson(fileName)));
+    response.writeHead(200, { 'content-type': contentType });
+    response.end(
+      contentType.startsWith('application/json')
+        ? JSON.stringify(JSON.parse(rawData))
+        : rawData
+    );
+  });
+
+const getLastRequest = (method: string, pathname: string) => {
+  const request = requests.findLast(
+    (item) => item.method === method && item.pathname === pathname
+  );
+  assert.ok(request, `Expected a recorded ${method} ${pathname} request`);
+  return request;
+};
+
+const jsonResponse = (data: unknown, status = 200) =>
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { 'content-type': 'application/json; charset=utf-8' },
   });
 
 const listenOnPort = async (port: number) => {
@@ -181,7 +233,7 @@ const listenOnPort = async (port: number) => {
   server = nextServer;
 };
 
-beforeAll(async () => {
+before(async () => {
   const basePort = 30000 + (process.pid % 10000);
   let port = basePort;
   let lastError: unknown;
@@ -203,11 +255,12 @@ beforeAll(async () => {
 
   kc = new KiteConnect({
     api_key: 'TEST_API_KEY',
+    access_token: 'TEST_ACCESS_TOKEN',
     root: `http://127.0.0.1:${port}`,
   });
 });
 
-afterAll(async () => {
+after(async () => {
   if (!server?.listening) return;
 
   await new Promise<void>((resolve, reject) => {
@@ -224,6 +277,125 @@ describe('KiteConnect', () => {
     const response = await kc.getProfile();
     assert.ok(response.hasOwnProperty('user_id'));
     assert.ok(response.hasOwnProperty('user_name'));
+
+    const request = getLastRequest('GET', '/user/profile');
+    assert.equal(
+      request.headers.authorization,
+      'token TEST_API_KEY:TEST_ACCESS_TOKEN'
+    );
+    assert.equal(request.headers['x-kite-version'], '3');
+    assert.match(request.headers['user-agent'] ?? '', /^kiteconnect-ts\//);
+  });
+
+  it('uses an injected fetch implementation', async () => {
+    const captured: { url?: URL; headers?: Headers } = {};
+    const client = new KiteConnect({
+      api_key: 'CUSTOM_API_KEY',
+      access_token: 'CUSTOM_ACCESS_TOKEN',
+      root: 'https://example.test',
+      fetch: async (input, init) => {
+        assert.ok(input instanceof URL);
+        captured.url = input;
+        captured.headers = new Headers(init?.headers);
+        return jsonResponse({
+          data: { user_id: 'custom-user', user_name: 'Custom User' },
+        });
+      },
+    });
+
+    const response = await client.getProfile();
+
+    assert.equal(response.user_id, 'custom-user');
+    assert.equal(captured.url?.toString(), 'https://example.test/user/profile');
+    assert.equal(
+      captured.headers?.get('authorization'),
+      'token CUSTOM_API_KEY:CUSTOM_ACCESS_TOKEN'
+    );
+  });
+
+  it('runs the expiry hook and preserves API errors', async () => {
+    let expiryCount = 0;
+    const client = new KiteConnect({
+      api_key: 'TEST_API_KEY',
+      fetch: async () =>
+        jsonResponse(
+          {
+            error_type: 'TokenException',
+            message: 'Session expired',
+            data: null,
+          },
+          403
+        ),
+    });
+    client.setSessionExpiryHook(() => expiryCount++);
+
+    await assert.rejects(
+      () => client.getProfile(),
+      (error: any) => {
+        assert.equal(error.error_type, 'TokenException');
+        assert.equal(error.message, 'Session expired');
+        return true;
+      }
+    );
+    assert.equal(expiryCount, 1);
+  });
+
+  it('normalizes network failures', async () => {
+    const client = new KiteConnect({
+      api_key: 'TEST_API_KEY',
+      fetch: async () => {
+        throw new TypeError('socket closed');
+      },
+    });
+
+    await assert.rejects(
+      () => client.getProfile(),
+      (error: any) => {
+        assert.equal(error.error_type, 'NetworkException');
+        assert.equal(error.message, 'socket closed');
+        assert.equal(error.data, null);
+        return true;
+      }
+    );
+  });
+
+  it('aborts requests after the configured timeout', async () => {
+    const client = new KiteConnect({
+      api_key: 'TEST_API_KEY',
+      timeout: 5,
+      fetch: (_input, init) =>
+        new Promise((_resolve, reject) => {
+          const signal = init?.signal;
+          assert.ok(signal);
+          signal.addEventListener('abort', () => reject(signal.reason), {
+            once: true,
+          });
+        }),
+    });
+
+    await assert.rejects(
+      () => client.getProfile(),
+      (error: any) => {
+        assert.equal(error.error_type, 'NetworkException');
+        assert.equal(error.message, 'Request timed out after 5ms');
+        return true;
+      }
+    );
+  });
+
+  it('returns a DataException for unsupported response media types', async () => {
+    const client = new KiteConnect({
+      api_key: 'TEST_API_KEY',
+      fetch: async () =>
+        new Response('plain text', {
+          headers: { 'content-type': 'text/plain; charset=utf-8' },
+        }),
+    });
+
+    const response = (await client.getProfile()) as any;
+
+    assert.equal(response.error_type, 'DataException');
+    assert.match(response.message, /text\/plain; charset=utf-8/);
   });
 
   // fetch user fund detail
@@ -250,6 +422,16 @@ describe('KiteConnect', () => {
       order_type: OrderType.MARKET,
     });
     assert.ok(response.hasOwnProperty('order_id'));
+
+    const request = getLastRequest('POST', '/orders/regular');
+    const form = new URLSearchParams(request.body);
+    assert.equal(form.get('exchange'), Exchange.NSE);
+    assert.equal(form.get('tradingsymbol'), 'SBIN');
+    assert.equal(form.get('quantity'), '1');
+    assert.equal(
+      request.headers['content-type'],
+      'application/x-www-form-urlencoded'
+    );
   });
 
   it('Place market order with market_protection', async () => {
@@ -468,13 +650,28 @@ describe('KiteConnect', () => {
   });
 
   // Market quotes and instruments
+  it('parses CSV responses with charset parameters', async () => {
+    const response = await kc.getInstruments();
+
+    assert.ok(Array.isArray(response));
+    assert.equal(response[0]?.tradingsymbol, 'CENTRALBK-BE');
+    assert.equal(response[0]?.last_price, 0);
+    assert.equal(response[0]?.lot_size, 1);
+  });
+
   // Retrieve full market quotes for instruments
   it('Retrieve full market quotes for instruments', async () => {
-    const response = await kc.getQuote('NSE:INFY');
+    const response = await kc.getQuote(['NSE:INFY', 'NSE:SBIN']);
     assert.ok(response.hasOwnProperty('NSE:INFY'));
     assert.ok(response['NSE:INFY'].hasOwnProperty('last_price'));
     assert.ok(response['NSE:INFY'].hasOwnProperty('depth'));
     assert.ok(response['NSE:INFY'].hasOwnProperty('ohlc'));
+
+    const request = getLastRequest('GET', '/quote');
+    assert.deepEqual(request.url.searchParams.getAll('i'), [
+      'NSE:INFY',
+      'NSE:SBIN',
+    ]);
   });
 
   // Retrieve LTP quotes for instruments
@@ -598,5 +795,26 @@ describe('KiteConnect', () => {
     assert.ok(response[0]?.charges.hasOwnProperty('transaction_tax'));
     assert.ok(response[0]?.charges.hasOwnProperty('gst'));
     assert.ok(response[0]?.charges.gst.hasOwnProperty('total'));
+
+    const request = getLastRequest('POST', '/margins/orders');
+    const body = JSON.parse(request.body);
+    assert.ok(Array.isArray(body));
+    assert.equal(body[0].tradingsymbol, 'SBIN');
+    assert.equal(request.headers['content-type'], 'application/json');
+  });
+
+  it('validates postback checksums with node:crypto compatibility', () => {
+    assert.equal(
+      kc.validatePostback(
+        {
+          order_id: 'ORDER123',
+          order_timestamp: '2026-07-18 10:00:00',
+          checksum:
+            '11e31fa2d8aa9a9f0ef8302ab3ecd6c7c9639a8837d7ee51193dff6f2402ae19',
+        },
+        'SECRET'
+      ),
+      true
+    );
   });
 });

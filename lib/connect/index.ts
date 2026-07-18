@@ -1,10 +1,4 @@
-import axios, {
-  AxiosInstance,
-  AxiosResponse,
-  AxiosResponseTransformer,
-} from 'axios';
 import { createHash } from 'node:crypto';
-import querystring from 'node:querystring';
 import csvParse from 'papaparse';
 import { getUserAgent } from '../utils';
 import {
@@ -40,6 +34,8 @@ import {
   Validity,
   Variety,
 } from './types';
+
+type ResponseTransformer = (data: any, headers: Headers) => any;
 
 /**
  * API client class. In production, you may initialise a single instance of this class per `api_key`.
@@ -210,7 +206,7 @@ export class KiteConnect {
   private access_token;
   private default_login_uri;
   private session_expiry_hook: Function | null;
-  private requestInstance: AxiosInstance;
+  private readonly fetchImpl: typeof globalThis.fetch;
 
   private readonly kiteVersion = 3; // Kite version to send in header
   private readonly userAgent = getUserAgent(); // User agent to be sent with every request
@@ -282,92 +278,7 @@ export class KiteConnect {
     this.access_token = params.access_token || null;
     this.default_login_uri = defaults.login;
     this.session_expiry_hook = null;
-
-    this.requestInstance = axios.create({
-      baseURL: this.root,
-      timeout: this.timeout,
-      headers: {
-        'X-Kite-Version': this.kiteVersion,
-        'User-Agent': this.userAgent,
-      },
-      paramsSerializer: {
-        indexes: null,
-      },
-    });
-
-    // Add a request interceptor
-    this.requestInstance.interceptors.request.use((request) => {
-      if (this.debug) console.log(request);
-      return request;
-    });
-
-    // Add a response interceptor
-    this.requestInstance.interceptors.response.use(
-      (response) => {
-        if (this.debug) console.log(response);
-
-        const contentType = response.headers['content-type'];
-        if (
-          contentType === 'application/json' &&
-          typeof response.data === 'object'
-        ) {
-          // Throw incase of error
-          if (response.data.error_type) throw response.data;
-
-          // Return success data
-          return response.data.data;
-        } else if (contentType === 'text/csv') {
-          // Return the response directly
-          return response.data;
-        } else {
-          return {
-            error_type: 'DataException',
-            message:
-              'Unknown content type (' +
-              contentType +
-              ') with response: (' +
-              response.data +
-              ')',
-          };
-        }
-      },
-      (error) => {
-        let resp = {
-          message: 'Unknown error',
-          error_type: 'GeneralException',
-          data: null,
-        };
-
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          if (error.response.data && error.response.data.error_type) {
-            if (
-              error.response.data.error_type === 'TokenException' &&
-              this.session_expiry_hook
-            ) {
-              this.session_expiry_hook();
-            }
-
-            resp = error.response.data;
-          } else {
-            resp.error_type = 'NetworkException';
-            resp.message = error.response.statusText;
-          }
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          resp.error_type = 'NetworkException';
-          resp.message =
-            'No response from server with error code: ' + error.code;
-        } else if (error.message) {
-          resp = error;
-        }
-
-        return Promise.reject(resp);
-      }
-    );
+    this.fetchImpl = params.fetch ?? globalThis.fetch;
   }
 
   /**
@@ -1295,7 +1206,7 @@ export class KiteConnect {
   }
 
   // Format response ex. datetime string to date
-  private formatResponse(data: AxiosResponse) {
+  private formatResponse(data: any) {
     if (!data.data || typeof data.data !== 'object') return data;
     let list = [];
     if (data.data instanceof Array) {
@@ -1359,9 +1270,9 @@ export class KiteConnect {
     return { data: results };
   }
 
-  private transformInstrumentsResponse(data: any, headers: any) {
+  private transformInstrumentsResponse(data: any, headers: Headers) {
     // Parse CSV responses
-    if (headers['content-type'] === 'text/csv') {
+    if (this.getMediaType(headers) === 'text/csv') {
       const parsedData = csvParse.parse(data, { header: true }).data as any[];
       for (const item of parsedData) {
         item['last_price'] = parseFloat(item['last_price']);
@@ -1380,9 +1291,9 @@ export class KiteConnect {
     return data;
   }
 
-  private transformMFInstrumentsResponse(data: any, headers: any) {
+  private transformMFInstrumentsResponse(data: any, headers: Headers) {
     // Parse CSV responses
-    if (headers['content-type'] === 'text/csv') {
+    if (this.getMediaType(headers) === 'text/csv') {
       const parsedData = csvParse.parse(data, { header: true }).data as any[];
       for (const item of parsedData) {
         item['minimum_purchase_amount'] = parseFloat(
@@ -1421,7 +1332,7 @@ export class KiteConnect {
     route: keyof typeof this.routes,
     params?: any,
     responseType?: string | null,
-    responseTransformer?: AxiosResponseTransformer | null,
+    responseTransformer?: ResponseTransformer | null,
     isJSON = false
   ) {
     return this.request(
@@ -1438,7 +1349,7 @@ export class KiteConnect {
     route: keyof typeof this.routes,
     params: any,
     responseType?: string | null,
-    responseTransformer?: AxiosResponseTransformer | null,
+    responseTransformer?: ResponseTransformer | null,
     isJSON = false,
     queryParams: any = null
   ) {
@@ -1457,7 +1368,7 @@ export class KiteConnect {
     route: keyof typeof this.routes,
     params: any,
     responseType?: string | null,
-    responseTransformer?: AxiosResponseTransformer | null,
+    responseTransformer?: ResponseTransformer | null,
     isJSON = false,
     queryParams = null
   ) {
@@ -1476,7 +1387,7 @@ export class KiteConnect {
     route: keyof typeof this.routes,
     params?: any,
     responseType?: string | null,
-    responseTransformer?: AxiosResponseTransformer | null,
+    responseTransformer?: ResponseTransformer | null,
     isJSON = false
   ) {
     return this.request(
@@ -1489,78 +1400,190 @@ export class KiteConnect {
     );
   }
 
-  private request(
+  private async request(
     route: keyof typeof this.routes,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     params?: any,
     responseType?: string | null,
-    responseTransformer?: AxiosResponseTransformer | null,
+    responseTransformer?: ResponseTransformer | null,
     isJSON?: boolean,
     queryParams?: any
   ) {
-    // Check access token
     if (!responseType) responseType = 'json';
     let uri = this.routes[route];
 
     // Replace variables in "RESTful" URLs with corresponding params
     if (uri.indexOf('{') !== -1) {
       for (const k in params) {
-        if (params.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(params, k)) {
           uri = uri.replace('{' + k + '}', params[k]);
         }
       }
     }
 
-    let payload = null;
+    let body: string | undefined;
     if (method === 'GET' || method === 'DELETE') {
       queryParams = params;
+    } else if (isJSON) {
+      body = JSON.stringify(params);
     } else {
-      if (isJSON) {
-        // post JSON payload
-        payload = JSON.stringify(params);
-      } else {
-        // post url encoded payload
-        payload = querystring.stringify(params);
-      }
+      const form = new URLSearchParams();
+      this.appendParams(form, params);
+      body = form.toString();
     }
 
-    const options = {
-      method: method,
-      url: uri,
-      params: queryParams,
-      data: payload,
-      // Set auth header
-      headers: {} as any,
-      transformResponse: undefined as any,
-    };
+    const url = new URL(uri, this.root);
+    this.appendParams(url.searchParams, queryParams);
+    const headers = new Headers({
+      'Content-Type': isJSON
+        ? 'application/json'
+        : 'application/x-www-form-urlencoded',
+      'User-Agent': this.userAgent,
+      'X-Kite-Version': String(this.kiteVersion),
+    });
 
-    // Send auth token
     if (this.access_token) {
       const authHeader = this.api_key + ':' + this.access_token;
-      options['headers']['Authorization'] = 'token ' + authHeader;
+      headers.set('Authorization', 'token ' + authHeader);
     }
 
-    // Set request header content type
-    if (isJSON) {
-      options['headers']['Content-Type'] = 'application/json';
-    } else {
-      options['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), this.timeout);
+    const request = {
+      method,
+      url: url.toString(),
+      headers: Object.fromEntries(headers.entries()),
+      body,
+    };
+
+    if (this.debug) console.log(request);
+
+    try {
+      const response = await this.fetchImpl(url, {
+        method,
+        headers,
+        body,
+        signal: controller.signal,
+      });
+
+      if (this.debug) console.log(response);
+
+      return await this.handleResponse(response, responseTransformer);
+    } catch (error) {
+      if (this.isAPIError(error)) throw error;
+
+      if (controller.signal.aborted) {
+        throw {
+          message: `Request timed out after ${this.timeout}ms`,
+          error_type: 'NetworkException',
+          data: null,
+        };
+      }
+
+      if (error instanceof Error) {
+        throw {
+          message: error.message,
+          error_type: 'NetworkException',
+          data: null,
+        };
+      }
+
+      throw {
+        message: 'Unknown error',
+        error_type: 'GeneralException',
+        data: null,
+      };
+    } finally {
+      clearTimeout(timeout);
     }
-    // Set response transformer
+  }
+
+  private appendParams(target: URLSearchParams, params?: any) {
+    if (!params) return;
+
+    for (const [key, value] of Object.entries(params)) {
+      if (value === undefined || value === null) continue;
+      const values = Array.isArray(value) ? value : [value];
+
+      for (const item of values) {
+        target.append(key, String(item));
+      }
+    }
+  }
+
+  private getMediaType(headers: Headers) {
+    return headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase();
+  }
+
+  private isAPIError(error: unknown): error is { error_type: string } {
+    return (
+      typeof error === 'object' &&
+      error !== null &&
+      'error_type' in error &&
+      typeof error.error_type === 'string'
+    );
+  }
+
+  private async handleResponse(
+    response: Response,
+    responseTransformer?: ResponseTransformer | null
+  ) {
+    const mediaType = this.getMediaType(response.headers);
+    const rawData = await response.text();
+    let data: any = rawData;
+
+    if (mediaType === 'application/json') {
+      try {
+        data = JSON.parse(rawData);
+      } catch {
+        data = rawData;
+      }
+    }
+
     if (responseTransformer) {
-      if (!axios.defaults.transformResponse) {
-        options.transformResponse = responseTransformer;
-      }
-      if (Array.isArray(axios.defaults.transformResponse)) {
-        options.transformResponse =
-          axios.defaults.transformResponse.concat(responseTransformer);
-      } else {
-        options.transformResponse = [axios.defaults.transformResponse].concat(
-          responseTransformer
-        );
-      }
+      data = responseTransformer.call(this, data, response.headers);
     }
-    return this.requestInstance.request(options) as Promise<any>;
+
+    if (!response.ok) {
+      if (this.isAPIError(data)) {
+        if (
+          data.error_type === 'TokenException' &&
+          this.session_expiry_hook
+        ) {
+          this.session_expiry_hook();
+        }
+
+        throw data;
+      }
+
+      throw {
+        message: response.statusText,
+        error_type: 'NetworkException',
+        data: null,
+      };
+    }
+
+    if (mediaType === 'application/json' && typeof data === 'object') {
+      if (this.isAPIError(data)) {
+        if (
+          data.error_type === 'TokenException' &&
+          this.session_expiry_hook
+        ) {
+          this.session_expiry_hook();
+        }
+
+        throw data;
+      }
+
+      return data.data;
+    }
+
+    if (mediaType === 'text/csv') return data;
+
+    return {
+      error_type: 'DataException',
+      message: `Unknown content type (${response.headers.get('content-type')}) with response: (${data})`,
+    };
   }
 }
 

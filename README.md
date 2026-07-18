@@ -24,9 +24,13 @@ Browse the full docs [here](https://kiteconnect.anuragroy.dev) or go to a specif
 - [Zerodha's kiteconnectjs docs](https://kite.trade/docs/kiteconnectjs/v3)
 - [Kite Connect HTTP API documentation](https://kite.trade/docs/connect/v3)
 
-## Requirements
+## Supported runtimes
 
 - Node.js `v24+`
+- Bun `v1.3+`
+- Deno `v2+`
+
+The HTTP and WebSocket clients use each runtime's native `fetch` and `WebSocket` implementations.
 
 Please note: Browser environments are not supported. See [Browser Support](#browser-support) for more details.
 
@@ -54,6 +58,12 @@ pnpm add kiteconnect-ts
 
 ```
 bun add kiteconnect-ts
+```
+
+#### Deno
+
+```
+deno add npm:kiteconnect-ts
 ```
 
 ## KiteConnect

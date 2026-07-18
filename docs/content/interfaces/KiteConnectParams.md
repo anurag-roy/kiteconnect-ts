@@ -39,6 +39,32 @@ If set to true, will console log requests and responses.
 
 ***
 
+### fetch?
+
+> `optional` **fetch?**: (`input`, `init?`) => `Promise`\<`Response`\>
+
+Custom fetch implementation. Defaults to the runtime's global fetch.
+
+#### Parameters
+
+##### input
+
+`string` \| `URL` \| `Request`
+
+##### init?
+
+`RequestInit`
+
+#### Returns
+
+`Promise`\<`Response`\>
+
+#### Default Value
+
+`globalThis.fetch`
+
+***
+
 ### login\_uri?
 
 > `optional` **login\_uri?**: `string`

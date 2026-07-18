@@ -1,6 +1,10 @@
-## Requirements
+## Supported runtimes
 
-- Node.js `v14+`
+- Node.js `v24+`
+- Bun `v1.3+`
+- Deno `v2+`
+
+The HTTP and WebSocket clients use each runtime's native `fetch` and `WebSocket` implementations.
 
 Please note: Browser environments are not supported. See [Browser Support](#browser-support) for more details.
 
@@ -28,6 +32,12 @@ pnpm add kiteconnect-ts
 
 ```
 bun add kiteconnect-ts
+```
+
+#### Deno
+
+```
+deno add npm:kiteconnect-ts
 ```
 
 ## KiteConnect

@@ -1,6 +1,3 @@
-import { clearInterval } from 'node:timers';
-import ws, { WebSocket } from 'ws';
-import { getUserAgent } from '../utils';
 import { KiteTickerParams, TickerEvent, TickerEvents } from './types';
 
 /**
@@ -87,8 +84,8 @@ import { KiteTickerParams, TickerEvent, TickerEvents } from './types';
  */
 export class KiteTicker {
   private root = 'wss://ws.kite.trade/';
-  private api_key: string | null = null;
-  private access_token: string | null = null;
+  private api_key: string;
+  private access_token: string;
 
   private read_timeout = 5; // seconds
   private reconnect_max_delay = 0;
@@ -130,9 +127,9 @@ export class KiteTicker {
     message: [],
     order_update: [],
   };
-  private read_timer: NodeJS.Timeout | null = null;
+  private read_timer: ReturnType<typeof setInterval> | null = null;
   private last_read: number = 0;
-  private reconnect_timer: NodeJS.Timeout | null = null;
+  private reconnect_timer: ReturnType<typeof setTimeout> | null = null;
   private auto_reconnect = false;
   private current_reconnection_count = 0;
   private last_reconnect_interval: number | null = 0;
@@ -164,9 +161,11 @@ export class KiteTicker {
     this.api_key = params.api_key;
     this.access_token = params.access_token;
 
-    // Enable auto reconnect by default
-    if (!params.reconnect) params.reconnect = true;
-    this.autoReconnect(params.reconnect, params.max_retry, params.max_delay);
+    this.autoReconnect(
+      params.reconnect ?? true,
+      params.max_retry,
+      params.max_delay
+    );
   }
 
   /**
@@ -201,25 +200,18 @@ export class KiteTicker {
     // Skip if its already connected
     if (
       this.ws &&
-      (this.ws.readyState == ws.CONNECTING || this.ws.readyState == ws.OPEN)
+      (this.ws.readyState == WebSocket.CONNECTING ||
+        this.ws.readyState == WebSocket.OPEN)
     )
       return;
 
-    const url =
-      this.root +
-      '?api_key=' +
-      this.api_key +
-      '&access_token=' +
-      this.access_token +
-      '&uid=' +
-      new Date().getTime().toString();
+    const connectionUrl = new URL(this.root);
+    connectionUrl.searchParams.set('api_key', this.api_key);
+    connectionUrl.searchParams.set('access_token', this.access_token);
+    connectionUrl.searchParams.set('uid', Date.now().toString());
+    const url = connectionUrl.toString();
 
-    this.ws = new WebSocket(url, {
-      headers: {
-        'X-Kite-Version': '3',
-        'User-Agent': getUserAgent(),
-      },
-    });
+    this.ws = new globalThis.WebSocket(url);
 
     this.ws.binaryType = 'arraybuffer';
 
@@ -270,7 +262,7 @@ export class KiteTicker {
       this.trigger('error', [e]);
 
       // Force close to avoid ghost connections
-      if (this.ws && this.ws.readyState == ws.OPEN) this.ws.close();
+      if (this.ws && this.ws.readyState == WebSocket.OPEN) this.ws.close();
     };
 
     this.ws.onclose = (e) => {
@@ -290,8 +282,8 @@ export class KiteTicker {
   disconnect() {
     if (
       this.ws &&
-      this.ws.readyState != ws.CLOSING &&
-      this.ws.readyState != ws.CLOSED
+      this.ws.readyState != WebSocket.CLOSING &&
+      this.ws.readyState != WebSocket.CLOSED
     ) {
       this.ws.close();
     }
@@ -303,7 +295,7 @@ export class KiteTicker {
    * @returns `true` if the ticker is connected or `false` otherwise.
    */
   connected() {
-    if (this.ws && this.ws.readyState == ws.OPEN) {
+    if (this.ws && this.ws.readyState == WebSocket.OPEN) {
       return true;
     } else {
       return false;
@@ -422,6 +414,10 @@ export class KiteTicker {
   }
 
   private triggerDisconnect(e?: any) {
+    if (this.read_timer) {
+      clearInterval(this.read_timer);
+      this.read_timer = null;
+    }
     this.ws = null;
     this.trigger('disconnect', [e]);
     if (this.auto_reconnect) this.attemptReconnection();
@@ -430,7 +426,7 @@ export class KiteTicker {
   // send a message via the socket
   // automatically encodes json if possible
   private send(message: any) {
-    if (!this.ws || this.ws.readyState != ws.OPEN) return;
+    if (!this.ws || this.ws.readyState != WebSocket.OPEN) return;
 
     try {
       if (typeof message == 'object') {

@@ -1310,6 +1310,12 @@ export interface KiteConnectParams {
    * @defaultValue `7000`
    */
   timeout?: number;
+  /**
+   * Custom fetch implementation. Defaults to the runtime's global fetch.
+   *
+   * @defaultValue `globalThis.fetch`
+   */
+  fetch?: typeof globalThis.fetch;
 }
 
 /**
