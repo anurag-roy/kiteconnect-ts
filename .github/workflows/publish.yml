@@ -7,7 +7,37 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
+  runtime-tests:
+    name: Test (${{ matrix.runtime }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime:
+          - node
+          - bun
+          - deno
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v4
+        if: matrix.runtime == 'node'
+        with:
+          node-version: 24.x
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - uses: denoland/setup-deno@v2
+        if: matrix.runtime == 'deno'
+        with:
+          deno-version: v2.x
+
+      - run: bun install --frozen-lockfile
+      - run: bun run test:${{ matrix.runtime }}
+
+  publish:
+    needs: runtime-tests
     runs-on: ubuntu-latest
     environment: NPM_TOKEN
     permissions:
@@ -15,7 +45,7 @@ jobs:
       id-token: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-node@v4
@@ -28,7 +58,6 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run lint
       - run: bun run build
-      - run: bun run test
       - run: bun run smoke:node
       - run: bun run package:check
       - run: bun run pack:dry-run
