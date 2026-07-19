@@ -1,5 +1,11 @@
 # kiteconnect-ts
 
+## 3.0.0
+
+### Major Changes
+
+- f3bbc89: Use the runtime-native Fetch and WebSocket APIs across Node.js, Bun, and Deno. Add an optional custom fetch implementation to `KiteConnectParams` and preserve explicit `reconnect: false` settings for `KiteTicker`.
+
 ## 2.0.1
 
 ### Patch Changes
